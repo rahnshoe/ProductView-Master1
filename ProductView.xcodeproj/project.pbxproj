@@ -7,20 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B5621D232388581300EF5FC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D222388581300EF5FC6 /* AppDelegate.swift */; };
-		B5621D252388581300EF5FC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D242388581300EF5FC6 /* ViewController.swift */; };
 		B5621D272388581500EF5FC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5621D262388581500EF5FC6 /* Assets.xcassets */; };
-		B5621D2A2388581500EF5FC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5621D282388581500EF5FC6 /* Main.storyboard */; };
+		B5621D332388588A00EF5FC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5621D322388588A00EF5FC6 /* Main.storyboard */; };
+		B5621D382388591C00EF5FC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D372388591C00EF5FC6 /* ViewController.swift */; };
+		B5621D3A2388593700EF5FC6 /* HighRezImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D392388593700EF5FC6 /* HighRezImageViewController.swift */; };
+		B5621D3C2388595700EF5FC6 /* AddWomens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D3B2388595700EF5FC6 /* AddWomens.swift */; };
+		B5621D3E2388596F00EF5FC6 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D3D2388596F00EF5FC6 /* StringUtils.swift */; };
+		B5621D402388597D00EF5FC6 /* OhausViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D3F2388597D00EF5FC6 /* OhausViewController.swift */; };
+		B5621D42238859A400EF5FC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D41238859A400EF5FC6 /* AppDelegate.swift */; };
+		B5621D44238859F400EF5FC6 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D43238859F400EF5FC6 /* Product.swift */; };
+		B5621D4623885A6200EF5FC6 /* MultiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D4523885A6200EF5FC6 /* MultiView.swift */; };
+		B5621D4823885A8C00EF5FC6 /* OverrideIMG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D4723885A8C00EF5FC6 /* OverrideIMG.swift */; };
+		B5621D4A23885AA500EF5FC6 /* MyChrisoft Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B5621D4923885AA500EF5FC6 /* MyChrisoft Logo.png */; };
+		B5621D4C23885AAA00EF5FC6 /* RSC logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B5621D4B23885AAA00EF5FC6 /* RSC logo.png */; };
+		E1A8762AB1326BE6DEB9CA35 /* Pods_ProductView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DED8F00A4792BBB73FBAF5C /* Pods_ProductView.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		41D84781BA07920659F0D7ED /* Pods-ProductView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProductView.debug.xcconfig"; path = "Target Support Files/Pods-ProductView/Pods-ProductView.debug.xcconfig"; sourceTree = "<group>"; };
+		5DED8F00A4792BBB73FBAF5C /* Pods_ProductView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProductView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5621D1F2388581300EF5FC6 /* ProductView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductView.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5621D222388581300EF5FC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5621D242388581300EF5FC6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B5621D262388581500EF5FC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B5621D292388581500EF5FC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5621D2B2388581500EF5FC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5621D2C2388581500EF5FC6 /* ProductView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProductView.entitlements; sourceTree = "<group>"; };
+		B5621D322388588A00EF5FC6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		B5621D372388591C00EF5FC6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B5621D392388593700EF5FC6 /* HighRezImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighRezImageViewController.swift; sourceTree = "<group>"; };
+		B5621D3B2388595700EF5FC6 /* AddWomens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWomens.swift; sourceTree = "<group>"; };
+		B5621D3D2388596F00EF5FC6 /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		B5621D3F2388597D00EF5FC6 /* OhausViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OhausViewController.swift; sourceTree = "<group>"; };
+		B5621D41238859A400EF5FC6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B5621D43238859F400EF5FC6 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		B5621D4523885A6200EF5FC6 /* MultiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiView.swift; sourceTree = "<group>"; };
+		B5621D4723885A8C00EF5FC6 /* OverrideIMG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverrideIMG.swift; sourceTree = "<group>"; };
+		B5621D4923885AA500EF5FC6 /* MyChrisoft Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MyChrisoft Logo.png"; sourceTree = "<group>"; };
+		B5621D4B23885AAA00EF5FC6 /* RSC logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSC logo.png"; sourceTree = "<group>"; };
+		C17C84A806378598319F9198 /* Pods-ProductView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProductView.release.xcconfig"; path = "Target Support Files/Pods-ProductView/Pods-ProductView.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1A8762AB1326BE6DEB9CA35 /* Pods_ProductView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,6 +62,8 @@
 			children = (
 				B5621D212388581300EF5FC6 /* ProductView */,
 				B5621D202388581300EF5FC6 /* Products */,
+				FD21D4382F9AF8DB155F806A /* Pods */,
+				C6C459EABD7EE5E9FE0CB894 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -53,14 +78,65 @@
 		B5621D212388581300EF5FC6 /* ProductView */ = {
 			isa = PBXGroup;
 			children = (
-				B5621D222388581300EF5FC6 /* AppDelegate.swift */,
-				B5621D242388581300EF5FC6 /* ViewController.swift */,
+				B5621D36238858C600EF5FC6 /* Controller */,
+				B5621D35238858BF00EF5FC6 /* View */,
+				B5621D34238858B000EF5FC6 /* Model */,
 				B5621D262388581500EF5FC6 /* Assets.xcassets */,
-				B5621D282388581500EF5FC6 /* Main.storyboard */,
+				B5621D4B23885AAA00EF5FC6 /* RSC logo.png */,
+				B5621D4923885AA500EF5FC6 /* MyChrisoft Logo.png */,
 				B5621D2B2388581500EF5FC6 /* Info.plist */,
 				B5621D2C2388581500EF5FC6 /* ProductView.entitlements */,
 			);
 			path = ProductView;
+			sourceTree = "<group>";
+		};
+		B5621D34238858B000EF5FC6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B5621D4723885A8C00EF5FC6 /* OverrideIMG.swift */,
+				B5621D43238859F400EF5FC6 /* Product.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B5621D35238858BF00EF5FC6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B5621D4523885A6200EF5FC6 /* MultiView.swift */,
+				B5621D372388591C00EF5FC6 /* ViewController.swift */,
+				B5621D392388593700EF5FC6 /* HighRezImageViewController.swift */,
+				B5621D322388588A00EF5FC6 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B5621D36238858C600EF5FC6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B5621D41238859A400EF5FC6 /* AppDelegate.swift */,
+				B5621D3F2388597D00EF5FC6 /* OhausViewController.swift */,
+				B5621D3D2388596F00EF5FC6 /* StringUtils.swift */,
+				B5621D3B2388595700EF5FC6 /* AddWomens.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C6C459EABD7EE5E9FE0CB894 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5DED8F00A4792BBB73FBAF5C /* Pods_ProductView.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FD21D4382F9AF8DB155F806A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				41D84781BA07920659F0D7ED /* Pods-ProductView.debug.xcconfig */,
+				C17C84A806378598319F9198 /* Pods-ProductView.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -70,9 +146,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5621D2F2388581500EF5FC6 /* Build configuration list for PBXNativeTarget "ProductView" */;
 			buildPhases = (
+				C063FD6C9F3A4A9DBB824E1B /* [CP] Check Pods Manifest.lock */,
 				B5621D1B2388581300EF5FC6 /* Sources */,
 				B5621D1C2388581300EF5FC6 /* Frameworks */,
 				B5621D1D2388581300EF5FC6 /* Resources */,
+				71335ED96DD1F106C36135AC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -121,35 +199,75 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5621D4C23885AAA00EF5FC6 /* RSC logo.png in Resources */,
 				B5621D272388581500EF5FC6 /* Assets.xcassets in Resources */,
-				B5621D2A2388581500EF5FC6 /* Main.storyboard in Resources */,
+				B5621D332388588A00EF5FC6 /* Main.storyboard in Resources */,
+				B5621D4A23885AA500EF5FC6 /* MyChrisoft Logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		71335ED96DD1F106C36135AC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ProductView/Pods-ProductView-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ProductView/Pods-ProductView-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ProductView/Pods-ProductView-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C063FD6C9F3A4A9DBB824E1B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ProductView-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B5621D1B2388581300EF5FC6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5621D252388581300EF5FC6 /* ViewController.swift in Sources */,
-				B5621D232388581300EF5FC6 /* AppDelegate.swift in Sources */,
+				B5621D4823885A8C00EF5FC6 /* OverrideIMG.swift in Sources */,
+				B5621D4623885A6200EF5FC6 /* MultiView.swift in Sources */,
+				B5621D42238859A400EF5FC6 /* AppDelegate.swift in Sources */,
+				B5621D3C2388595700EF5FC6 /* AddWomens.swift in Sources */,
+				B5621D3E2388596F00EF5FC6 /* StringUtils.swift in Sources */,
+				B5621D3A2388593700EF5FC6 /* HighRezImageViewController.swift in Sources */,
+				B5621D402388597D00EF5FC6 /* OhausViewController.swift in Sources */,
+				B5621D382388591C00EF5FC6 /* ViewController.swift in Sources */,
+				B5621D44238859F400EF5FC6 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		B5621D282388581500EF5FC6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B5621D292388581500EF5FC6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		B5621D2D2388581500EF5FC6 /* Debug */ = {
@@ -267,6 +385,7 @@
 		};
 		B5621D302388581500EF5FC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41D84781BA07920659F0D7ED /* Pods-ProductView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ProductView/ProductView.entitlements;
@@ -287,6 +406,7 @@
 		};
 		B5621D312388581500EF5FC6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C17C84A806378598319F9198 /* Pods-ProductView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ProductView/ProductView.entitlements;
