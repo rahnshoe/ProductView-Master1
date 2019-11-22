@@ -12,9 +12,6 @@ let OhausScaleServiceCBUUID = CBUUID(string: "2456e1b9-26e2-8f83-e744-f34f01e9d7
 let OhausScaleCharacteristicCBUUID = CBUUID(string: "2456e1b9-26e2-8f83-e744-f34f01e9d703")
 let CBUUIDClientCharacteristicConfigurationString: String = "00002902-0000-1000-8000-00805f9b34fb"
 
-
-
-
 class OhausScale: NSObject {
     
     var centralManager: CBCentralManager!
@@ -24,15 +21,12 @@ class OhausScale: NSObject {
     var scaleCounter = 0
     var hexStringString:String? = nil
 
-  
-    
     func scaleBegin() ->String{
-        
         centralManager = CBCentralManager(delegate: self, queue: nil)
         return "Scale is disconnected"
-        
     }
 }
+
 
 extension OhausScale: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
