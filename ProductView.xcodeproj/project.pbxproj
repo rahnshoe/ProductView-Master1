@@ -20,6 +20,7 @@
 		B5621D4823885A8C00EF5FC6 /* OverrideIMG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D4723885A8C00EF5FC6 /* OverrideIMG.swift */; };
 		B5621D4A23885AA500EF5FC6 /* MyChrisoft Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B5621D4923885AA500EF5FC6 /* MyChrisoft Logo.png */; };
 		B5621D4C23885AAA00EF5FC6 /* RSC logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B5621D4B23885AAA00EF5FC6 /* RSC logo.png */; };
+		B57A8C022388880B00AD77F6 /* OhausScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57A8C012388880B00AD77F6 /* OhausScale.swift */; };
 		E1A8762AB1326BE6DEB9CA35 /* Pods_ProductView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DED8F00A4792BBB73FBAF5C /* Pods_ProductView.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		B5621D4723885A8C00EF5FC6 /* OverrideIMG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverrideIMG.swift; sourceTree = "<group>"; };
 		B5621D4923885AA500EF5FC6 /* MyChrisoft Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MyChrisoft Logo.png"; sourceTree = "<group>"; };
 		B5621D4B23885AAA00EF5FC6 /* RSC logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSC logo.png"; sourceTree = "<group>"; };
+		B57A8C012388880B00AD77F6 /* OhausScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhausScale.swift; sourceTree = "<group>"; };
 		C17C84A806378598319F9198 /* Pods-ProductView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProductView.release.xcconfig"; path = "Target Support Files/Pods-ProductView/Pods-ProductView.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 				B5621D41238859A400EF5FC6 /* AppDelegate.swift */,
 				B5621D4723885A8C00EF5FC6 /* OverrideIMG.swift */,
 				B5621D43238859F400EF5FC6 /* Product.swift */,
+				B57A8C012388880B00AD77F6 /* OhausScale.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				B5621D42238859A400EF5FC6 /* AppDelegate.swift in Sources */,
 				B5621D3C2388595700EF5FC6 /* AddWomens.swift in Sources */,
 				B5621D3E2388596F00EF5FC6 /* StringUtils.swift in Sources */,
+				B57A8C022388880B00AD77F6 /* OhausScale.swift in Sources */,
 				B5621D3A2388593700EF5FC6 /* HighRezImageViewController.swift in Sources */,
 				B5621D402388597D00EF5FC6 /* OhausViewController.swift in Sources */,
 				B5621D382388591C00EF5FC6 /* ViewController.swift in Sources */,

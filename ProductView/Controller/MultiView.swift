@@ -22,6 +22,8 @@ class MultiView: NSViewController {
     var AltImgText2 = ""
     var ovrUPC = ""
     
+    var scale = OhausScale()
+    
     @IBOutlet weak var UPCSearchField: NSSearchField!
     @IBOutlet weak var UPCField: NSTextField!
     @IBOutlet weak var image15: NSButton!
@@ -85,7 +87,9 @@ class MultiView: NSViewController {
     @IBOutlet weak var scaleStatus: NSTextField!
     
     override func viewDidLoad() {
-        scaleStatus.stringValue = "Scale is disconnected"
+        
+        scaleStatus.stringValue = scale.scaleBegin()
+        //scaleStatus.stringValue = "Scale is disconnected"
         counter = 0
         super.viewDidLoad()
         // Do view setup here.
