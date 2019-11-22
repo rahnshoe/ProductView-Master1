@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -93,6 +93,10 @@
 		B5621D34238858B000EF5FC6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B5621D3B2388595700EF5FC6 /* AddWomens.swift */,
+				B5621D3D2388596F00EF5FC6 /* StringUtils.swift */,
+				B5621D3F2388597D00EF5FC6 /* OhausViewController.swift */,
+				B5621D41238859A400EF5FC6 /* AppDelegate.swift */,
 				B5621D4723885A8C00EF5FC6 /* OverrideIMG.swift */,
 				B5621D43238859F400EF5FC6 /* Product.swift */,
 			);
@@ -102,9 +106,6 @@
 		B5621D35238858BF00EF5FC6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B5621D4523885A6200EF5FC6 /* MultiView.swift */,
-				B5621D372388591C00EF5FC6 /* ViewController.swift */,
-				B5621D392388593700EF5FC6 /* HighRezImageViewController.swift */,
 				B5621D322388588A00EF5FC6 /* Main.storyboard */,
 			);
 			path = View;
@@ -113,10 +114,9 @@
 		B5621D36238858C600EF5FC6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B5621D41238859A400EF5FC6 /* AppDelegate.swift */,
-				B5621D3F2388597D00EF5FC6 /* OhausViewController.swift */,
-				B5621D3D2388596F00EF5FC6 /* StringUtils.swift */,
-				B5621D3B2388595700EF5FC6 /* AddWomens.swift */,
+				B5621D372388591C00EF5FC6 /* ViewController.swift */,
+				B5621D392388593700EF5FC6 /* HighRezImageViewController.swift */,
+				B5621D4523885A6200EF5FC6 /* MultiView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -135,7 +135,6 @@
 				41D84781BA07920659F0D7ED /* Pods-ProductView.debug.xcconfig */,
 				C17C84A806378598319F9198 /* Pods-ProductView.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
