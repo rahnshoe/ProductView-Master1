@@ -460,7 +460,7 @@ class MultiView: NSViewController {
     
     
     @IBAction func initScale(_ sender: NSButton) {
-        
+        scaleStatus.stringValue = scale.scaleStatus!
     }
     
     

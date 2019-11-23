@@ -12,6 +12,7 @@ let OhausScaleServiceCBUUID = CBUUID(string: "2456e1b9-26e2-8f83-e744-f34f01e9d7
 let OhausScaleCharacteristicCBUUID = CBUUID(string: "2456e1b9-26e2-8f83-e744-f34f01e9d703")
 let CBUUIDClientCharacteristicConfigurationString: String = "00002902-0000-1000-8000-00805f9b34fb"
 
+
 class OhausScale: NSViewController {
     
     var centralManager: CBCentralManager!
@@ -20,6 +21,7 @@ class OhausScale: NSViewController {
     var logWindowController:NSWindowController? = nil
     var scaleCounter = 0
     var hexStringString:String? = nil
+    var scaleStatus: String?
 //    var weightDisplayValue: String?
 
     func scaleBegin() ->String{
@@ -43,7 +45,11 @@ class OhausScale: NSViewController {
                         let endingIndex = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 34)
                     let range = startingIndex..<endingIndex
                         let substring1 = mutableMultilineString!.substring(with: range)
-                    print("substring1: \(substring1)")
+                   // print("substring1: \(substring1)")
+                        let tempWeight = hexStringtoAscii(substring1)
+                        
+                        print("substring: \(tempWeight)")
+                        
 //****************** weightDisplay.stringValue = hexStringtoAscii(substring1)
                   //      weightDisplayValue = hexStringtoAscii(substring1)
                      } else {
@@ -174,6 +180,8 @@ extension OhausScale: CBCentralManagerDelegate {
             if (characteristic.isNotifying) {
                 print ("Subscribed. Notification has begun for: \(characteristic.uuid)")
  //*******      scaleStatus.stringValue = "Scale is Connected"
+                scaleStatus = "Scale is Connected"
+                print(scaleStatus)
                 selectedCharacteristic = characteristic
             }
         }
