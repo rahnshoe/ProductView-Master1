@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1792,6 +1793,7 @@
                         <outlet property="sleeveStyle" destination="eIK-3u-JsP" id="Eec-KM-zxl"/>
                         <outlet property="storeCategory" destination="06T-gv-r72" id="bG2-2f-ghb"/>
                         <outlet property="style" destination="LyG-sI-HIc" id="jVO-qg-NsZ"/>
+                        <outlet property="weightDisplay" destination="wjL-0l-i4v" id="8Cp-LU-3hF"/>
                     </connections>
                 </viewController>
                 <customObject id="Bqi-KE-Yi5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

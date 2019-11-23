@@ -85,6 +85,7 @@ class MultiView: NSViewController {
     
     @IBOutlet weak var emptyFlag: NSTextField!
     @IBOutlet weak var scaleStatus: NSTextField!
+    @IBOutlet weak var weightDisplay: NSTextField!
     
     override func viewDidLoad() {
         
