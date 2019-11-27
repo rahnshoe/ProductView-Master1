@@ -1,12 +1,17 @@
 //
-//  OhausScale.swift
-//  ProductView
+//  Ohaus.swift
+//  protocols and delegates
 //
-//  Created by chris rahn on 11/22/19.
+//  Created by chris rahn on 11/23/19.
 //  Copyright © 2019 chris rahn. All rights reserved.
 //
+
 import Cocoa
 import CoreBluetooth
+
+protocol ScaleData {
+    func displayWeight(weight: String)
+}
 
 let OhausScaleServiceCBUUID = CBUUID(string: "2456e1b9-26e2-8f83-e744-f34f01e9d701")
 let OhausScaleCharacteristicCBUUID = CBUUID(string: "2456e1b9-26e2-8f83-e744-f34f01e9d703")
@@ -16,9 +21,10 @@ let CBUUIDClientCharacteristicConfigurationString: String = "00002902-0000-1000-
 var tempWeight: String?
 
 class OhausScale: NSViewController {
-    
+  var scaleDelegate: ScaleData?
 
-    
+
+    var counter = 0
     var centralManager: CBCentralManager!
     var scalePeripheral: CBPeripheral!
     var selectedCharacteristic:CBCharacteristic? = nil
@@ -49,23 +55,18 @@ class OhausScale: NSViewController {
                         let endingIndex = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 34)
                     let range = startingIndex..<endingIndex
                         let substring1 = mutableMultilineString!.substring(with: range)
-                   // print("substring1: \(substring1)")
-                         tempWeight = hexStringtoAscii(substring1)
-                        
-                        print("substring: \(tempWeight)")
-                        
-                   // weightDisplay.stringValue = hexStringtoAscii(substring1)
-                       // print(MultiView().weightDisplayValue)
-//                        var multiview = MultiView()
-//                        multiview.globalWeight = tempWeight
-                        
-                     } else {
+                     // print("substring1: \(substring1)")
+                        tempWeight = hexStringtoAscii(substring1)
+                        scaleDelegate?.displayWeight(weight: tempWeight!)
+                        } else {
                         return
                     }
                 } else {
                     counter = 1
                 }
             }
+
+    
         }
     
         func hexStringtoAscii(_ hexString : String) -> String {
@@ -142,8 +143,8 @@ extension OhausScale: CBCentralManagerDelegate {
             print("Connected!")
             scalePeripheral.discoverServices([OhausScaleServiceCBUUID])
         }
-    
-    }
+
+  }
     
     extension OhausScale: CBPeripheralDelegate {
         func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
@@ -209,3 +210,4 @@ private struct LogEntry {
     let data:String
     let timestamp:Date
 }
+

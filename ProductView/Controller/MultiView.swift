@@ -9,9 +9,9 @@
 import Cocoa
 import RealmSwift
 
-class MultiView: NSViewController {
+class MultiView: NSViewController, ScaleData {
     
-    //var ohaus = OhausScale()
+   // var ohaus = OhausScale()
    
     
     
@@ -28,15 +28,7 @@ class MultiView: NSViewController {
     var ovrUPC = ""
     
     var scale = OhausScale()
-    
-    
-    var tempWeight1: String? = "nope" {
-        willSet{
-            //weightDisplay.stringValue = newValue!
-            print(newValue!)
-        }
-    }
-   // tempWeight1 = tempWeight
+  
     
     @IBOutlet weak var UPCSearchField: NSSearchField!
     @IBOutlet weak var UPCField: NSTextField!
@@ -103,26 +95,15 @@ class MultiView: NSViewController {
     
     
 
-//   var globalWeight: String = "empty" {
-//       willSet {
-//       //  DispatchQueue.main.async {
-//            self.globalWeight = newValue
-//            self.weightDisplay.stringValue = self.globalWeight
-//      //  }
-//
-//        }
-//       }
-//
-    func updateWeight() {
-        weightDisplay.stringValue = tempWeight ?? "No Weight"
+    func displayWeight(weight: String) {
+        print(weight)
+        self.weightDisplay.stringValue = weight
     }
-           
 
-    
     override func viewDidLoad() {
         //weightDisplay.stringValue = globalWeight
-        
-        scaleStatus.stringValue = scale.scaleBegin()
+        scale.scaleDelegate = self
+        scale.scaleBegin()
         counter = 0
         super.viewDidLoad()
         // Do view setup here.
