@@ -11,6 +11,11 @@ import RealmSwift
 
 class MultiView: NSViewController {
     
+    //var ohaus = OhausScale()
+   
+    
+    
+    
     var results: Results<Product>?
     var result: Results<Product>?
     var searchString: Int = 0
@@ -23,6 +28,15 @@ class MultiView: NSViewController {
     var ovrUPC = ""
     
     var scale = OhausScale()
+    
+    
+    var tempWeight1: String? = "nope" {
+        willSet{
+            //weightDisplay.stringValue = newValue!
+            print(newValue!)
+        }
+    }
+   // tempWeight1 = tempWeight
     
     @IBOutlet weak var UPCSearchField: NSSearchField!
     @IBOutlet weak var UPCField: NSTextField!
@@ -87,10 +101,28 @@ class MultiView: NSViewController {
     @IBOutlet weak var scaleStatus: NSTextField!
     @IBOutlet weak var weightDisplay: NSTextField!
     
+    
+
+//   var globalWeight: String = "empty" {
+//       willSet {
+//       //  DispatchQueue.main.async {
+//            self.globalWeight = newValue
+//            self.weightDisplay.stringValue = self.globalWeight
+//      //  }
+//
+//        }
+//       }
+//
+    func updateWeight() {
+        weightDisplay.stringValue = tempWeight ?? "No Weight"
+    }
+           
+
+    
     override func viewDidLoad() {
+        //weightDisplay.stringValue = globalWeight
         
         scaleStatus.stringValue = scale.scaleBegin()
-        //scaleStatus.stringValue = "Scale is disconnected"
         counter = 0
         super.viewDidLoad()
         // Do view setup here.
@@ -459,9 +491,12 @@ class MultiView: NSViewController {
     
     
     
-    @IBAction func initScale(_ sender: NSButton) {
-        scaleStatus.stringValue = scale.scaleStatus!
-    }
+    
+//    func initScale() {
+//    // scaleStatus.stringValue = scale.scaleStatus!
+//       weightDisplay.stringValue = globalWeight
+//
+//        }
     
     
     

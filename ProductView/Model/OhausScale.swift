@@ -13,7 +13,11 @@ let OhausScaleCharacteristicCBUUID = CBUUID(string: "2456e1b9-26e2-8f83-e744-f34
 let CBUUIDClientCharacteristicConfigurationString: String = "00002902-0000-1000-8000-00805f9b34fb"
 
 
+var tempWeight: String?
+
 class OhausScale: NSViewController {
+    
+
     
     var centralManager: CBCentralManager!
     var scalePeripheral: CBPeripheral!
@@ -22,7 +26,7 @@ class OhausScale: NSViewController {
     var scaleCounter = 0
     var hexStringString:String? = nil
     var scaleStatus: String?
-//    var weightDisplayValue: String?
+
 
     func scaleBegin() ->String{
         centralManager = CBCentralManager(delegate: self, queue: nil)
@@ -46,12 +50,15 @@ class OhausScale: NSViewController {
                     let range = startingIndex..<endingIndex
                         let substring1 = mutableMultilineString!.substring(with: range)
                    // print("substring1: \(substring1)")
-                        let tempWeight = hexStringtoAscii(substring1)
+                         tempWeight = hexStringtoAscii(substring1)
                         
                         print("substring: \(tempWeight)")
                         
-//****************** weightDisplay.stringValue = hexStringtoAscii(substring1)
-                  //      weightDisplayValue = hexStringtoAscii(substring1)
+                   // weightDisplay.stringValue = hexStringtoAscii(substring1)
+                       // print(MultiView().weightDisplayValue)
+//                        var multiview = MultiView()
+//                        multiview.globalWeight = tempWeight
+                        
                      } else {
                         return
                     }
