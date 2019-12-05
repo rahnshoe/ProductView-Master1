@@ -9,7 +9,7 @@
 import Cocoa
 import RealmSwift
 
-class MultiView: NSViewController, ScaleData {
+class MultiView: NSViewController, ScaleData, ScaleStatus {
     
    // var ohaus = OhausScale()
    
@@ -100,9 +100,14 @@ class MultiView: NSViewController, ScaleData {
         self.weightDisplay.stringValue = weight
     }
 
+    func displayScaleStatus(status: String) {
+       self.scaleStatus.stringValue = status
+  }
+   
     override func viewDidLoad() {
         //weightDisplay.stringValue = globalWeight
         scale.scaleDelegate = self
+        scale.scaleStatusDelegate = self
         scale.scaleBegin()
         counter = 0
         super.viewDidLoad()

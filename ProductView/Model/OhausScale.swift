@@ -13,6 +13,10 @@ protocol ScaleData {
     func displayWeight(weight: String)
 }
 
+protocol ScaleStatus {
+    func displayScaleStatus(status: String)
+}
+
 let OhausScaleServiceCBUUID = CBUUID(string: "2456e1b9-26e2-8f83-e744-f34f01e9d701")
 let OhausScaleCharacteristicCBUUID = CBUUID(string: "2456e1b9-26e2-8f83-e744-f34f01e9d703")
 let CBUUIDClientCharacteristicConfigurationString: String = "00002902-0000-1000-8000-00805f9b34fb"
@@ -21,7 +25,8 @@ let CBUUIDClientCharacteristicConfigurationString: String = "00002902-0000-1000-
 var tempWeight: String?
 
 class OhausScale: NSViewController {
-  var scaleDelegate: ScaleData?
+    var scaleDelegate: ScaleData?
+    var scaleStatusDelegate: ScaleStatus?
 
 
     var counter = 0
@@ -188,8 +193,9 @@ extension OhausScale: CBCentralManagerDelegate {
             if (characteristic.isNotifying) {
                 print ("Subscribed. Notification has begun for: \(characteristic.uuid)")
  //*******      scaleStatus.stringValue = "Scale is Connected"
-                scaleStatus = "Scale is Connected"
-                print(scaleStatus)
+                scaleStatus = "Scale connected"
+                print(scaleStatus!)
+                  scaleStatusDelegate?.displayScaleStatus(status: scaleStatus!)
                 selectedCharacteristic = characteristic
             }
         }
