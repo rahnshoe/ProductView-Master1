@@ -747,18 +747,6 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kkc-6G-D5Y">
-                                <rect key="frame" x="441" y="937" width="309" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UQC-ii-I0R">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="saveButton:" target="XfG-lQ-9wD" id="WS1-zY-weL"/>
-                                </connections>
-                            </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ADm-9e-ZQV">
                                 <rect key="frame" x="873" y="124" width="96" height="22"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -888,6 +876,26 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uSk-yd-teI">
+                                <rect key="frame" x="134" y="574" width="746" height="981"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="hBh-pP-J4J">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kkc-6G-D5Y">
+                                <rect key="frame" x="911" y="567" width="309" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UQC-ii-I0R">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <color key="contentTintColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <action selector="saveButton:" target="XfG-lQ-9wD" id="WS1-zY-weL"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
@@ -949,23 +957,12 @@
             <objects>
                 <viewController title="MultiView" id="OUq-4Z-H7t" customClass="MultiView" customModule="ProductView" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="btQ-XW-bGl">
-                        <rect key="frame" x="0.0" y="0.0" width="2560" height="1440"/>
+                        <rect key="frame" x="0.0" y="0.0" width="2618" height="1440"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <userGuides>
                             <userLayoutGuide location="719" affinity="minY"/>
                         </userGuides>
                         <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vLD-na-Esu">
-                                <rect key="frame" x="-1" y="1246" width="76" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Home" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dKW-6J-ePA">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <segue destination="XfG-lQ-9wD" kind="show" id="Ad2-S7-phC"/>
-                                </connections>
-                            </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t6w-Wv-fzR">
                                 <rect key="frame" x="478" y="828" width="48" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1494,20 +1491,11 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jv4-L6-ql2">
-                                <rect key="frame" x="236" y="1280" width="96" height="22"/>
+                                <rect key="frame" x="120" y="1201" width="96" height="22"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="iNb-BM-4iv">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6p9-np-a3b">
-                                <rect key="frame" x="264" y="1310" width="41" height="17"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="MSRP" id="ztI-rK-SWj">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -1690,22 +1678,6 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RWt-66-ZEY">
-                                <rect key="frame" x="42" y="1324" width="137" height="17"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" placeholderString="Disconnected" id="kBk-Sg-Gbc">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="Zip-10-OIE" name="displayPatternValue1" keyPath="values.scaleStatus" id="ta5-EG-vcr">
-                                        <dictionary key="options">
-                                            <string key="NSDisplayPattern">%{value1}@</string>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wjL-0l-i4v">
                                 <rect key="frame" x="63" y="1343" width="96" height="22"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1724,9 +1696,103 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vs4-gS-5Ph">
+                                <rect key="frame" x="247" y="1365" width="76" height="16"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Original Qty" id="X62-gw-kap">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zem-Md-bM3">
+                                <rect key="frame" x="375" y="1389" width="96" height="21"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="dSO-4B-312">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M3k-EC-T0T">
+                                <rect key="frame" x="373" y="1410" width="99" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title=" Qty received" id="sxf-ou-MbZ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6p9-np-a3b">
+                                <rect key="frame" x="148" y="1229" width="41" height="17"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="MSRP" id="ztI-rK-SWj">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CgI-yQ-OxJ">
+                                <rect key="frame" x="265" y="1346" width="43" height="16"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="11E-Z2-zqL">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9pb-G8-ioY">
+                                <rect key="frame" x="552" y="1346" width="37" height="16"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="gdg-uQ-e67">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m8C-W3-FBC">
+                                <rect key="frame" x="521" y="1365" width="99" height="16"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Inventory count" id="PgR-jO-yUr">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qb7-PC-YAB">
+                                <rect key="frame" x="360" y="1361" width="127" height="32"/>
+                                <buttonCell key="cell" type="push" title="Add to inventory" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Adx-xJ-Sph">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addToInventory:" target="OUq-4Z-H7t" id="8Mq-LF-SMw"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RWt-66-ZEY">
+                                <rect key="frame" x="49" y="1326" width="124" height="16"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" placeholderString="Disconnected" id="kBk-Sg-Gbc">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="Zip-10-OIE" name="displayPatternValue1" keyPath="values.scaleStatus" id="ta5-EG-vcr">
+                                        <dictionary key="options">
+                                            <string key="NSDisplayPattern">%{value1}@</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </textField>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="M3k-EC-T0T" firstAttribute="top" secondItem="btQ-XW-bGl" secondAttribute="top" constant="14" id="Wwn-Bj-coo"/>
+                            <constraint firstItem="zem-Md-bM3" firstAttribute="top" secondItem="M3k-EC-T0T" secondAttribute="bottom" id="Wz2-CG-rf0"/>
+                            <constraint firstItem="Qb7-PC-YAB" firstAttribute="top" secondItem="zem-Md-bM3" secondAttribute="bottom" id="XWf-aC-efU"/>
+                            <constraint firstItem="Qb7-PC-YAB" firstAttribute="top" secondItem="zem-Md-bM3" secondAttribute="bottom" id="yRj-XH-UJM"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="OriginalQty" destination="CgI-yQ-OxJ" id="irt-RV-ehN"/>
                         <outlet property="UPCField" destination="GoZ-oU-cnW" id="co5-Y2-1zG"/>
                         <outlet property="UPCSearchField" destination="9dd-XV-dzi" id="eDt-xm-Ldr"/>
                         <outlet property="brand" destination="mi3-qq-NBF" id="9Fu-0h-kNV"/>
@@ -1753,11 +1819,13 @@
                         <outlet property="image8TXT" destination="SOg-GT-hHb" id="JDv-tR-o3a"/>
                         <outlet property="image9" destination="7Tx-aE-37G" id="4GL-cO-wed"/>
                         <outlet property="image9TXT" destination="ZgB-BA-6zo" id="602-hg-95x"/>
+                        <outlet property="inventoryCount" destination="9pb-G8-ioY" id="dGZ-os-ScN"/>
                         <outlet property="itemDescriptionField" destination="2sr-Kj-zsv" id="T2h-JC-bEZ"/>
                         <outlet property="msrp" destination="jv4-L6-ql2" id="cIS-f2-I0E"/>
                         <outlet property="override8" destination="zXW-oO-haZ" id="DsT-KF-rW2"/>
                         <outlet property="override9" destination="rT5-hC-j8S" id="a23-9O-6Kb"/>
                         <outlet property="price" destination="aa4-Xp-j4m" id="QJI-7Z-wqw"/>
+                        <outlet property="qtyReceived" destination="zem-Md-bM3" id="LU7-wM-hdE"/>
                         <outlet property="saveHD_img1" destination="zSg-ph-1dS" id="CA3-Ne-Fjh"/>
                         <outlet property="saveHD_img10" destination="bhR-Tb-dnv" id="pje-ye-tQx"/>
                         <outlet property="saveHD_img11" destination="vGW-Iy-DfD" id="eAr-oX-uHm"/>
@@ -1788,7 +1856,7 @@
                 <customObject id="Bqi-KE-Yi5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="Zip-10-OIE"/>
             </objects>
-            <point key="canvasLocation" x="-472" y="2924"/>
+            <point key="canvasLocation" x="-1216" y="2610"/>
         </scene>
         <!--OverrideIMG-->
         <scene sceneID="khw-FB-o6U">
@@ -1866,7 +1934,4 @@
     <resources>
         <image name="MyChrisoft Logo" width="707" height="265"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Ad2-S7-phC"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -98,8 +98,8 @@
 				B5621D3B2388595700EF5FC6 /* AddWomens.swift */,
 				B5621D3D2388596F00EF5FC6 /* StringUtils.swift */,
 				B5621D3F2388597D00EF5FC6 /* OhausViewController.swift */,
-				B5621D41238859A400EF5FC6 /* AppDelegate.swift */,
 				B5621D4723885A8C00EF5FC6 /* OverrideIMG.swift */,
+				B5621D41238859A400EF5FC6 /* AppDelegate.swift */,
 				B5621D43238859F400EF5FC6 /* Product.swift */,
 				B57A8C012388880B00AD77F6 /* OhausScale.swift */,
 			);

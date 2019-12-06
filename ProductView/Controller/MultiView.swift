@@ -84,6 +84,10 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     @IBOutlet weak var eBayConditionID: NSTextField!
     @IBOutlet weak var sizeType: NSTextField!
     @IBOutlet weak var image: NSTextField!
+    @IBOutlet weak var OriginalQty: NSTextField!
+    @IBOutlet weak var inventoryCount: NSTextField!
+    @IBOutlet weak var qtyReceived: NSTextField!
+    
     
     
     @IBOutlet weak var image8TXT: NSTextField!
@@ -157,6 +161,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 image8TXT.stringValue = ""
                 image9TXT.stringValue = ""
                 UPCField.stringValue = String(result![0].upc)
+                OriginalQty.stringValue = String(result![0].originalQty)
+                inventoryCount.stringValue = String(result![0].inventoryCount)
                 itemDescriptionField.stringValue = result![0].itemDescription
                 colorField.stringValue = String(result![0].color)
                 price.stringValue = String(result![0].price)
@@ -427,13 +433,24 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         } else {
            UPCField.stringValue = "No Realm File!"
         }
- 
-      
+
+    }
+    
+    
+    @IBAction func addToInventory(_ sender: NSButton) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+                   let realm = try! Realm(configuration: config)
+                   try! realm.write {
+        inventoryCount.stringValue = String(qtyReceived.intValue + inventoryCount.intValue)
+        result![0].inventoryCount = inventoryCount.integerValue
         
-        
+        //qtyReceived.stringValue = "";
+           //qtyReceived.integerValue = 0
+        self.qtyReceived.stringValue = ""
+        print("text cleared")
         
     }
- 
+    }
     @IBAction func updateImages(_ sender: NSButton) {
         updateimages()
     }
@@ -513,6 +530,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             result![0].storeCategory = storeCategory.stringValue
             result![0].eBayConditionID = eBayConditionID.integerValue
             result![0].sizeType = sizeType.stringValue
+           // result![0].inventoryCount = inventoryCount.integerValue
             }
         
         print(result![0].itemDescription)
@@ -537,123 +555,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
        
     }
     
-    //write updated objects to realm
-    
-    
-    
-    
-    
-   /* @IBAction func forwardButton(_ sender: Any) {
-        arrayOfURLs = []
-        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-        let realm = try! Realm(configuration: config)
-        
-        
-       
-           let upcString = String(realm.objects(Product.self)[counter].upc)
-           let itemDescriptionString = String(realm.objects(Product.self)[counter].itemDescription)
-           let colorString = String(realm.objects(Product.self)[counter].color)
-           let image0 = String(realm.objects(Product.self)[counter].image)
-        
-           UPCField.stringValue = upcString
-           itemDescriptionField.stringValue = itemDescriptionString
-           colorField.stringValue = colorString
-        
-        //let hiRezImgURLbegin = "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/"
-        //let hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$"
-        let lowImgURLbegin = "http://slimages.macys.com/is/image/MCY/"
-        let lowImgURLEnd = "%20"
-        
-        let start = image0.index(image0.startIndex, offsetBy: 39)
-        let end = image0.index(image0.endIndex, offsetBy: 0)
-        let range = start..<end
-        let imageCode = Int(image0[range])!-7
-        
-        //iterate and set image display
-        //var arrayOfURLs: [URL] = []
-        let images = [image1, image2, image3, image4,image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15]
-        var incrementer = 0
-        repeat {
-            for i in images {
-                let url1 = URL(string: "\(lowImgURLbegin)\(imageCode + incrementer )\(lowImgURLEnd)")
-              // print(url1)
-                arrayOfURLs.append(url1!)
-                do {
-                    let data = try Data(contentsOf: url1!)
-                    i!.image = NSImage(data: data)
-                    incrementer += 1
-                } catch {
-                    print("error!")
-                }
-            }
-        }while incrementer <= 7
-        
-        counter += 1
-       //dump(arrayOfURLs)
-        //print(arrayOfURLs[14])
-    }
-    
- 
-    
-    
-    @IBAction func backButton(_ sender: Any) {
-         arrayOfURLs = []
-        hdArrayOfURLs = []
-        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-        let realm = try! Realm(configuration: config)
-        guard counter > 1 else {
-            return
-        }
-            counter -= 1
-            let upcString = String(realm.objects(Product.self)[counter-1].upc)
-            let itemDescriptionString = String(realm.objects(Product.self)[counter-1].itemDescription)
-            let colorString = String(realm.objects(Product.self)[counter-1].color)
-            let image0 = String(realm.objects(Product.self)[counter-1].image)
-            
-            UPCField.stringValue = upcString
-            itemDescriptionField.stringValue = itemDescriptionString
-            colorField.stringValue = colorString
-            
-            //let hiRezImgURLbegin = "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/"
-            //let hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$"
-            let lowImgURLbegin = "http://slimages.macys.com/is/image/MCY/"
-            let lowImgURLEnd = "%20"
-        
-            let start = image0.index(image0.startIndex, offsetBy: 39)
-            let end = image0.index(image0.endIndex, offsetBy: -3)
-            let range = start..<end
-            let imageCode = Int(image0[range])!-7
-        
-            //iterate and set image display
-            let images = [image1, image2, image3, image4,image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15]
-            var incrementer = 0
-            repeat {
-                for i in images {
-                    let url1 = URL(string: "\(lowImgURLbegin)\(imageCode + incrementer )\(lowImgURLEnd)")
-                    // print(url1)
-                    arrayOfURLs.append(url1!)
-            do {
-            let data = try Data(contentsOf: url1!)
-                i!.image = NSImage(data: data)
-            incrementer += 1
-            } catch {
-            print("error!")
-            }
-                }
-            }while incrementer <= 7
-             
-        }
-      */
-    //@IBAction func box1(_ sender: NSButton) {
-      //  if sender.state == .on{
-     //       print("game on!")
-    //    } else {
-      //      print("off!")
-      //  }
-        
-        
-        
-   // }
+
     @IBAction func ibox1(_ sender: NSButton) {
         if sender.state == .on{
             let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)

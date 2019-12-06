@@ -15,6 +15,7 @@ class Product: Object, Codable {
     @objc dynamic var itemDescription: String = ""
     @objc dynamic var brand: String = ""
     @objc dynamic var originalQty: Int = 0
+    @objc dynamic var inventoryCount = 0
     @objc dynamic var msrp: String = ""
     @objc dynamic var color: String = ""
     @objc dynamic var size: String = ""
