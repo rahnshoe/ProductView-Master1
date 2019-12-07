@@ -157,6 +157,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             
             if (result?.count)! > 0 {
                 
+                UPCField.textColor = NSColor.black
+                itemDescriptionField.textColor = NSColor.black
                 image8TXT.stringValue = ""
                 image9TXT.stringValue = ""
                 UPCField.stringValue = String(result![0].upc)
@@ -399,10 +401,43 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
          } else {
                 
                 print("error.localizedDescription")
-                UPCField.stringValue = "not found"
-                itemDescriptionField.stringValue = "not found"
-                //prodImage.image = nil
+                image1.image = nil
+                image2.image = nil
+                image3.image = nil
+                image4.image = nil
+                image5.image = nil
+                image6.image = nil
+                image7.image = nil
                 image8.image = nil
+                image9.image = nil
+                image10.image = nil
+                image11.image = nil
+                image12.image = nil
+                image13.image = nil
+                image14.image = nil
+                image15.image = nil
+                UPCField.stringValue = "not found"
+                msrp.stringValue = ""
+                price.stringValue = ""
+                shipping.stringValue = ""
+                sku.stringValue = ""
+                brand.stringValue = ""
+                style.stringValue = ""
+                color.stringValue = ""
+                size.stringValue = ""
+                sleeveStyle.stringValue = ""
+                sleeveLength.stringValue = ""
+                ebayCategory.stringValue = ""
+                eBayConditionID.stringValue = ""
+                sizeType.stringValue = ""
+                storeCategory.stringValue = ""
+                UPCField.textColor = NSColor.red
+                itemDescriptionField.stringValue = "not found"
+                itemDescriptionField.textColor = NSColor.red
+                OriginalQty.stringValue = ""
+                inventoryCount.stringValue = ""
+                //prodImage.image = nil
+                //image8.image = nil
                 
             }
         } else {
@@ -761,25 +796,37 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     }
     
     
-    //high resolution display trigger
+    //Display HD image @IBaction triggers
     
-    
-    
-    
-    @IBAction func Image8HighRezOpen(_ sender: NSButton) {
+    @IBAction func Image1HighRezOpen(_ sender: NSButton) {
         tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode! + 7
-        performSegue(withIdentifier: "SegueHD", sender: self)
-           
-    }
-
-  
-    @IBAction func Image7HighRezOpen(_ sender: NSButton) {
-        tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode! + 6
+        HRimageCode = HRimageCode!
         performSegue(withIdentifier: "SegueHD", sender: self)
     }
     
+    @IBAction func Image2HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 1
+        performSegue(withIdentifier: "SegueHD", sender: self)
+    }
+    
+    @IBAction func Image3HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 2
+        performSegue(withIdentifier: "SegueHD", sender: self)
+    }
+    
+    @IBAction func Image4HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 3
+        performSegue(withIdentifier: "SegueHD", sender: self)
+    }
+    
+    @IBAction func Image5HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 4
+        performSegue(withIdentifier: "SegueHD", sender: self)
+    }
     
     @IBAction func Image6HighRezOpen(_ sender: NSButton) {
         tempHRimageCode = HRimageCode
@@ -787,8 +834,58 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         performSegue(withIdentifier: "SegueHD", sender: self)
     }
     
+    @IBAction func Image7HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 6
+        performSegue(withIdentifier: "SegueHD", sender: self)
+      }
     
+    @IBAction func Image8HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 7
+        performSegue(withIdentifier: "SegueHD", sender: self)
+    }
+
+  @IBAction func Image9HighRezOpen(_ sender: NSButton) {
+      tempHRimageCode = HRimageCode
+      HRimageCode = HRimageCode! + 8
+      performSegue(withIdentifier: "SegueHD", sender: self)
+  }
+  
+    @IBAction func Image10HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 9
+        performSegue(withIdentifier: "SegueHD", sender: self)
+    }
     
+    @IBAction func Image11HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 10
+        performSegue(withIdentifier: "SegueHD", sender: self)
+    }
+    
+    @IBAction func Image12HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 11
+        performSegue(withIdentifier: "SegueHD", sender: self)
+    }
+    
+    @IBAction func Image13HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 12
+        performSegue(withIdentifier: "SegueHD", sender: self)
+    }
+    
+    @IBAction func Image14HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 13
+        performSegue(withIdentifier: "SegueHD", sender: self)
+    }
+    @IBAction func Image15HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 14
+        performSegue(withIdentifier: "SegueHD", sender: self)
+    }
     }
 
 
