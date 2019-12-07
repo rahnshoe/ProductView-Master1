@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <capability name="System colors introduced in macOS 10.13" minToolsVersion="9.0"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -906,7 +907,6 @@
                         <outlet property="quantityField" destination="zEu-7M-Uec" id="czT-kj-FDJ"/>
                         <outlet property="sizeField" destination="3Ni-Wb-Zkb" id="fWy-mg-Zgy"/>
                         <segue destination="OUq-4Z-H7t" kind="show" identifier="MultiView" id="9C8-xx-4lF"/>
-                        <segue destination="0nd-eh-LFA" kind="show" identifier="SegueHD" id="idb-DR-FY7"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -924,7 +924,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cuS-7t-TTC">
-                                <rect key="frame" x="129" y="97" width="2007" height="1323"/>
+                                <rect key="frame" x="258" y="97" width="1388" height="1246"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="MyChrisoft Logo" id="Cq2-Pv-nwU" userLabel="highRezImageView"/>
                                 <connections>
@@ -932,12 +932,13 @@
                                 </connections>
                             </imageView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sH0-cu-R9i">
-                                <rect key="frame" x="1037" y="49" width="191" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fNn-kW-9GS">
+                                <rect key="frame" x="1516" y="388" width="943" height="514"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <buttonCell key="cell" type="bevel" title="Click to close" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fNn-kW-9GS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="system" size="131"/>
                                 </buttonCell>
+                                <color key="contentTintColor" name="findHighlightColor" catalog="System" colorSpace="catalog"/>
                                 <connections>
                                     <action selector="CloseWindow:" target="0nd-eh-LFA" id="Dk6-dp-i0S"/>
                                 </connections>
@@ -946,11 +947,12 @@
                     </view>
                     <connections>
                         <outlet property="HighRezImageView" destination="cuS-7t-TTC" id="d77-68-NgM"/>
+                        <outlet property="closeButton" destination="sH0-cu-R9i" id="7h5-bQ-1lw"/>
                     </connections>
                 </viewController>
                 <customObject id="pCl-H1-2ww" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2663" y="790"/>
+            <point key="canvasLocation" x="1493" y="2645"/>
         </scene>
         <!--MultiView-->
         <scene sceneID="FQm-vO-4id">
@@ -1032,6 +1034,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="Image8HighRezOpen:" target="OUq-4Z-H7t" id="zeG-th-BDj"/>
+                                </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m24-6g-sOC">
                                 <rect key="frame" x="1965" y="754" width="261" height="369"/>
@@ -1040,6 +1045,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="Image7HighRezOpen:" target="OUq-4Z-H7t" id="pdK-YC-WjM"/>
+                                </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v1e-C0-kM5">
                                 <rect key="frame" x="1648" y="756" width="261" height="369"/>
@@ -1048,6 +1056,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="Image6HighRezOpen:" target="OUq-4Z-H7t" id="IHw-ed-L6k"/>
+                                </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M3S-7I-Zd8">
                                 <rect key="frame" x="1345" y="754" width="261" height="369"/>
@@ -1851,6 +1862,7 @@
                         <outlet property="storeCategory" destination="06T-gv-r72" id="bG2-2f-ghb"/>
                         <outlet property="style" destination="LyG-sI-HIc" id="jVO-qg-NsZ"/>
                         <outlet property="weightDisplay" destination="wjL-0l-i4v" id="8Cp-LU-3hF"/>
+                        <segue destination="0nd-eh-LFA" kind="modal" identifier="SegueHD" id="VXD-GN-StR"/>
                     </connections>
                 </viewController>
                 <customObject id="Bqi-KE-Yi5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

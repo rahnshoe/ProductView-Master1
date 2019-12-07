@@ -177,6 +177,7 @@ var counter = 0
         //var arrayOfURLs: [URL] = []
         ///var incrementer = 0
         let url1 = URL(string: "\(hiRezImgURLbegin)\(imageCode)\(hiRezImgURLEnd)")
+        print("url1 is: \(url1)")
         do {
             let data = try Data(contentsOf: url1!)
             HighRezImageView1 = NSImage(data: data)
@@ -192,7 +193,7 @@ var counter = 0
      //   } catch {
       //      print("error!")
        // }
-performSegue(withIdentifier: "SegueHD", sender: self)
+//performSegue(withIdentifier: "SegueHD", sender: self)
     }
     
     

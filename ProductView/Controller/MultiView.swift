@@ -9,13 +9,11 @@
 import Cocoa
 import RealmSwift
 
+var HRimageCode: Int?
+var tempHRimageCode: Int?
+
 class MultiView: NSViewController, ScaleData, ScaleStatus {
-    
-   // var ohaus = OhausScale()
-   
-    
-    
-    
+        
     var results: Results<Product>?
     var result: Results<Product>?
     var searchString: Int = 0
@@ -26,6 +24,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     var AltImgText1 = ""
     var AltImgText2 = ""
     var ovrUPC = ""
+
     
     var scale = OhausScale()
   
@@ -189,17 +188,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 } else {
                     emptyFlag.stringValue = ""
                 }
-                //let substring = "pants"
-                //if itemDescriptionField.stringValue.contains(substring, option caseInsensitve) {
-               // style.stringValue = substring
-               // } else {
-                    // no match
-                
-                //temp change delete me 123
-                
-               //}
-              
-                
+
                 let string = itemDescriptionField.stringValue
                 if let range3 = string.range(of: "shirt", options: .caseInsensitive) {
                     // match
@@ -365,9 +354,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     }
                     }
                     }
-                
-                //sizeField.stringValue = String(result![0].size)
-                //quantityField.stringValue = String(result![0].originalQty)
+          
                 let url = URL(string: result![0].image)
                 print(result![0].image)
                 
@@ -383,6 +370,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 let end = image0.index(image0.endIndex, offsetBy: 0)
                 let range = start..<end
                 let imageCode = Int(image0[range])!-7
+                HRimageCode = imageCode
                 print("image code is \(imageCode)")
                 
                 //iterate and set image display
@@ -408,20 +396,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     }
                 }while incrementer <= 7
                 
-                
-          /*     do {
-                   let data = try Data(contentsOf: url8!)
-                    //    prodImage.image = NSImage(data: data)
-                    image8.image = NSImage(data: data)
-                } catch {
-                    print("error!")
-                }
-                print(itemDescriptionField)
-                try! realm.write {
-                    
-                  }
-         */       } else {
-                
+         } else {
                 
                 print("error.localizedDescription")
                 UPCField.stringValue = "not found"
@@ -443,12 +418,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                    try! realm.write {
         inventoryCount.stringValue = String(qtyReceived.intValue + inventoryCount.intValue)
         result![0].inventoryCount = inventoryCount.integerValue
-        
-        //qtyReceived.stringValue = "";
-           //qtyReceived.integerValue = 0
         self.qtyReceived.stringValue = ""
-        print("text cleared")
-        
     }
     }
     @IBAction func updateImages(_ sender: NSButton) {
@@ -493,16 +463,6 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     }
     
     
-    
-    
-//    func initScale() {
-//    // scaleStatus.stringValue = scale.scaleStatus!
-//       weightDisplay.stringValue = globalWeight
-//
-//        }
-    
-    
-    
     @IBAction func saveButton(_ sender: NSButton) {
         saveDataFields()
     }
@@ -540,12 +500,12 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     
     
     @IBAction func override(_ sender: NSButton) {
-        
-       
         performSegue(withIdentifier: "OVERRIDEIMGSEGUE", sender: self)
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+         case "OVERRIDEIMGSEGUE":
         var vc = segue.destinationController as! OverrideIMG
         AltImgText1 = String(describing: hdArrayOfURLs[7])
         AltImgText2 = String(describing: hdArrayOfURLs[8])
@@ -553,6 +513,11 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         vc.altImg2 = AltImgText2
         vc.upcValue = ovrUPC
        
+       // case "HighRezImageViewController":
+         //   var vc = segue.destinationController as! HighRezImageViewController
+          // print("dope")
+        default: break
+        }
     }
     
 
@@ -793,6 +758,33 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         } else {
             print("off!")
         }
+    }
+    
+    
+    //high resolution display trigger
+    
+    
+    
+    
+    @IBAction func Image8HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 7
+        performSegue(withIdentifier: "SegueHD", sender: self)
+           
+    }
+
+  
+    @IBAction func Image7HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 6
+        performSegue(withIdentifier: "SegueHD", sender: self)
+    }
+    
+    
+    @IBAction func Image6HighRezOpen(_ sender: NSButton) {
+        tempHRimageCode = HRimageCode
+        HRimageCode = HRimageCode! + 5
+        performSegue(withIdentifier: "SegueHD", sender: self)
     }
     
     
