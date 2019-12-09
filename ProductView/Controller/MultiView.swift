@@ -71,27 +71,9 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     @IBOutlet weak var ImgSelectPopUpbutton14: NSPopUpButton!
     @IBOutlet weak var ImgSelectPopUpbutton15: NSPopUpButton!
     
-    
-    
-    
-    @IBOutlet weak var saveHD_img1: NSButton!
-    @IBOutlet weak var saveHD_img2: NSButton!
-    @IBOutlet weak var saveHD_img3: NSButton!
-    @IBOutlet weak var saveHD_img4: NSButton!
-    @IBOutlet weak var saveHD_img5: NSButton!
-    @IBOutlet weak var saveHD_img6: NSButton!
-    @IBOutlet weak var saveHD_img7: NSButton!
-    @IBOutlet weak var saveHD_img8: NSButton!
-    @IBOutlet weak var saveHD_img9: NSButton!
-    @IBOutlet weak var saveHD_img10: NSButton!
-    @IBOutlet weak var saveHD_img11: NSButton!
-    @IBOutlet weak var saveHD_img12: NSButton!
-    @IBOutlet weak var saveHD_img13: NSButton!
-    @IBOutlet weak var saveHD_img14: NSButton!
-    @IBOutlet weak var saveHD_img15: NSButton!
     @IBOutlet weak var sleeveLength: NSTextField!
     
-    
+
     @IBOutlet weak var price: NSTextField!
     @IBOutlet weak var shipping: NSTextField!
     @IBOutlet weak var sku: NSTextField!
