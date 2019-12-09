@@ -109,7 +109,6 @@
 		B5621D35238858BF00EF5FC6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B5621D322388588A00EF5FC6 /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -120,6 +119,7 @@
 				B5621D372388591C00EF5FC6 /* ViewController.swift */,
 				B5621D392388593700EF5FC6 /* HighRezImageViewController.swift */,
 				B5621D4523885A6200EF5FC6 /* MultiView.swift */,
+				B5621D322388588A00EF5FC6 /* Main.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

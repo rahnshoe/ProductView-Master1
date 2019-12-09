@@ -49,7 +49,29 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     
     @IBOutlet weak var itemDescriptionField: NSTextField!
     @IBOutlet weak var colorField: NSTextField!
- 
+    
+    
+    
+  
+    
+    @IBOutlet weak var ImgSelectPopUpbutton1: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton2: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton3: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton4: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton5: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton6: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton7: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton8: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton9: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton10: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton11: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton12: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton13: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton14: NSPopUpButton!
+    @IBOutlet weak var ImgSelectPopUpbutton15: NSPopUpButton!
+    
+    
+    
     
     @IBOutlet weak var saveHD_img1: NSButton!
     @IBOutlet weak var saveHD_img2: NSButton!
@@ -108,16 +130,355 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
   }
    
     override func viewDidLoad() {
+        setupPopUpButtons()
         //weightDisplay.stringValue = globalWeight
         scale.scaleDelegate = self
         scale.scaleStatusDelegate = self
         scale.scaleBegin()
         counter = 0
+        
+//        // Add an item to the list
+//        myPopUpbutton.addItem(withTitle: "Pop up buttons rock")
+
+
+       
+        
         super.viewDidLoad()
         // Do view setup here.
     }
     
+    func setupPopUpButtons (){
+        
+        // Remove all items from the list
+        ImgSelectPopUpbutton1.removeAllItems()
+        ImgSelectPopUpbutton1.removeAllItems()
+        ImgSelectPopUpbutton2.removeAllItems()
+        ImgSelectPopUpbutton3.removeAllItems()
+        ImgSelectPopUpbutton4.removeAllItems()
+        ImgSelectPopUpbutton5.removeAllItems()
+        ImgSelectPopUpbutton6.removeAllItems()
+        ImgSelectPopUpbutton7.removeAllItems()
+        ImgSelectPopUpbutton8.removeAllItems()
+        ImgSelectPopUpbutton9.removeAllItems()
+        ImgSelectPopUpbutton10.removeAllItems()
+        ImgSelectPopUpbutton11.removeAllItems()
+        ImgSelectPopUpbutton12.removeAllItems()
+        ImgSelectPopUpbutton13.removeAllItems()
+        ImgSelectPopUpbutton14.removeAllItems()
+        ImgSelectPopUpbutton15.removeAllItems()
+        
+        // Add an array of items to the list
+        ImgSelectPopUpbutton1.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton2.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton3.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton4.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton5.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton6.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton7.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton8.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton9.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton10.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton11.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton12.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton13.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton14.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        ImgSelectPopUpbutton15.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
+        
 
+        // Select an item at a specific index
+        ImgSelectPopUpbutton1.selectItem(at: 0)
+        ImgSelectPopUpbutton2.selectItem(at: 0)
+        ImgSelectPopUpbutton3.selectItem(at: 0)
+        ImgSelectPopUpbutton4.selectItem(at: 0)
+        ImgSelectPopUpbutton5.selectItem(at: 0)
+        ImgSelectPopUpbutton6.selectItem(at: 0)
+        ImgSelectPopUpbutton7.selectItem(at: 0)
+        ImgSelectPopUpbutton8.selectItem(at: 0)
+        ImgSelectPopUpbutton9.selectItem(at: 0)
+        ImgSelectPopUpbutton10.selectItem(at: 0)
+        ImgSelectPopUpbutton11.selectItem(at: 0)
+        ImgSelectPopUpbutton12.selectItem(at: 0)
+        ImgSelectPopUpbutton13.selectItem(at: 0)
+        ImgSelectPopUpbutton14.selectItem(at: 0)
+        ImgSelectPopUpbutton15.selectItem(at: 0)
+    }
+    
+    func storeImageInSlot1(arrayNum: Int) {
+        print(String(describing: hdArrayOfURLs[arrayNum]))
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+                       let realm = try! Realm(configuration: config)
+                       try! realm.write {
+                           let path0 =  String(describing: hdArrayOfURLs[arrayNum])
+                                      let searchfieldChangeValue = UPCSearchField.stringValue
+                                      let upcValue = Int(searchfieldChangeValue)
+                                      realm.create(Product.self, value: ["upc": upcValue!, "imageSlot1": path0], update: .modified)
+        }
+                       }
+    
+    func storeImageInSlot2(arrayNum: Int) {
+         print(String(describing: hdArrayOfURLs[arrayNum]))
+    let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+                   let realm = try! Realm(configuration: config)
+                   try! realm.write {
+                       let path0 =  String(describing: hdArrayOfURLs[arrayNum])
+                                  let searchfieldChangeValue = UPCSearchField.stringValue
+                                  let upcValue = Int(searchfieldChangeValue)
+                                  realm.create(Product.self, value: ["upc": upcValue!, "imageSlot2": path0], update: .modified)
+    }
+                   }
+    
+    func storeImageInSlot3(arrayNum: Int) {
+         print(String(describing: hdArrayOfURLs[arrayNum]))
+       let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+                      let realm = try! Realm(configuration: config)
+                      try! realm.write {
+                          let path0 =  String(describing: hdArrayOfURLs[arrayNum])
+                                     let searchfieldChangeValue = UPCSearchField.stringValue
+                                     let upcValue = Int(searchfieldChangeValue)
+                                     realm.create(Product.self, value: ["upc": upcValue!, "imageSlot3": path0], update: .modified)
+       }
+                      }
+    
+    func storeImageInSlot4(arrayNum: Int) {
+         print(String(describing: hdArrayOfURLs[arrayNum]))
+       let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+                      let realm = try! Realm(configuration: config)
+                      try! realm.write {
+                          let path0 =  String(describing: hdArrayOfURLs[arrayNum])
+                                     let searchfieldChangeValue = UPCSearchField.stringValue
+                                     let upcValue = Int(searchfieldChangeValue)
+                                     realm.create(Product.self, value: ["upc": upcValue!, "imageSlot4": path0], update: .modified)
+       }
+                      }
+
+
+
+
+    
+    
+    @IBAction func saveImages(_ sender: NSButton) {
+       
+        
+        // Get the index of the currently selected item
+        let selectedIndex1 = ImgSelectPopUpbutton1.indexOfSelectedItem
+        let selectedIndex2 = ImgSelectPopUpbutton2.indexOfSelectedItem
+        let selectedIndex3 = ImgSelectPopUpbutton3.indexOfSelectedItem
+        let selectedIndex4 = ImgSelectPopUpbutton4.indexOfSelectedItem
+        let selectedIndex5 = ImgSelectPopUpbutton5.indexOfSelectedItem
+        let selectedIndex6 = ImgSelectPopUpbutton6.indexOfSelectedItem
+        let selectedIndex7 = ImgSelectPopUpbutton7.indexOfSelectedItem
+        let selectedIndex8 = ImgSelectPopUpbutton8.indexOfSelectedItem
+        let selectedIndex9 = ImgSelectPopUpbutton9.indexOfSelectedItem
+        let selectedIndex10 = ImgSelectPopUpbutton10.indexOfSelectedItem
+        let selectedIndex11 = ImgSelectPopUpbutton11.indexOfSelectedItem
+        let selectedIndex12 = ImgSelectPopUpbutton12.indexOfSelectedItem
+        let selectedIndex13 = ImgSelectPopUpbutton13.indexOfSelectedItem
+        let selectedIndex14 = ImgSelectPopUpbutton14.indexOfSelectedItem
+        let selectedIndex15 = ImgSelectPopUpbutton15.indexOfSelectedItem
+        
+
+        switch selectedIndex1 {
+        case 1:
+            storeImageInSlot1(arrayNum: 0)
+        case 2:
+            storeImageInSlot2(arrayNum: 0)
+        case 3:
+            storeImageInSlot3(arrayNum: 0)
+        case 4:
+            storeImageInSlot4(arrayNum: 0)
+        default:
+            print("nope")
+        }
+        switch selectedIndex2 {
+        case 1:
+            storeImageInSlot1(arrayNum: 1)
+        case 2:
+            storeImageInSlot2(arrayNum: 1)
+        case 3:
+            storeImageInSlot3(arrayNum: 1)
+        case 4:
+            storeImageInSlot4(arrayNum: 1)
+        default:
+            print("nope")
+
+        }
+        switch selectedIndex3 {
+        case 1:
+            storeImageInSlot1(arrayNum: 2)
+        case 2:
+            storeImageInSlot2(arrayNum: 2)
+        case 3:
+            storeImageInSlot3(arrayNum: 2)
+        case 4:
+            storeImageInSlot4(arrayNum: 2)
+        default:
+           print("nope")
+
+        }
+        switch selectedIndex4 {
+        case 1:
+            storeImageInSlot1(arrayNum: 3)
+        case 2:
+            storeImageInSlot2(arrayNum: 3)
+        case 3:
+            storeImageInSlot3(arrayNum: 3)
+        case 4:
+            storeImageInSlot4(arrayNum: 3)
+        default:
+             print("nope")
+
+        }
+        
+        switch selectedIndex5 {
+        case 1:
+            storeImageInSlot1(arrayNum: 4)
+        case 2:
+            storeImageInSlot2(arrayNum: 4)
+        case 3:
+            storeImageInSlot3(arrayNum: 4)
+        case 4:
+            storeImageInSlot4(arrayNum: 4)
+        default:
+            print("nope")
+
+        }
+        
+        switch selectedIndex6 {
+        case 1:
+            storeImageInSlot1(arrayNum: 5)
+        case 2:
+            storeImageInSlot2(arrayNum: 5)
+        case 3:
+            storeImageInSlot3(arrayNum: 5)
+        case 4:
+            storeImageInSlot4(arrayNum: 5)
+        default:
+            print("nope")
+
+        }
+        
+        switch selectedIndex7 {
+        case 1:
+            storeImageInSlot1(arrayNum: 6)
+        case 2:
+            storeImageInSlot2(arrayNum: 6)
+        case 3:
+            storeImageInSlot3(arrayNum: 6)
+        case 4:
+            storeImageInSlot4(arrayNum: 6)
+        default:
+            print("nope")
+
+        }
+        
+        switch selectedIndex8 {
+        case 1:
+            storeImageInSlot1(arrayNum: 7)
+        case 2:
+            storeImageInSlot2(arrayNum: 7)
+        case 3:
+            storeImageInSlot3(arrayNum: 7)
+        case 4:
+            storeImageInSlot4(arrayNum: 7)
+        default:
+            print("nope")
+
+        }
+        
+        switch selectedIndex9 {
+        case 1:
+            storeImageInSlot1(arrayNum: 8)
+        case 2:
+            storeImageInSlot2(arrayNum: 8)
+        case 3:
+            storeImageInSlot3(arrayNum: 8)
+        case 4:
+            storeImageInSlot4(arrayNum: 8)
+        default:
+            print("nope")
+
+        }
+        
+        switch selectedIndex10 {
+        case 1:
+            storeImageInSlot1(arrayNum: 9)
+        case 2:
+            storeImageInSlot2(arrayNum: 9)
+        case 3:
+            storeImageInSlot3(arrayNum: 9)
+        case 4:
+            storeImageInSlot4(arrayNum: 9)
+        default:
+            print("nope")
+        }
+        
+        switch selectedIndex11 {
+        case 1:
+            storeImageInSlot1(arrayNum: 10)
+        case 2:
+            storeImageInSlot2(arrayNum: 10)
+        case 3:
+            storeImageInSlot3(arrayNum: 10)
+        case 4:
+            storeImageInSlot4(arrayNum: 10)
+        default:
+            print("nope")
+
+        }
+        switch selectedIndex12 {
+        case 1:
+            storeImageInSlot1(arrayNum: 11)
+        case 2:
+            storeImageInSlot2(arrayNum: 11)
+        case 3:
+            storeImageInSlot3(arrayNum: 11)
+        case 4:
+            storeImageInSlot4(arrayNum: 11)
+        default:
+            print("nope")
+
+        }
+        switch selectedIndex13 {
+        case 1:
+            storeImageInSlot1(arrayNum: 12)
+        case 2:
+            storeImageInSlot2(arrayNum: 12)
+        case 3:
+            storeImageInSlot3(arrayNum: 12)
+        case 4:
+            storeImageInSlot4(arrayNum: 12)
+        default:
+            print("nope")
+
+        }
+        switch selectedIndex14 {
+        case 1:
+            storeImageInSlot1(arrayNum: 13)
+        case 2:
+            storeImageInSlot2(arrayNum: 13)
+        case 3:
+            storeImageInSlot3(arrayNum: 13)
+        case 4:
+            storeImageInSlot4(arrayNum: 13)
+        default:
+            print("nope")
+
+        }
+        switch selectedIndex15 {
+        case 1:
+            storeImageInSlot1(arrayNum: 14)
+        case 2:
+            storeImageInSlot2(arrayNum: 14)
+        case 3:
+            storeImageInSlot3(arrayNum: 14)
+        case 4:
+            storeImageInSlot4(arrayNum: 14)
+        default:
+            print("nope")
+
+        }
+    }
+    
     
     @IBAction func SearchBar(_ sender: Any) {
          saveHD_img1.state = .off
@@ -159,6 +520,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 
                 UPCField.textColor = NSColor.black
                 itemDescriptionField.textColor = NSColor.black
+                setupPopUpButtons()
                 image8TXT.stringValue = ""
                 image9TXT.stringValue = ""
                 UPCField.stringValue = String(result![0].upc)
@@ -400,7 +762,9 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 
          } else {
                 
+                
                 print("error.localizedDescription")
+                setupPopUpButtons()
                 image1.image = nil
                 image2.image = nil
                 image3.image = nil
