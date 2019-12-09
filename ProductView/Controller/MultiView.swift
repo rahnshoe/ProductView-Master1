@@ -24,6 +24,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     var AltImgText1 = ""
     var AltImgText2 = ""
     var ovrUPC = ""
+    var reviewModeState = "off"
 
     
     var scale = OhausScale()
@@ -111,8 +112,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     
     
     
-    @IBOutlet weak var image8TXT: NSTextField!
-    @IBOutlet weak var image9TXT: NSTextField!
+    @IBOutlet weak var imageOverride1TxtField: NSTextField!
+    @IBOutlet weak var imageOverride2TxtField: NSTextField!
     
     @IBOutlet weak var emptyFlag: NSTextField!
     @IBOutlet weak var scaleStatus: NSTextField!
@@ -146,6 +147,34 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         super.viewDidLoad()
         // Do view setup here.
     }
+    
+    @IBAction func reviewMode(_ sender: NSButtonCell) {
+        if sender.state == .on{
+        print("on")
+            reviewModeState = "on"
+            image1.image = nil
+            image2.image = nil
+            image3.image = nil
+            image4.image = nil
+            image5.image = nil
+            image6.image = nil
+            image7.image = nil
+            image8.image = nil
+            image9.image = nil
+            image10.image = nil
+            image11.image = nil
+            image12.image = nil
+            image13.image = nil
+            image14.image = nil
+            image15.image = nil
+        }else{
+            print("off")
+            reviewModeState = "off"
+            
+        }
+    }
+    
+
     
     func setupPopUpButtons (){
         
@@ -206,50 +235,50 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     func storeImageInSlot1(arrayNum: Int) {
         print(String(describing: hdArrayOfURLs[arrayNum]))
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-                       let realm = try! Realm(configuration: config)
-                       try! realm.write {
-                           let path0 =  String(describing: hdArrayOfURLs[arrayNum])
-                                      let searchfieldChangeValue = UPCSearchField.stringValue
-                                      let upcValue = Int(searchfieldChangeValue)
-                                      realm.create(Product.self, value: ["upc": upcValue!, "imageSlot1": path0], update: .modified)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+            let path0 =  String(describing: hdArrayOfURLs[arrayNum])
+            let searchfieldChangeValue = UPCSearchField.stringValue
+            let upcValue = Int(searchfieldChangeValue)
+            realm.create(Product.self, value: ["upc": upcValue!, "imageSlot1": path0], update: .modified)
         }
-                       }
+    }
     
     func storeImageInSlot2(arrayNum: Int) {
-         print(String(describing: hdArrayOfURLs[arrayNum]))
-    let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-                   let realm = try! Realm(configuration: config)
-                   try! realm.write {
-                       let path0 =  String(describing: hdArrayOfURLs[arrayNum])
-                                  let searchfieldChangeValue = UPCSearchField.stringValue
-                                  let upcValue = Int(searchfieldChangeValue)
-                                  realm.create(Product.self, value: ["upc": upcValue!, "imageSlot2": path0], update: .modified)
+        print(String(describing: hdArrayOfURLs[arrayNum]))
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+            let path0 =  String(describing: hdArrayOfURLs[arrayNum])
+            let searchfieldChangeValue = UPCSearchField.stringValue
+            let upcValue = Int(searchfieldChangeValue)
+            realm.create(Product.self, value: ["upc": upcValue!, "imageSlot2": path0], update: .modified)
+        }
     }
-                   }
     
     func storeImageInSlot3(arrayNum: Int) {
-         print(String(describing: hdArrayOfURLs[arrayNum]))
-       let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-                      let realm = try! Realm(configuration: config)
-                      try! realm.write {
-                          let path0 =  String(describing: hdArrayOfURLs[arrayNum])
-                                     let searchfieldChangeValue = UPCSearchField.stringValue
-                                     let upcValue = Int(searchfieldChangeValue)
-                                     realm.create(Product.self, value: ["upc": upcValue!, "imageSlot3": path0], update: .modified)
-       }
-                      }
+        print(String(describing: hdArrayOfURLs[arrayNum]))
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+            let path0 =  String(describing: hdArrayOfURLs[arrayNum])
+            let searchfieldChangeValue = UPCSearchField.stringValue
+            let upcValue = Int(searchfieldChangeValue)
+            realm.create(Product.self, value: ["upc": upcValue!, "imageSlot3": path0], update: .modified)
+        }
+    }
     
     func storeImageInSlot4(arrayNum: Int) {
-         print(String(describing: hdArrayOfURLs[arrayNum]))
-       let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-                      let realm = try! Realm(configuration: config)
-                      try! realm.write {
-                          let path0 =  String(describing: hdArrayOfURLs[arrayNum])
-                                     let searchfieldChangeValue = UPCSearchField.stringValue
-                                     let upcValue = Int(searchfieldChangeValue)
-                                     realm.create(Product.self, value: ["upc": upcValue!, "imageSlot4": path0], update: .modified)
-       }
-                      }
+        print(String(describing: hdArrayOfURLs[arrayNum]))
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+            let path0 =  String(describing: hdArrayOfURLs[arrayNum])
+            let searchfieldChangeValue = UPCSearchField.stringValue
+            let upcValue = Int(searchfieldChangeValue)
+            realm.create(Product.self, value: ["upc": upcValue!, "imageSlot4": path0], update: .modified)
+        }
+    }
 
 
 
@@ -481,23 +510,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     
     
     @IBAction func SearchBar(_ sender: Any) {
-         saveHD_img1.state = .off
-         saveHD_img2.state = .off
-         saveHD_img3.state = .off
-         saveHD_img4.state = .off
-         saveHD_img5.state = .off
-         saveHD_img6.state = .off
-         saveHD_img7.state = .off
-         saveHD_img8.state = .off
-         saveHD_img9.state = .off
-         saveHD_img10.state = .off
-         saveHD_img11.state = .off
-         saveHD_img12.state = .off
-         saveHD_img13.state = .off
-         saveHD_img14.state = .off
-         saveHD_img15.state = .off
-        
-       
+
          arrayOfURLs = []
         hdArrayOfURLs = []
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
@@ -521,8 +534,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 UPCField.textColor = NSColor.black
                 itemDescriptionField.textColor = NSColor.black
                 setupPopUpButtons()
-                image8TXT.stringValue = ""
-                image9TXT.stringValue = ""
+                imageOverride1TxtField.stringValue = ""
+                imageOverride2TxtField.stringValue = ""
                 UPCField.stringValue = String(result![0].upc)
                 OriginalQty.stringValue = String(result![0].originalQty)
                 inventoryCount.stringValue = String(result![0].inventoryCount)
@@ -740,27 +753,33 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 //iterate and set image display
                 let images = [image1, image2, image3, image4,image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15]
                 var incrementer = 0
-                repeat {
-                    for i in images {
-                        let url1 = URL(string: "\(lowImgURLbegin)\(imageCode + incrementer )\(lowImgURLEnd)")
-                        let hdurl1 = URL(string: "\(hiRezImgURLbegin)\(imageCode + incrementer )\(hiRezImgURLEnd)")
-                        // print(url1)
-                        arrayOfURLs.append(url1!)
-                        hdArrayOfURLs.append(hdurl1!)
-                        //print(hdArrayOfURLs)
-                        do {
-                            let data = try Data(contentsOf: url1!)
-                            //let hddata = try Data(contentsOf: hdurl1!)
-                            i!.image = NSImage(data: data)
-                           // i!.image = NSImage(data: hddata)
-                            incrementer += 1
-                        } catch {
-                            print("error!")
-                        }
-                    }
-                }while incrementer <= 7
                 
-         } else {
+                if reviewModeState == "off" {
+                    repeat {
+                        for i in images {
+                            let url1 = URL(string: "\(lowImgURLbegin)\(imageCode + incrementer )\(lowImgURLEnd)")
+                            let hdurl1 = URL(string: "\(hiRezImgURLbegin)\(imageCode + incrementer )\(hiRezImgURLEnd)")
+                            // print(url1)
+                            arrayOfURLs.append(url1!)
+                            hdArrayOfURLs.append(hdurl1!)
+                            //print(hdArrayOfURLs)
+                            do {
+                                let data = try Data(contentsOf: url1!)
+                                //let hddata = try Data(contentsOf: hdurl1!)
+                                i!.image = NSImage(data: data)
+                                // i!.image = NSImage(data: hddata)
+                                incrementer += 1
+                            } catch {
+                                print("error!")
+                            }
+                        }
+                    }while incrementer <= 7
+                } else {
+                    print("review mode on")
+                    updateimages()
+                }
+                
+            } else {
                 
                 
                 print("error.localizedDescription")
@@ -804,6 +823,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 //image8.image = nil
                 
             }
+            
+            
         } else {
            UPCField.stringValue = "No Realm File!"
         }
@@ -828,18 +849,56 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
         let realm = try! Realm(configuration: config)
         
-        
-        image8TXT.stringValue = String(result![0].imageSlot8)
-        image9TXT.stringValue = String(result![0].imageSlot9)
-        let url2 = URL(string: image8TXT.stringValue)
-        let url3 = URL(string: image9TXT.stringValue)
+        image1.image = nil
+        image2.image = nil
+        image3.image = nil
+        image4.image = nil
+
+        let url1 = URL(string: (result![0].imageSlot1))
+        let url2 = URL(string: (result![0].imageSlot2))
+        let url3 = URL(string: (result![0].imageSlot3))
+        let url4 = URL(string: (result![0].imageSlot4))
         
         do {
-            
-            let data1 = try Data(contentsOf: url2!)
-            image8.image = NSImage(data: data1)
-            let data2 = try Data(contentsOf: url3!)
-            image9.image = NSImage(data: data2)
+            if url1 != nil {
+            let data1 = try Data(contentsOf: url1!)
+            image1.image = NSImage(data: data1)
+            }else{
+                image1.image = nil
+                return
+            }
+            if url2 != nil {
+            let data2 = try Data(contentsOf: url2!)
+            image2.image = NSImage(data: data2)
+            }else{
+                image2.image = nil
+                return
+            }
+            if url3 != nil {
+            let data3 = try Data(contentsOf: url3!)
+            image3.image = NSImage(data: data3)
+            }else{
+                image3.image = nil
+                return
+            }
+            if url4 != nil {
+            let data4 = try Data(contentsOf: url4!)
+            image4.image = NSImage(data: data4)
+            }else{
+                image4.image = nil
+                return
+            }
+            image5.image = nil
+            image6.image = nil
+            image7.image = nil
+            image8.image = nil
+            image9.image = nil
+            image10.image = nil
+            image11.image = nil
+            image12.image = nil
+            image13.image = nil
+            image14.image = nil
+            image15.image = nil
             
             
         } catch {
@@ -856,8 +915,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
         let realm = try! Realm(configuration: config)
         try! realm.write {
-         result![0].imageSlot8 = image8TXT.stringValue
-         result![0].imageSlot9 = image9TXT.stringValue
+         result![0].imageSlot1 = imageOverride1TxtField.stringValue
+         result![0].imageSlot2 = imageOverride2TxtField.stringValue
         }
     }
     
@@ -920,246 +979,6 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     }
     
 
-    @IBAction func ibox1(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-            let path0 =  String(describing: hdArrayOfURLs[0])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-             realm.create(Product.self, value: ["upc": upcValue, "imageSlot1": path0], update: .modified)
-                print("URL saved to realmDB.")
-            }
-        } else {
-            print("off!")
-    }
-    }
-    @IBAction func ibox2(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[1])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-                realm.create(Product.self, value: ["upc": upcValue, "imageSlot2": path0], update: .modified)
-                print("URL saved to realmDB.")
-
-            }
-        } else {
-            print("off!")
-        }
-    }
-    @IBAction func ibox3(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[2])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-                realm.create(Product.self, value: ["upc": upcValue, "imageSlot3": path0], update: .modified)
-                print("URL saved to realmDB.")
-
-            }
-        } else {
-            print("off!")
-        }
-    }
-    @IBAction func ibox4(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[3])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-                realm.create(Product.self, value: ["upc": upcValue, "imageSlot4": path0], update: .modified)
-                print("URL saved to realmDB.")
-
-            }
-        } else {
-            print("off!")
-        }
-    }
-    @IBAction func ibox5(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[4])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-                realm.create(Product.self, value: ["upc": upcValue, "imageSlot5": path0], update: .modified)
-                print("URL saved to realmDB.")
-            }
-        } else {
-            print("off!")
-        }
-    }
-    @IBAction func ibox6(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[5])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-               realm.create(Product.self, value: ["upc": upcValue, "imageSlot6": path0], update: .modified)
-                print("URL saved to realmDB.")
-
-            }
-        } else {
-            print("off!")
-        }
-    }
-    @IBAction func ibox7(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[6])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-                realm.create(Product.self, value: ["upc": upcValue, "imageSlot7": path0], update: .modified)
-                print("URL saved to realmDB.")
-        
-            }
-        } else {
-            print("off!")
-        }
-    }
-    @IBAction func ibox8(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[7])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-                realm.create(Product.self, value: ["upc": upcValue, "imageSlot8": path0], update: .modified)
-                print("URL saved to realmDB.")
-                
-                }
-                } else {
-            print("off!")
-        }
-    }
-    @IBAction func ibox9(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[8])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-                realm.create(Product.self, value: ["upc": upcValue, "imageSlot9": path0], update: .modified)
-                print("URL saved to realmDB.")
-                
-            }
-        } else {
-            print("off!")
-        }
-    }
-    @IBAction func ibox10(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[9])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-                realm.create(Product.self, value: ["upc": upcValue, "imageSlot10": path0], update: .modified)
-                print("URL saved to realmDB.")
-                
-            }
-        } else {
-            print("off!")
-        }
-    }
-    @IBAction func ibox11(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[10])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-                realm.create(Product.self, value: ["upc": upcValue, "imageSlot11": path0], update: .modified)
-                print("URL saved to realmDB.")
-               
-            }
-        } else {
-            print("off!")
-        }
-    }
-    @IBAction func ibox12(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[11])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-                realm.create(Product.self, value: ["upc": upcValue, "imageSlot12": path0], update: .modified)
-                print("URL saved to realmDB.")
-             
-            }
-        } else {
-            print("off!")
-        }
-    }
-    @IBAction func ibox13(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[12])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-                realm.create(Product.self, value: ["upc": upcValue, "imageSlot13": path0], update: .modified)
-                print("URL saved to realmDB.")
-               
-            }
-        } else {
-            print("off!")
-        }
-    }
-    @IBAction func ibox14(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[13])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-                realm.create(Product.self, value: ["upc": upcValue, "imageSlot14": path0], update: .modified)
-                print("URL saved to realmDB.")
-               
-            }
-        } else {
-            print("off!")
-        }
-    }
-    @IBAction func ibox15(_ sender: NSButton) {
-        if sender.state == .on{
-            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            try! realm.write {
-                let path0 =  String(describing: hdArrayOfURLs[14])
-                let searchfieldChangeValue = UPCSearchField.stringValue
-                let upcValue = Int(searchfieldChangeValue)
-                realm.create(Product.self, value: ["upc": upcValue, "imageSlot15": path0], update: .modified)
-                print("URL saved to realmDB.")
-               
-            }
-        } else {
-            print("off!")
-        }
-    }
-    
-    
     //Display HD image @IBaction triggers
     
     @IBAction func Image1HighRezOpen(_ sender: NSButton) {

@@ -4,7 +4,6 @@
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
         <capability name="System colors introduced in macOS 10.13" minToolsVersion="9.0"/>
-        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -783,7 +782,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="2618" height="1440"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <userGuides>
-                            <userLayoutGuide location="711" affinity="minY"/>
+                            <userLayoutGuide location="712" affinity="minY"/>
                         </userGuides>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t6w-Wv-fzR">
@@ -1050,114 +1049,6 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXe-aL-uTH">
-                                <rect key="frame" x="2343" y="692" width="104" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 8" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4xb-AU-ojF">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox8:" target="OUq-4Z-H7t" id="tnY-UK-Yuh"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y3L-hy-qzA">
-                                <rect key="frame" x="2044" y="692" width="103" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 7" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZR9-Zu-hzc">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox7:" target="OUq-4Z-H7t" id="Lo6-UP-Jmj"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ktC-P1-aOx">
-                                <rect key="frame" x="1726" y="693" width="104" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 6" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nuh-9E-vrg">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox6:" target="OUq-4Z-H7t" id="jcY-dE-gYv"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hyu-zl-mtJ">
-                                <rect key="frame" x="1423" y="690" width="104" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 5" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2Ab-gS-1WO">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox5:" target="OUq-4Z-H7t" id="KfI-zx-O2w"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FbD-P4-9yQ">
-                                <rect key="frame" x="1113" y="693" width="104" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 4" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JFh-uB-18w">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox4:" target="OUq-4Z-H7t" id="jUx-ME-YKb"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pos-tJ-hEh">
-                                <rect key="frame" x="788" y="693" width="104" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 3" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cHD-yW-5Qv">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox3:" target="OUq-4Z-H7t" id="fRb-vw-nFr"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lhN-40-uhG">
-                                <rect key="frame" x="450" y="693" width="104" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 2" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aqI-zv-u44">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox2:" target="OUq-4Z-H7t" id="h11-Vq-9K5"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zSg-ph-1dS">
-                                <rect key="frame" x="143" y="694" width="102" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 1" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PCv-uz-kcd">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox1:" target="OUq-4Z-H7t" id="Tq6-fV-PON"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KEx-P5-g2H">
-                                <rect key="frame" x="2187" y="220" width="104" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 9" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oga-iM-VIg">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox9:" target="OUq-4Z-H7t" id="YNB-sj-W0J"/>
-                                </connections>
-                            </button>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rjd-CV-8eO">
                                 <rect key="frame" x="2191" y="248" width="92" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1173,78 +1064,6 @@
                                     </menu>
                                 </popUpButtonCell>
                             </popUpButton>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bhR-Tb-dnv">
-                                <rect key="frame" x="1854" y="219" width="110" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 10" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iUN-rT-2gc">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox10:" target="OUq-4Z-H7t" id="SpD-cU-XgQ"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vGW-Iy-DfD">
-                                <rect key="frame" x="1531" y="220" width="108" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 11" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="R2m-GJ-103">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox11:" target="OUq-4Z-H7t" id="s0g-Hw-Zw0"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NZF-NO-Ii1">
-                                <rect key="frame" x="1227" y="220" width="110" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 12" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="adQ-FO-Oyw">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox12:" target="OUq-4Z-H7t" id="VGr-P8-1CA"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iEs-BL-myF">
-                                <rect key="frame" x="877" y="220" width="110" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 13" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Yn3-Ci-yEl">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox13:" target="OUq-4Z-H7t" id="qcr-MC-VK6"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hjZ-eS-O5s">
-                                <rect key="frame" x="553" y="220" width="110" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 14" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0eE-dv-dcf">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox14:" target="OUq-4Z-H7t" id="Vx3-Ze-hBY"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Di-s7-wV6">
-                                <rect key="frame" x="250" y="219" width="110" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save HD 15" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="GGc-uC-DMw">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="ibox15:" target="OUq-4Z-H7t" id="06i-Jt-3Qu"/>
-                                </connections>
-                            </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNa-Cr-7PF">
                                 <rect key="frame" x="601" y="1200" width="96" height="22"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1887,6 +1706,17 @@
                                     <action selector="saveImages:" target="OUq-4Z-H7t" id="i6z-Xd-GOG"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jIC-lJ-DeO">
+                                <rect key="frame" x="1708" y="1370" width="103" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Review Mode" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Qfl-vj-4Au">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <action selector="reviewMode:" target="OUq-4Z-H7t" id="GLF-DD-auI"/>
+                                    </connections>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="M3k-EC-T0T" firstAttribute="top" secondItem="btQ-XW-bGl" secondAttribute="top" constant="14" id="Wwn-Bj-coo"/>
@@ -1935,9 +1765,9 @@
                         <outlet property="image6" destination="v1e-C0-kM5" id="5WH-HF-epD"/>
                         <outlet property="image7" destination="m24-6g-sOC" id="1QQ-OO-31Q"/>
                         <outlet property="image8" destination="4IZ-oM-6cl" id="be6-kA-1Pe"/>
-                        <outlet property="image8TXT" destination="SOg-GT-hHb" id="JDv-tR-o3a"/>
                         <outlet property="image9" destination="7Tx-aE-37G" id="4GL-cO-wed"/>
-                        <outlet property="image9TXT" destination="ZgB-BA-6zo" id="602-hg-95x"/>
+                        <outlet property="imageOverride1TxtField" destination="SOg-GT-hHb" id="oIx-sK-dgt"/>
+                        <outlet property="imageOverride2TxtField" destination="ZgB-BA-6zo" id="64V-yH-Xiz"/>
                         <outlet property="inventoryCount" destination="9pb-G8-ioY" id="dGZ-os-ScN"/>
                         <outlet property="itemDescriptionField" destination="2sr-Kj-zsv" id="T2h-JC-bEZ"/>
                         <outlet property="msrp" destination="jv4-L6-ql2" id="cIS-f2-I0E"/>
@@ -1945,21 +1775,6 @@
                         <outlet property="override9" destination="rT5-hC-j8S" id="a23-9O-6Kb"/>
                         <outlet property="price" destination="aa4-Xp-j4m" id="QJI-7Z-wqw"/>
                         <outlet property="qtyReceived" destination="zem-Md-bM3" id="LU7-wM-hdE"/>
-                        <outlet property="saveHD_img1" destination="zSg-ph-1dS" id="CA3-Ne-Fjh"/>
-                        <outlet property="saveHD_img10" destination="bhR-Tb-dnv" id="pje-ye-tQx"/>
-                        <outlet property="saveHD_img11" destination="vGW-Iy-DfD" id="eAr-oX-uHm"/>
-                        <outlet property="saveHD_img12" destination="NZF-NO-Ii1" id="uK4-Iq-1zx"/>
-                        <outlet property="saveHD_img13" destination="iEs-BL-myF" id="c1Z-Qf-b2g"/>
-                        <outlet property="saveHD_img14" destination="hjZ-eS-O5s" id="36s-FT-jeC"/>
-                        <outlet property="saveHD_img15" destination="2Di-s7-wV6" id="cYZ-kR-mB0"/>
-                        <outlet property="saveHD_img2" destination="lhN-40-uhG" id="akg-38-HkM"/>
-                        <outlet property="saveHD_img3" destination="Pos-tJ-hEh" id="z7F-V9-RqZ"/>
-                        <outlet property="saveHD_img4" destination="FbD-P4-9yQ" id="uYc-3s-28D"/>
-                        <outlet property="saveHD_img5" destination="hyu-zl-mtJ" id="85Q-0a-n4Y"/>
-                        <outlet property="saveHD_img6" destination="ktC-P1-aOx" id="wOC-QF-nIc"/>
-                        <outlet property="saveHD_img7" destination="Y3L-hy-qzA" id="WJP-So-ceG"/>
-                        <outlet property="saveHD_img8" destination="AXe-aL-uTH" id="P0O-3B-g9d"/>
-                        <outlet property="saveHD_img9" destination="KEx-P5-g2H" id="KKp-FA-5hT"/>
                         <outlet property="scaleStatus" destination="RWt-66-ZEY" id="9aM-SM-nEt"/>
                         <outlet property="shipping" destination="Raj-IS-NSg" id="VHN-r7-RHa"/>
                         <outlet property="size" destination="7Cf-pY-ewl" id="KXQ-Hf-E3N"/>
