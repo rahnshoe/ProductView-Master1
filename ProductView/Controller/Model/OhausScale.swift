@@ -10,7 +10,9 @@ import Cocoa
 import CoreBluetooth
 
 protocol ScaleData {
-    func displayWeight(weight: String)
+    func displayWeight(weight: String, lbs: Int, ounces: Int, ounceFraction: Int) 
+   // func displayWeight(weight: String)
+    
 }
 
 protocol ScaleStatus {
@@ -23,6 +25,9 @@ let CBUUIDClientCharacteristicConfigurationString: String = "00002902-0000-1000-
 
 
 var tempWeight: String?
+var lbs: Int?
+var ounces: Int?
+var ounceFraction: Int?
 
 class OhausScale: NSViewController {
     var scaleDelegate: ScaleData?
@@ -54,21 +59,59 @@ class OhausScale: NSViewController {
                 counter += 1
             let hexString = data.hexString
                 hexStringString = String(hexString)
+                    print(hexString)
             let mutableMultilineString = hexStringString
                     if counter > 1 {
-                    let startingIndex = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 4)
-                        let endingIndex = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 34)
+                    let startingIndex = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 6)
+                        let endingIndex = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 23)
                     let range = startingIndex..<endingIndex
                         let substring1 = mutableMultilineString!.substring(with: range)
-                     // print("substring1: \(substring1)")
+                        
+                        let startingIndex1 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 6)
+                            let endingIndex1 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 8)
+                        let range1 = startingIndex1..<endingIndex1
+                            let substring2 = mutableMultilineString!.substring(with: range1)
+                       // print("substring2: \(substring2)")
+                        let tempWeight1 = hexStringtoAscii(substring2)
+                       // print("tempweight1: \(tempWeight1)")
+                        lbs = Int(tempWeight1)
+                     
+                        
+                       let startingIndex2 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 10)
+                            let endingIndex2 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 14)
+                        let range2 = startingIndex2..<endingIndex2
+                            let substring3 = mutableMultilineString!.substring(with: range2)
+                       // print("substring3: \(substring3)")
+                        let tempWeight2 = hexStringtoAscii(substring3)
+                        //print("tempweight2: \(tempWeight2)")
+                        ounces = Int(tempWeight2)
+                      //  print("ounces: \(ounces!)")
+                        
+                        let startingIndex3 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 16)
+                             let endingIndex3 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 22)
+                         let range3 = startingIndex3..<endingIndex3
+                             let substring4 = mutableMultilineString!.substring(with: range3)
+                        // print("substring3: \(substring3)")
+                         let tempWeight3 = hexStringtoAscii(substring4)
+                         //print("tempweight3: \(tempWeight3)")
+                        ounceFraction = Int(tempWeight3)
+                        // print("ounceFraction: \(ounceFraction!)")
+                         
+                        
+                        
+                        
+                     print("substring1: \(substring1)")
                         tempWeight = hexStringtoAscii(substring1)
-                        scaleDelegate?.displayWeight(weight: tempWeight!)
+                       // print("tempweight: \(tempWeight)")
+                        scaleDelegate?.displayWeight(weight: tempWeight!, lbs: lbs!, ounces: ounces!, ounceFraction: ounceFraction!)
+                       
                         } else {
-                        return
+                        
                     }
                 } else {
                     counter = 1
                 }
+
             }
 
     

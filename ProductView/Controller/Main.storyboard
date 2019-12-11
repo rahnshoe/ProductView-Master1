@@ -752,7 +752,7 @@
                                 </connections>
                             </imageView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sH0-cu-R9i">
-                                <rect key="frame" x="2015" y="574" width="494" height="301"/>
+                                <rect key="frame" x="2014" y="574" width="494" height="301"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <buttonCell key="cell" type="bevel" title="Close" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fNn-kW-9GS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1137,7 +1137,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QCW-Zy-l0D">
-                                <rect key="frame" x="2325" y="1230" width="79" height="17"/>
+                                <rect key="frame" x="2314" y="1231" width="79" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Sleeve Style" id="zd8-Et-XQN">
                                     <font key="font" metaFont="system"/>
@@ -1155,7 +1155,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eIK-3u-JsP">
-                                <rect key="frame" x="2316" y="1200" width="96" height="22"/>
+                                <rect key="frame" x="2316" y="1202" width="96" height="21"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="8zn-OS-Hud">
                                     <font key="font" metaFont="system"/>
@@ -1173,7 +1173,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PN7-58-PH3">
-                                <rect key="frame" x="2434" y="1200" width="96" height="22"/>
+                                <rect key="frame" x="2434" y="1202" width="96" height="22"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="5Dg-h0-Zbt">
                                     <font key="font" metaFont="system"/>
@@ -1182,9 +1182,9 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M2p-8M-FL8">
-                                <rect key="frame" x="2187" y="1343" width="306" height="32"/>
+                                <rect key="frame" x="2191" y="1347" width="298" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PGU-2D-T9Y">
+                                <buttonCell key="cell" type="bevel" title="Save" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PGU-2D-T9Y">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1265,7 +1265,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xaV-Rb-sdK">
-                                <rect key="frame" x="2356" y="1167" width="63" height="17"/>
+                                <rect key="frame" x="2373" y="1167" width="63" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Condition" id="yUl-fH-5d5">
                                     <font key="font" metaFont="system"/>
@@ -1286,15 +1286,6 @@
                                 <rect key="frame" x="2186" y="1144" width="96" height="22"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Ehu-mc-BRi">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KrI-gR-eSy">
-                                <rect key="frame" x="2339" y="1144" width="96" height="22"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="jyY-Ue-xUv">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1717,6 +1708,45 @@
                                     </connections>
                                 </buttonCell>
                             </button>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yj7-6g-3dx">
+                                <rect key="frame" x="2342" y="1188" width="191" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="RPG-vM-lb0" id="Utd-fq-Z9G">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <menu key="menu" id="yeJ-91-Wh4">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="RPG-vM-lb0"/>
+                                            <menuItem title="Item 2" id="f1f-9e-9vI"/>
+                                            <menuItem title="Item 3" id="iI1-Rf-2pf"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wkb-4t-JhT">
+                                <rect key="frame" x="397" y="1178" width="149" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="VT7-IK-quq" id="gdV-ZE-caw">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <menu key="menu" id="AqO-cV-JNM">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="VT7-IK-quq"/>
+                                            <menuItem title="Item 2" id="kc4-NQ-T5a"/>
+                                            <menuItem title="Item 3" id="MtQ-Vp-kQj"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lhI-6Q-Y72">
+                                <rect key="frame" x="415" y="1168" width="112" height="16"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Oversize shipping" id="cBt-bO-zfB">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="M3k-EC-T0T" firstAttribute="top" secondItem="btQ-XW-bGl" secondAttribute="top" constant="14" id="Wwn-Bj-coo"/>
@@ -1747,8 +1777,8 @@
                         <outlet property="brand" destination="mi3-qq-NBF" id="9Fu-0h-kNV"/>
                         <outlet property="color" destination="E5z-gj-7KZ" id="Zg7-Wd-l2b"/>
                         <outlet property="colorField" destination="E5z-gj-7KZ" id="abf-Cb-IK7"/>
-                        <outlet property="eBayConditionID" destination="KrI-gR-eSy" id="Fs5-73-biG"/>
                         <outlet property="ebayCategory" destination="Hr8-YL-VFq" id="vW2-U4-UDJ"/>
+                        <outlet property="ebayConditionSelector" destination="Yj7-6g-3dx" id="ebR-sE-Mbd"/>
                         <outlet property="emptyFlag" destination="36V-kB-HZC" id="9I8-Zb-bx6"/>
                         <outlet property="image" destination="hWA-D7-mo0" id="duy-RW-nOQ"/>
                         <outlet property="image1" destination="m3o-F4-S4l" id="Z48-T1-Gin"/>
@@ -1773,6 +1803,7 @@
                         <outlet property="msrp" destination="jv4-L6-ql2" id="cIS-f2-I0E"/>
                         <outlet property="override8" destination="zXW-oO-haZ" id="DsT-KF-rW2"/>
                         <outlet property="override9" destination="rT5-hC-j8S" id="a23-9O-6Kb"/>
+                        <outlet property="overrideShipping" destination="wkb-4t-JhT" id="dp1-74-nWL"/>
                         <outlet property="price" destination="aa4-Xp-j4m" id="QJI-7Z-wqw"/>
                         <outlet property="qtyReceived" destination="zem-Md-bM3" id="LU7-wM-hdE"/>
                         <outlet property="scaleStatus" destination="RWt-66-ZEY" id="9aM-SM-nEt"/>

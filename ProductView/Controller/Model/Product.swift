@@ -44,6 +44,7 @@ class Product: Object, Codable {
     @objc dynamic var ebayCategory: String = ""
     @objc dynamic var storeCategory: String = ""
     @objc dynamic var eBayConditionID: Int = 0
+    //@objc dynamic var weight: Int = 0
     
     override static func primaryKey() -> String? {
         return "upc"

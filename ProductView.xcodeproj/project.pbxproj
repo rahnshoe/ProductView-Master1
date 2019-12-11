@@ -13,7 +13,6 @@
 		B5621D3A2388593700EF5FC6 /* HighRezImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D392388593700EF5FC6 /* HighRezImageViewController.swift */; };
 		B5621D3C2388595700EF5FC6 /* AddWomens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D3B2388595700EF5FC6 /* AddWomens.swift */; };
 		B5621D3E2388596F00EF5FC6 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D3D2388596F00EF5FC6 /* StringUtils.swift */; };
-		B5621D402388597D00EF5FC6 /* OhausViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D3F2388597D00EF5FC6 /* OhausViewController.swift */; };
 		B5621D42238859A400EF5FC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D41238859A400EF5FC6 /* AppDelegate.swift */; };
 		B5621D44238859F400EF5FC6 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D43238859F400EF5FC6 /* Product.swift */; };
 		B5621D4623885A6200EF5FC6 /* MultiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5621D4523885A6200EF5FC6 /* MultiView.swift */; };
@@ -21,6 +20,7 @@
 		B5621D4A23885AA500EF5FC6 /* MyChrisoft Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B5621D4923885AA500EF5FC6 /* MyChrisoft Logo.png */; };
 		B5621D4C23885AAA00EF5FC6 /* RSC logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B5621D4B23885AAA00EF5FC6 /* RSC logo.png */; };
 		B57A8C022388880B00AD77F6 /* OhausScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57A8C012388880B00AD77F6 /* OhausScale.swift */; };
+		B57B27D523A02A6D0093E2E7 /* Shipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B27D423A02A6D0093E2E7 /* Shipping.swift */; };
 		E1A8762AB1326BE6DEB9CA35 /* Pods_ProductView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DED8F00A4792BBB73FBAF5C /* Pods_ProductView.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,6 @@
 		B5621D392388593700EF5FC6 /* HighRezImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighRezImageViewController.swift; sourceTree = "<group>"; };
 		B5621D3B2388595700EF5FC6 /* AddWomens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWomens.swift; sourceTree = "<group>"; };
 		B5621D3D2388596F00EF5FC6 /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
-		B5621D3F2388597D00EF5FC6 /* OhausViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OhausViewController.swift; sourceTree = "<group>"; };
 		B5621D41238859A400EF5FC6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5621D43238859F400EF5FC6 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		B5621D4523885A6200EF5FC6 /* MultiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiView.swift; sourceTree = "<group>"; };
@@ -44,6 +43,7 @@
 		B5621D4923885AA500EF5FC6 /* MyChrisoft Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MyChrisoft Logo.png"; sourceTree = "<group>"; };
 		B5621D4B23885AAA00EF5FC6 /* RSC logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSC logo.png"; sourceTree = "<group>"; };
 		B57A8C012388880B00AD77F6 /* OhausScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhausScale.swift; sourceTree = "<group>"; };
+		B57B27D423A02A6D0093E2E7 /* Shipping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shipping.swift; sourceTree = "<group>"; };
 		C17C84A806378598319F9198 /* Pods-ProductView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProductView.release.xcconfig"; path = "Target Support Files/Pods-ProductView/Pods-ProductView.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,7 +82,6 @@
 			children = (
 				B5621D36238858C600EF5FC6 /* Controller */,
 				B5621D35238858BF00EF5FC6 /* View */,
-				B5621D34238858B000EF5FC6 /* Model */,
 				B5621D262388581500EF5FC6 /* Assets.xcassets */,
 				B5621D4B23885AAA00EF5FC6 /* RSC logo.png */,
 				B5621D4923885AA500EF5FC6 /* MyChrisoft Logo.png */,
@@ -97,9 +96,9 @@
 			children = (
 				B5621D3B2388595700EF5FC6 /* AddWomens.swift */,
 				B5621D3D2388596F00EF5FC6 /* StringUtils.swift */,
-				B5621D3F2388597D00EF5FC6 /* OhausViewController.swift */,
 				B5621D4723885A8C00EF5FC6 /* OverrideIMG.swift */,
 				B5621D41238859A400EF5FC6 /* AppDelegate.swift */,
+				B57B27D423A02A6D0093E2E7 /* Shipping.swift */,
 				B5621D43238859F400EF5FC6 /* Product.swift */,
 				B57A8C012388880B00AD77F6 /* OhausScale.swift */,
 			);
@@ -119,6 +118,7 @@
 				B5621D372388591C00EF5FC6 /* ViewController.swift */,
 				B5621D392388593700EF5FC6 /* HighRezImageViewController.swift */,
 				B5621D4523885A6200EF5FC6 /* MultiView.swift */,
+				B5621D34238858B000EF5FC6 /* Model */,
 				B5621D322388588A00EF5FC6 /* Main.storyboard */,
 			);
 			path = Controller;
@@ -264,7 +264,7 @@
 				B5621D3E2388596F00EF5FC6 /* StringUtils.swift in Sources */,
 				B57A8C022388880B00AD77F6 /* OhausScale.swift in Sources */,
 				B5621D3A2388593700EF5FC6 /* HighRezImageViewController.swift in Sources */,
-				B5621D402388597D00EF5FC6 /* OhausViewController.swift in Sources */,
+				B57B27D523A02A6D0093E2E7 /* Shipping.swift in Sources */,
 				B5621D382388591C00EF5FC6 /* ViewController.swift in Sources */,
 				B5621D44238859F400EF5FC6 /* Product.swift in Sources */,
 			);
