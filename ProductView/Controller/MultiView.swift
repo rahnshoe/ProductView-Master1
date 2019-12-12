@@ -28,6 +28,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     var AltImgText2 = ""
     var ovrUPC = ""
     var reviewModeState = "off"
+    var inventoryCheckInModeState: String?
+ 
 
     
     var scale = OhausScale()
@@ -319,8 +321,116 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     }
 
 
+    @IBAction func SetNoImages(_ sender: NSButton) {
+        if sender.state == .on{
+            //********** save flag to no image column in DB*********
+        image1.image = image1.alternateImage
+        image2.image = image1.alternateImage
+        image3.image = image1.alternateImage
+        image4.image = image1.alternateImage
+        image5.image = image1.alternateImage
+        image6.image = image1.alternateImage
+        image7.image = image1.alternateImage
+        image8.image = image1.alternateImage
+        image9.image = image1.alternateImage
+        image10.image = image1.alternateImage
+        image11.image = image1.alternateImage
+        image12.image = image1.alternateImage
+        image13.image = image1.alternateImage
+        image14.image = image1.alternateImage
+        image15.image = image1.alternateImage
+            
+            let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+            let realm = try! Realm(configuration: config)
+            try! realm.write {
+                //let path0 =  String(describing: hdArrayOfURLs[0])
+                let path0 = "******************************"
+                let searchfieldChangeValue = UPCSearchField.stringValue
+                let upcValue = Int(searchfieldChangeValue)
+                realm.create(Product.self, value: ["upc": upcValue!, "imageSlot1": path0], update: .modified)
+                realm.create(Product.self, value: ["upc": upcValue!, "imageSlot2": path0], update: .modified)
+                realm.create(Product.self, value: ["upc": upcValue!, "imageSlot3": path0], update: .modified)
+                realm.create(Product.self, value: ["upc": upcValue!, "imageSlot4": path0], update: .modified)
+            }
+        }else{
+            sender.state = .off
+            image1.image = nil
+            image2.image = nil
+            image3.image = nil
+            image4.image = nil
+            image5.image = nil
+            image6.image = nil
+            image7.image = nil
+            image8.image = nil
+            image9.image = nil
+            image10.image = nil
+            image11.image = nil
+            image12.image = nil
+            image13.image = nil
+            image14.image = nil
+            image15.image = nil
+        }
 
+        
+        
+    }
+    
+    @IBAction func inventoryCheckInMode(_ sender: NSButton) {
+        if sender.state == .on{
+        inventoryCheckInModeState =  "on"
+        qtyReceived.stringValue = "1"
+            qtyReceived.backgroundColor = NSColor.yellow
+        }else{
+             qtyReceived.backgroundColor = NSColor.white
+            qtyReceived.stringValue = ""
+            weightDisplay.stringValue = ""
+            
+            
+            setupPopUpButtons()
+            image1.image = nil
+            image2.image = nil
+            image3.image = nil
+            image4.image = nil
+            image5.image = nil
+            image6.image = nil
+            image7.image = nil
+            image8.image = nil
+            image9.image = nil
+            image10.image = nil
+            image11.image = nil
+            image12.image = nil
+            image13.image = nil
+            image14.image = nil
+            image15.image = nil
+            UPCField.stringValue = "not found"
+            msrp.stringValue = ""
+            price.stringValue = ""
+            shipping.stringValue = ""
+            sku.stringValue = ""
+            brand.stringValue = ""
+            style.stringValue = ""
+            color.stringValue = ""
+            size.stringValue = ""
+            sleeveStyle.stringValue = ""
+            sleeveLength.stringValue = ""
+            ebayCategory.stringValue = ""
+           
+            sizeType.stringValue = ""
+            storeCategory.stringValue = ""
+            UPCField.textColor = NSColor.red
+            itemDescriptionField.stringValue = "not found"
+            itemDescriptionField.textColor = NSColor.red
+            OriginalQty.stringValue = ""
+            inventoryCount.stringValue = ""
+            ebayConditionSelector.selectItem(at: 0)
+            overrideShipping.selectItem(at: 0)
+            UPCSearchField.stringValue = ""
+            UPCField.stringValue = ""
+            itemDescriptionField.stringValue = ""
+            
 
+        }
+    }
     
     
     @IBAction func saveImages(_ sender: NSButton) {
@@ -548,7 +658,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     
     
     @IBAction func SearchBar(_ sender: Any) {
-
+        
          arrayOfURLs = []
         hdArrayOfURLs = []
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
@@ -913,8 +1023,31 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                    try! realm.write {
         inventoryCount.stringValue = String(qtyReceived.intValue + inventoryCount.intValue)
         result![0].inventoryCount = inventoryCount.integerValue
-        self.qtyReceived.stringValue = ""
-    }
+        self.qtyReceived.stringValue = "1"
+    
+        
+        if inventoryCheckInModeState == "on" {
+             result![0].shipping = ecomDashShipCode!
+        let overrideShippingIndex = overrideShipping.indexOfSelectedItem
+            
+            if overrideShippingIndex == 0 {
+                return
+                 }else if overrideShippingIndex == 1 {
+                      ecomDashShipCode = 851436
+                  }else if overrideShippingIndex == 2 {
+                      ecomDashShipCode = 851450
+                  }else if overrideShippingIndex == 3 {
+                      ecomDashShipCode = 912425
+                  }else if overrideShippingIndex == 4 {
+                      ecomDashShipCode = 1001772
+                  }else if overrideShippingIndex == 5 {
+                      ecomDashShipCode = 851451
+                  }else if overrideShippingIndex == 6 {
+                      ecomDashShipCode = 999308
+                  }
+               result![0].shipping = ecomDashShipCode!
+        }
+        }
     }
     @IBAction func updateImages(_ sender: NSButton) {
         updateimages()
@@ -929,11 +1062,25 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         image3.image = nil
         image4.image = nil
 
+        
+        let url1a = result![0].imageSlot1
+//        let url2a = result![0].imageSlot2
+//        let url3a = result![0].imageSlot3
+//        let url4a = result![0].imageSlot4
+        
+        if url1a == "******************************" {
+            image1.image = image1.alternateImage
+            image2.image = image2.alternateImage
+            image3.image = image3.alternateImage
+            image4.image = image4.alternateImage
+        }else{
         let url1 = URL(string: (result![0].imageSlot1))
         let url2 = URL(string: (result![0].imageSlot2))
         let url3 = URL(string: (result![0].imageSlot3))
         let url4 = URL(string: (result![0].imageSlot4))
         
+        
+            
         do {
             if url1 != nil {
             let data1 = try Data(contentsOf: url1!)
@@ -979,7 +1126,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         } catch {
             print("error!")
         }
-        
+        }
     }
     
     @IBAction func writeURLstoDB(_ sender: NSButton) {

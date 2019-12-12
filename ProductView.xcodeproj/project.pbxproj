@@ -21,6 +21,7 @@
 		B5621D4C23885AAA00EF5FC6 /* RSC logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B5621D4B23885AAA00EF5FC6 /* RSC logo.png */; };
 		B57A8C022388880B00AD77F6 /* OhausScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57A8C012388880B00AD77F6 /* OhausScale.swift */; };
 		B57B27D523A02A6D0093E2E7 /* Shipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B27D423A02A6D0093E2E7 /* Shipping.swift */; };
+		B584CF0423A2AA6400688EB7 /* no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = B584CF0323A2AA6400688EB7 /* no_image.png */; };
 		E1A8762AB1326BE6DEB9CA35 /* Pods_ProductView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DED8F00A4792BBB73FBAF5C /* Pods_ProductView.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		B5621D4B23885AAA00EF5FC6 /* RSC logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSC logo.png"; sourceTree = "<group>"; };
 		B57A8C012388880B00AD77F6 /* OhausScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhausScale.swift; sourceTree = "<group>"; };
 		B57B27D423A02A6D0093E2E7 /* Shipping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shipping.swift; sourceTree = "<group>"; };
+		B584CF0323A2AA6400688EB7 /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image.png; sourceTree = "<group>"; };
 		C17C84A806378598319F9198 /* Pods-ProductView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProductView.release.xcconfig"; path = "Target Support Files/Pods-ProductView/Pods-ProductView.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +85,7 @@
 				B5621D36238858C600EF5FC6 /* Controller */,
 				B5621D35238858BF00EF5FC6 /* View */,
 				B5621D262388581500EF5FC6 /* Assets.xcassets */,
+				B584CF0323A2AA6400688EB7 /* no_image.png */,
 				B5621D4B23885AAA00EF5FC6 /* RSC logo.png */,
 				B5621D4923885AA500EF5FC6 /* MyChrisoft Logo.png */,
 				B5621D2B2388581500EF5FC6 /* Info.plist */,
@@ -205,6 +208,7 @@
 				B5621D272388581500EF5FC6 /* Assets.xcassets in Resources */,
 				B5621D332388588A00EF5FC6 /* Main.storyboard in Resources */,
 				B5621D4A23885AA500EF5FC6 /* MyChrisoft Logo.png in Resources */,
+				B584CF0423A2AA6400688EB7 /* no_image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

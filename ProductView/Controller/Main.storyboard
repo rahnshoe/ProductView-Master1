@@ -794,7 +794,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V5B-O2-ezN" userLabel="Image15">
                                 <rect key="frame" x="174" y="267" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="CyJ-jG-aG7">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="CyJ-jG-aG7">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -805,7 +805,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-U1-FMc">
                                 <rect key="frame" x="478" y="274" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="XEo-at-zrw">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="XEo-at-zrw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -816,7 +816,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X0S-cZ-Pol">
                                 <rect key="frame" x="801" y="268" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="K4z-aY-DmS">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="K4z-aY-DmS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -827,7 +827,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lYI-eh-al5" userLabel="Image12">
                                 <rect key="frame" x="1140" y="274" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="ULM-3L-LMj">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="ULM-3L-LMj">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -838,7 +838,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BwS-oU-ALG">
                                 <rect key="frame" x="1455" y="274" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="WRq-dI-5RU">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="WRq-dI-5RU">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -849,7 +849,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dyh-xX-dt0">
                                 <rect key="frame" x="1779" y="274" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="RME-xc-fil">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="RME-xc-fil">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -860,7 +860,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Tx-aE-37G" userLabel="Image9">
                                 <rect key="frame" x="2115" y="279" width="249" height="358"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="iit-vh-hRT">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="iit-vh-hRT">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -871,7 +871,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4IZ-oM-6cl">
                                 <rect key="frame" x="2264" y="754" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="rW1-tY-ni6">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="rW1-tY-ni6">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -893,7 +893,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v1e-C0-kM5">
                                 <rect key="frame" x="1648" y="756" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="cSS-oI-Waa">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="cSS-oI-Waa">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -904,7 +904,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M3S-7I-Zd8">
                                 <rect key="frame" x="1345" y="754" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="1jO-eK-eCZ">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="overlaps" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="1jO-eK-eCZ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -915,7 +915,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRO-iy-Emw">
                                 <rect key="frame" x="1035" y="756" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="xjp-fk-vVZ">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="xjp-fk-vVZ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -926,7 +926,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F4C-1k-rkM">
                                 <rect key="frame" x="710" y="756" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="lvv-ia-Dvl">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="lvv-ia-Dvl">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -937,7 +937,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZzA-wD-AG9">
                                 <rect key="frame" x="380" y="754" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="Xk3-Ta-yN3">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="Xk3-Ta-yN3">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -948,7 +948,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m3o-F4-S4l">
                                 <rect key="frame" x="63" y="754" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="xEk-Le-LCB">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="only" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="xEk-Le-LCB">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1713,7 +1713,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="RPG-vM-lb0" id="Utd-fq-Z9G">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="yeJ-91-Wh4">
                                         <items>
                                             <menuItem title="Item 1" state="on" id="RPG-vM-lb0"/>
@@ -1728,7 +1728,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="VT7-IK-quq" id="gdV-ZE-caw">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="AqO-cV-JNM">
                                         <items>
                                             <menuItem title="Item 1" state="on" id="VT7-IK-quq"/>
@@ -1747,6 +1747,28 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qwq-ZG-VWi">
+                                <rect key="frame" x="755" y="1351" width="173" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Inventory Check In Mode" bezelStyle="regularSquare" imagePosition="left" inset="2" id="RHT-Cc-KFe">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="inventoryCheckInMode:" target="OUq-4Z-H7t" id="Mcc-p8-3tE"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VgE-Ok-O0H">
+                                <rect key="frame" x="1555" y="675" width="87" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="No Images" bezelStyle="regularSquare" imagePosition="left" inset="2" id="JeD-9p-ul7">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="SetNoImages:" target="OUq-4Z-H7t" id="a9t-Dx-3WL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="M3k-EC-T0T" firstAttribute="top" secondItem="btQ-XW-bGl" secondAttribute="top" constant="14" id="Wwn-Bj-coo"/>
@@ -1899,5 +1921,6 @@
     </scenes>
     <resources>
         <image name="MyChrisoft Logo" width="707" height="265"/>
+        <image name="no_image" width="600" height="490"/>
     </resources>
 </document>
