@@ -31,10 +31,10 @@ class HighRezImageViewController: NSViewController {
    
 
     
-     let hiRezImgURLbegin = "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/"
-     let hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$"
-                  
-    
+     //let hiRezImgURLbegin = "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/"
+   //  let hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$"
+                
+    print("HiRezIMageURLstatus \(hiRezImgURLbegin)")
                    
                    let url1 = URL(string: "\(hiRezImgURLbegin)\(HRimageCode!)\(hiRezImgURLEnd)")
                    print("url1 is: \(url1)")

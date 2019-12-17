@@ -34,8 +34,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
         schemaVersion: 1,
         migrationBlock: { migration, oldSchemaVersion in
-       // migration.enumerateObjects(ofType: Product.className()) { oldObject, newObject in
                 if (oldSchemaVersion < 1) {
+                    //migration.enumerateObjects(ofType: Product.className()) { oldObject, newObject in
             //    }
                }
              })

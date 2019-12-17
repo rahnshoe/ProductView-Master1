@@ -22,6 +22,7 @@
 		B57A8C022388880B00AD77F6 /* OhausScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57A8C012388880B00AD77F6 /* OhausScale.swift */; };
 		B57B27D523A02A6D0093E2E7 /* Shipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B27D423A02A6D0093E2E7 /* Shipping.swift */; };
 		B584CF0423A2AA6400688EB7 /* no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = B584CF0323A2AA6400688EB7 /* no_image.png */; };
+		B584CF0623A2C4EA00688EB7 /* Brands.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584CF0523A2C4EA00688EB7 /* Brands.swift */; };
 		E1A8762AB1326BE6DEB9CA35 /* Pods_ProductView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DED8F00A4792BBB73FBAF5C /* Pods_ProductView.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		B57A8C012388880B00AD77F6 /* OhausScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhausScale.swift; sourceTree = "<group>"; };
 		B57B27D423A02A6D0093E2E7 /* Shipping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shipping.swift; sourceTree = "<group>"; };
 		B584CF0323A2AA6400688EB7 /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image.png; sourceTree = "<group>"; };
+		B584CF0523A2C4EA00688EB7 /* Brands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brands.swift; sourceTree = "<group>"; };
 		C17C84A806378598319F9198 /* Pods-ProductView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProductView.release.xcconfig"; path = "Target Support Files/Pods-ProductView/Pods-ProductView.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				B5621D3B2388595700EF5FC6 /* AddWomens.swift */,
+				B584CF0523A2C4EA00688EB7 /* Brands.swift */,
 				B5621D3D2388596F00EF5FC6 /* StringUtils.swift */,
 				B5621D4723885A8C00EF5FC6 /* OverrideIMG.swift */,
 				B5621D41238859A400EF5FC6 /* AppDelegate.swift */,
@@ -265,6 +268,7 @@
 				B5621D4623885A6200EF5FC6 /* MultiView.swift in Sources */,
 				B5621D42238859A400EF5FC6 /* AppDelegate.swift in Sources */,
 				B5621D3C2388595700EF5FC6 /* AddWomens.swift in Sources */,
+				B584CF0623A2C4EA00688EB7 /* Brands.swift in Sources */,
 				B5621D3E2388596F00EF5FC6 /* StringUtils.swift in Sources */,
 				B57A8C022388880B00AD77F6 /* OhausScale.swift in Sources */,
 				B5621D3A2388593700EF5FC6 /* HighRezImageViewController.swift in Sources */,

@@ -722,9 +722,21 @@
                                     <action selector="OpenFile:" target="XfG-lQ-9wD" id="PS4-Oe-BI9"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5VD-Tc-nHq">
+                                <rect key="frame" x="758" y="551" width="168" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="previously run?" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LQ7-ba-9vQ">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <action selector="previouslyRun:" target="XfG-lQ-9wD" id="0Ad-5l-fqX"/>
+                                    </connections>
+                                </buttonCell>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="previousRun" destination="LQ7-ba-9vQ" id="evG-zC-fQR"/>
                         <outlet property="startButton" destination="bc2-sv-rQr" id="37j-4A-wYB"/>
                         <segue destination="OUq-4Z-H7t" kind="show" identifier="MultiView" id="9C8-xx-4lF"/>
                     </connections>
@@ -882,7 +894,7 @@
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m24-6g-sOC">
                                 <rect key="frame" x="1965" y="754" width="261" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="g2d-cu-vaL">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MyChrisoft Logo" imagePosition="overlaps" alignment="center" alternateImage="no_image" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="g2d-cu-vaL">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -965,6 +977,15 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2sr-Kj-zsv">
+                                <rect key="frame" x="935" y="1200" width="592" height="22"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="FeQ-Ua-pMz">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E5z-gj-7KZ">
                                 <rect key="frame" x="1976" y="1200" width="178" height="22"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -980,15 +1001,6 @@
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Item Description" id="GbG-fd-e4x">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2sr-Kj-zsv">
-                                <rect key="frame" x="935" y="1200" width="592" height="22"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="FeQ-Ua-pMz">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -1020,7 +1032,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bMf-fY-riT">
-                                <rect key="frame" x="2047" y="1230" width="37" height="17"/>
+                                <rect key="frame" x="2036" y="1252" width="37" height="17"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Color" id="LQ0-Jw-Pc8">
                                     <font key="font" metaFont="system"/>
@@ -1122,15 +1134,6 @@
                                 <rect key="frame" x="1708" y="1230" width="40" height="17"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Brand" id="odi-A6-UkE">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O3u-mO-7MB">
-                                <rect key="frame" x="1899" y="1230" width="35" height="17"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Style" id="20E-ag-DXQ">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1769,6 +1772,62 @@
                                     <action selector="SetNoImages:" target="OUq-4Z-H7t" id="a9t-Dx-3WL"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DFN-MI-aFQ">
+                                <rect key="frame" x="1143" y="1157" width="121" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Add Womens" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7XC-mv-fYf">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addWomens:" target="OUq-4Z-H7t" id="K6B-FX-EFE"/>
+                                </connections>
+                            </button>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9LV-6e-snX">
+                                <rect key="frame" x="1977" y="1268" width="178" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="XEb-Mx-onn" id="Dgk-sF-NCQ">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="zwz-Qx-Ffc">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="XEb-Mx-onn"/>
+                                            <menuItem title="Item 2" id="fJD-01-rQa"/>
+                                            <menuItem title="Item 3" id="P5z-y2-Nla"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="colorSelected:" target="OUq-4Z-H7t" id="7mT-z7-KLV"/>
+                                </connections>
+                            </popUpButton>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8c-jk-R5F">
+                                <rect key="frame" x="1855" y="1268" width="101" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Sh5-vP-Htg" id="LKr-xn-Kah">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <menu key="menu" id="XTP-h2-0ju">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="Sh5-vP-Htg"/>
+                                            <menuItem title="Item 2" id="KLx-YO-tQw"/>
+                                            <menuItem title="Item 3" id="aC4-V6-4Gm"/>
+                                        </items>
+                                    </menu>
+                                    <connections>
+                                        <action selector="sizeSelected:" target="OUq-4Z-H7t" id="kIU-bN-kw8"/>
+                                    </connections>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O3u-mO-7MB">
+                                <rect key="frame" x="1892" y="1252" width="35" height="17"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Style" id="20E-ag-DXQ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="M3k-EC-T0T" firstAttribute="top" secondItem="btQ-XW-bGl" secondAttribute="top" constant="14" id="Wwn-Bj-coo"/>
@@ -1799,6 +1858,7 @@
                         <outlet property="brand" destination="mi3-qq-NBF" id="9Fu-0h-kNV"/>
                         <outlet property="color" destination="E5z-gj-7KZ" id="Zg7-Wd-l2b"/>
                         <outlet property="colorField" destination="E5z-gj-7KZ" id="abf-Cb-IK7"/>
+                        <outlet property="colorPicker" destination="9LV-6e-snX" id="aRS-ic-LTM"/>
                         <outlet property="ebayCategory" destination="Hr8-YL-VFq" id="vW2-U4-UDJ"/>
                         <outlet property="ebayConditionSelector" destination="Yj7-6g-3dx" id="ebR-sE-Mbd"/>
                         <outlet property="emptyFlag" destination="36V-kB-HZC" id="9I8-Zb-bx6"/>
@@ -1837,6 +1897,7 @@
                         <outlet property="sleeveStyle" destination="eIK-3u-JsP" id="Eec-KM-zxl"/>
                         <outlet property="storeCategory" destination="06T-gv-r72" id="bG2-2f-ghb"/>
                         <outlet property="style" destination="LyG-sI-HIc" id="jVO-qg-NsZ"/>
+                        <outlet property="stylePicker" destination="LKr-xn-Kah" id="U87-pu-TGP"/>
                         <outlet property="weightDisplay" destination="wjL-0l-i4v" id="8Cp-LU-3hF"/>
                         <segue destination="0nd-eh-LFA" kind="modal" identifier="SegueHD" id="VXD-GN-StR"/>
                     </connections>

@@ -12,8 +12,16 @@ import RealmSwift
 var HRimageCode: Int?
 var tempHRimageCode: Int?
 
+var hiRezImgURLbegin = "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/"
+var hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$"
+var lowImgURLbegin = "https://slimages.macys.com/is/image/MCY/"
+var lowImgURLEnd = ""
+
+
 
 class MultiView: NSViewController, ScaleData, ScaleStatus {
+    
+  
     
     var calculatedOunces: Float?
         
@@ -68,6 +76,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     
     @IBOutlet weak var itemDescriptionField: NSTextField!
     @IBOutlet weak var colorField: NSTextField!
+    @IBOutlet weak var colorPicker: NSPopUpButton!
+    @IBOutlet weak var stylePicker: NSPopUpButtonCell!
     
     @IBOutlet weak var ImgSelectPopUpbutton1: NSPopUpButton!
     @IBOutlet weak var ImgSelectPopUpbutton2: NSPopUpButton!
@@ -86,6 +96,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     @IBOutlet weak var ImgSelectPopUpbutton15: NSPopUpButton!
     @IBOutlet weak var ebayConditionSelector: NSPopUpButton!
     @IBOutlet weak var overrideShipping: NSPopUpButton!
+    
     
     @IBOutlet weak var sleeveLength: NSTextField!
     @IBOutlet weak var price: NSTextField!
@@ -139,7 +150,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         setupPopUpButtons()
         scale.scaleDelegate = self
         scale.scaleStatusDelegate = self
-        scale.scaleBegin()
+        //scale.scaleBegin()
         counter = 0
         
         super.viewDidLoad()
@@ -230,6 +241,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         ImgSelectPopUpbutton15.removeAllItems()
         ebayConditionSelector.removeAllItems()
         overrideShipping.removeAllItems()
+        colorPicker.removeAllItems()
+        stylePicker.removeAllItems()
         
     
         
@@ -251,7 +264,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         ImgSelectPopUpbutton15.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
         ebayConditionSelector.addItems(withTitles: ["", "New", "New Other", "New W/ Defects"])
         overrideShipping.addItems(withTitles: ["", "7.99", "8.99", "9.99", "13.99", "18.99", "Free"])
-
+        colorPicker.addItems(withTitles: ["", "Beige", "Black", "Blue", "Brown", "Charcoal", "Copper", "Gold", "Gray", "Green", "Multicolored", "Natural", "Navy", "Orange", "Pink", "Purple", "Red", "Silver", "Taupe", "Turquoise", "White", "Wine", "Yellow"])
+        stylePicker.addItems(withTitles: ["", "Blouse", "Bodysuit", "Cami", "Coat", "Dress", "Gown", "Hoodie", "Jacket", "Jeans", "Jumpsuit", "Legging" ,"Maxi", "Mini", "Overall", "Pants", "Pullover", "Romper", "Shirt", "Shorts", "Skirt", "Sleepwear", "Sweater", "Sweatshirt", "Tank", "Tee", "Top", "Trouser", "T-Shirt", "Tunic", "Vest", "Wrap"])
         // Select an item at a specific index
         ImgSelectPopUpbutton1.selectItem(at: 0)
         ImgSelectPopUpbutton2.selectItem(at: 0)
@@ -270,6 +284,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         ImgSelectPopUpbutton15.selectItem(at: 0)
         ebayConditionSelector.selectItem(at: 0)
         overrideShipping.selectItem(at: 0)
+        colorPicker.selectItem(at: 0)
+        stylePicker.selectItem(at: 0)
     }
     
     func storeImageInSlot1(arrayNum: Int) {
@@ -320,25 +336,28 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         }
     }
 
+    func setAlternateImagetoALL() {
+               image1.image = image1.alternateImage
+               image2.image = image2.alternateImage
+               image3.image = image3.alternateImage
+               image4.image = image4.alternateImage
+               image5.image = image5.alternateImage
+               image6.image = image6.alternateImage
+               image7.image = image7.alternateImage
+               image8.image = image8.alternateImage
+               image9.image = image9.alternateImage
+               image10.image = image10.alternateImage
+               image11.image = image11.alternateImage
+               image12.image = image12.alternateImage
+               image13.image = image13.alternateImage
+               image14.image = image14.alternateImage
+               image15.image = image15.alternateImage
+    }
 
     @IBAction func SetNoImages(_ sender: NSButton) {
         if sender.state == .on{
             //********** save flag to no image column in DB*********
-        image1.image = image1.alternateImage
-        image2.image = image1.alternateImage
-        image3.image = image1.alternateImage
-        image4.image = image1.alternateImage
-        image5.image = image1.alternateImage
-        image6.image = image1.alternateImage
-        image7.image = image1.alternateImage
-        image8.image = image1.alternateImage
-        image9.image = image1.alternateImage
-        image10.image = image1.alternateImage
-        image11.image = image1.alternateImage
-        image12.image = image1.alternateImage
-        image13.image = image1.alternateImage
-        image14.image = image1.alternateImage
-        image15.image = image1.alternateImage
+       setAlternateImagetoALL()
             
             let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
             let realm = try! Realm(configuration: config)
@@ -431,6 +450,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
 
         }
     }
+    
+   
     
     
     @IBAction func saveImages(_ sender: NSButton) {
@@ -656,17 +677,50 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         }
     }
     
+    @IBAction func addWomens(_ sender: NSButton) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        results = realm.objects(Product.self)
+        try! realm.write {
+        
+        // print(results?.count as Any)
+        if results?.count != nil {
+            searchString = UPCSearchField!.integerValue
+            //print("Search String")
+            // print(searchString)
+            let predicate = NSPredicate(format: "upc == %@", NSNumber (value: searchString))
+            result = results!.filter(predicate)
+            print("result")
+            print(result.self)
+            //print("ID \(result![0].itemDescription)")
+            var ID = result![0].vendorName
+            if ID.contains("Bar III"){
+                print("I found Bar III")
+                ID = ID.replacingOccurrences(of: "Bar III", with: "Bar III")
+                print(ID)
+                result![0].brand = ID
+            }else if ID.contains("FREE PEOPLE/URBAN OUTFITTERS") {
+                print("I found Free People")
+                ID = ID.replacingOccurrences(of: "FREE PEOPLE/URBAN OUTFITTERS", with: "Free People")
+                result![0].brand = ID
+                var sentanceToCapitalize =  result![0].brand + " Womens " + result![0].itemDescription + " " + result![0].color + " " + result![0].size
+                result![0].itemDescription = sentanceToCapitalize.localizedCapitalized
+                
+            }
+            
+        }
+    }
+    }
     
     @IBAction func SearchBar(_ sender: Any) {
         
-         arrayOfURLs = []
+        arrayOfURLs = []
         hdArrayOfURLs = []
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
         let realm = try! Realm(configuration: config)
         results = realm.objects(Product.self)
-    
-        
-        print(results?.count as Any)
+            
+        //print("UHOH! \(results?.count as Any)")
         if results?.count != nil {
             searchString = UPCSearchField!.integerValue
             print("Search String")
@@ -674,7 +728,10 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             let predicate = NSPredicate(format: "upc == %@", NSNumber (value: searchString))
             result = results!.filter(predicate)
             print("result")
-            print(result.self)
+            print(result.self!)
+            
+            print(result?.count)
+            
             
             
             if (result?.count)! > 0 {
@@ -708,196 +765,224 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 ovrUPC = String(result![0].upc)
                 
                 
-                if result![0].imageSlot8.isEmpty {
-                    print("Nothing to see here")
-                    emptyFlag.stringValue = "Nothing to see here"
-                } else {
-                    emptyFlag.stringValue = ""
-                }
+//                if result![0].imageSlot8.isEmpty {
+//                    print("Nothing to see here")
+//                    emptyFlag.stringValue = "Nothing to see here"
+//                } else {
+//                    emptyFlag.stringValue = ""
+//                }
 
-                let string = itemDescriptionField.stringValue
-                if let range3 = string.range(of: "shirt", options: .caseInsensitive) {
-                    // match
-                    print("match shirt")
-                    style.stringValue = "shirt"
-                    ebayCategory.stringValue = "53159"
-                    storeCategory.stringValue = "29010495011"
-                } else {
-                
-                if let range3 = string.range(of: "tank", options: .caseInsensitive) {
-                    // match
-                    print("match tank")
-                    style.stringValue = "tank"
-                    ebayCategory.stringValue = "53159"
-                    storeCategory.stringValue = "29010495011"
-                } else {
-                if let range3 = string.range(of: "cami", options: .caseInsensitive) {
-                        // match
-                        print("match cami")
-                        style.stringValue = "cami"
-                        ebayCategory.stringValue = "53159"
-                        storeCategory.stringValue = "29010495011"
-                    } else {
-                if let range3 = string.range(of: "top", options: .caseInsensitive) {
-                        // match
-                        print("match top")
-                        style.stringValue = "top"
-                        ebayCategory.stringValue = "53159"
-                        storeCategory.stringValue = "29010495011"
-                    } else {
-                if let range3 = string.range(of: "blouse", options: .caseInsensitive) {
-                        // match
-                        print("match blouse")
-                        style.stringValue = "blouse"
-                        ebayCategory.stringValue = "53159"
-                        storeCategory.stringValue = "29010495011"
-                    } else {
-                if let range3 = string.range(of: "sweater", options: .caseInsensitive) {
-                        // match
-                        print("match sweater")
-                        style.stringValue = "sweater"
-                        ebayCategory.stringValue = "63866"
-                        storeCategory.stringValue = "29010495011"
-                    } else {
-                if let range3 = string.range(of: "skirt", options: .caseInsensitive) {
-                        // match
-                        print("match skirt")
-                        style.stringValue = "skirt"
-                        ebayCategory.stringValue = "63864"
-                        storeCategory.stringValue = "33096451011"
-                    } else {
-                if let range3 = string.range(of: "shorts", options: .caseInsensitive) {
-                        // match
-                        print("match shorts")
-                        style.stringValue = "shorts"
-                        ebayCategory.stringValue = "11555"
-                        storeCategory.stringValue = "31775416011"
-                    } else {
-                if let range3 = string.range(of: "pants", options: .caseInsensitive) {
-                        // match
-                        print("match pants")
-                        style.stringValue = "pants"
-                        ebayCategory.stringValue = "63863"
-                        storeCategory.stringValue = "31775381011"
-                    } else {
-                if let range3 = string.range(of: "jumpsuit", options: .caseInsensitive) {
-                        // match
-                        print("match jumpsuit")
-                        style.stringValue = "jumpsuit"
-                        ebayCategory.stringValue = "3009"
-                        storeCategory.stringValue = "1"
-                    } else {
-               if let range3 = string.range(of: "romper", options: .caseInsensitive) {
-                        // match
-                        print("match romper")
-                        style.stringValue = "romper"
-                        ebayCategory.stringValue = "3009"
-                        storeCategory.stringValue = "1"
-                    } else {
-                if let range3 = string.range(of: "jeans", options: .caseInsensitive) {
-                    // match
-                    print("match jeans")
-                    style.stringValue = "jeans"
-                    ebayCategory.stringValue = "11554"
-                    storeCategory.stringValue = "31775381011"
-                } else {
-                if let range3 = string.range(of: "sleepwear", options: .caseInsensitive) {
-                        // match
-                        print("match sleepwear")
-                        style.stringValue = "sleepwear"
-                        ebayCategory.stringValue = "63855"
-                        storeCategory.stringValue = "1"
-                    } else {
-                if let range3 = string.range(of: "dress", options: .caseInsensitive) {
-                        // match
-                        print("match dress")
-                        style.stringValue = "dress"
-                        ebayCategory.stringValue = "63861"
-                        storeCategory.stringValue = "28973014011"
-                    } else {
-                if let range3 = string.range(of: "coat", options: .caseInsensitive) {
-                        // match
-                        print("match coat")
-                        style.stringValue = "coat"
-                        ebayCategory.stringValue = "63862"
-                        storeCategory.stringValue = "1"
-                    } else {
-                if let range3 = string.range(of: "jacket", options: .caseInsensitive) {
-                        // match
-                        print("match jacket")
-                        style.stringValue = "jacket"
-                        ebayCategory.stringValue = "63862"
-                        storeCategory.stringValue = "1"
-                    } else {
-                if let range3 = string.range(of: "vest", options: .caseInsensitive) {
-                        // match
-                        print("match vest")
-                        style.stringValue = "vest"
-                        ebayCategory.stringValue = "63862"
-                        storeCategory.stringValue = "1"
-                    } else {
-                if let range3 = string.range(of: "hoodie", options: .caseInsensitive) {
-                        // match
-                        print("match hoodie")
-                        style.stringValue = "hoodie"
-                        ebayCategory.stringValue = "155226"
-                        storeCategory.stringValue = "1"
-                    } else {
-                if let range3 = string.range(of: "sweatshirt", options: .caseInsensitive) {
-                        // match
-                        print("match sweatshirt")
-                        style.stringValue = "sweatshirt"
-                        ebayCategory.stringValue = "155226"
-                        storeCategory.stringValue = "1"
-                    } else {
-                if let range3 = string.range(of: "bodysuit", options: .caseInsensitive) {
-                        // match
-                        print("match bodysuit")
-                        style.stringValue = "bodysuit"
-                        ebayCategory.stringValue = "53159"
-                        storeCategory.stringValue = "29010495011"
-                    } else {
-                    // no match
-                    print("no match")
-                
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-                    }
-          
+//                let string = itemDescriptionField.stringValue
+//                if let range3 = string.range(of: "shirt", options: .caseInsensitive) {
+//                    // match
+//                    print("match shirt")
+//                    style.stringValue = "shirt"
+//                    ebayCategory.stringValue = "53159"
+//                    storeCategory.stringValue = "29010495011"
+//                } else {
+//
+//                if let range3 = string.range(of: "tank", options: .caseInsensitive) {
+//                    // match
+//                    print("match tank")
+//                    style.stringValue = "tank"
+//                    ebayCategory.stringValue = "53159"
+//                    storeCategory.stringValue = "29010495011"
+//                } else {
+//                if let range3 = string.range(of: "cami", options: .caseInsensitive) {
+//                        // match
+//                        print("match cami")
+//                        style.stringValue = "cami"
+//                        ebayCategory.stringValue = "53159"
+//                        storeCategory.stringValue = "29010495011"
+//                    } else {
+//                if let range3 = string.range(of: "top", options: .caseInsensitive) {
+//                        // match
+//                        print("match top")
+//                        style.stringValue = "top"
+//                        ebayCategory.stringValue = "53159"
+//                        storeCategory.stringValue = "29010495011"
+//                    } else {
+//                if let range3 = string.range(of: "blouse", options: .caseInsensitive) {
+//                        // match
+//                        print("match blouse")
+//                        style.stringValue = "blouse"
+//                        ebayCategory.stringValue = "53159"
+//                        storeCategory.stringValue = "29010495011"
+//                    } else {
+//                if let range3 = string.range(of: "sweater", options: .caseInsensitive) {
+//                        // match
+//                        print("match sweater")
+//                        style.stringValue = "sweater"
+//                        ebayCategory.stringValue = "63866"
+//                        storeCategory.stringValue = "29010495011"
+//                    } else {
+//                if let range3 = string.range(of: "skirt", options: .caseInsensitive) {
+//                        // match
+//                        print("match skirt")
+//                        style.stringValue = "skirt"
+//                        ebayCategory.stringValue = "63864"
+//                        storeCategory.stringValue = "33096451011"
+//                    } else {
+//                if let range3 = string.range(of: "shorts", options: .caseInsensitive) {
+//                        // match
+//                        print("match shorts")
+//                        style.stringValue = "shorts"
+//                        ebayCategory.stringValue = "11555"
+//                        storeCategory.stringValue = "31775416011"
+//                    } else {
+//                if let range3 = string.range(of: "pants", options: .caseInsensitive) {
+//                        // match
+//                        print("match pants")
+//                        style.stringValue = "pants"
+//                        ebayCategory.stringValue = "63863"
+//                        storeCategory.stringValue = "31775381011"
+//                    } else {
+//                if let range3 = string.range(of: "jumpsuit", options: .caseInsensitive) {
+//                        // match
+//                        print("match jumpsuit")
+//                        style.stringValue = "jumpsuit"
+//                        ebayCategory.stringValue = "3009"
+//                        storeCategory.stringValue = "1"
+//                    } else {
+//               if let range3 = string.range(of: "romper", options: .caseInsensitive) {
+//                        // match
+//                        print("match romper")
+//                        style.stringValue = "romper"
+//                        ebayCategory.stringValue = "3009"
+//                        storeCategory.stringValue = "1"
+//                    } else {
+//                if let range3 = string.range(of: "jeans", options: .caseInsensitive) {
+//                    // match
+//                    print("match jeans")
+//                    style.stringValue = "jeans"
+//                    ebayCategory.stringValue = "11554"
+//                    storeCategory.stringValue = "31775381011"
+//                } else {
+//                if let range3 = string.range(of: "sleepwear", options: .caseInsensitive) {
+//                        // match
+//                        print("match sleepwear")
+//                        style.stringValue = "sleepwear"
+//                        ebayCategory.stringValue = "63855"
+//                        storeCategory.stringValue = "1"
+//                    } else {
+//                if let range3 = string.range(of: "dress", options: .caseInsensitive) {
+//                        // match
+//                        print("match dress")
+//                        style.stringValue = "Dress"
+//                        ebayCategory.stringValue = "63861"
+//                        storeCategory.stringValue = "28973014011"
+//                    } else {
+//                if let range3 = string.range(of: "coat", options: .caseInsensitive) {
+//                        // match
+//                        print("match coat")
+//                        style.stringValue = "coat"
+//                        ebayCategory.stringValue = "63862"
+//                        storeCategory.stringValue = "1"
+//                    } else {
+//                if let range3 = string.range(of: "jacket", options: .caseInsensitive) {
+//                        // match
+//                        print("match jacket")
+//                        style.stringValue = "jacket"
+//                        ebayCategory.stringValue = "63862"
+//                        storeCategory.stringValue = "1"
+//                    } else {
+//                if let range3 = string.range(of: "vest", options: .caseInsensitive) {
+//                        // match
+//                        print("match vest")
+//                        style.stringValue = "vest"
+//                        ebayCategory.stringValue = "63862"
+//                        storeCategory.stringValue = "1"
+//                    } else {
+//                if let range3 = string.range(of: "hoodie", options: .caseInsensitive) {
+//                        // match
+//                        print("match hoodie")
+//                        style.stringValue = "hoodie"
+//                        ebayCategory.stringValue = "155226"
+//                        storeCategory.stringValue = "1"
+//                    } else {
+//                if let range3 = string.range(of: "sweatshirt", options: .caseInsensitive) {
+//                        // match
+//                        print("match sweatshirt")
+//                        style.stringValue = "sweatshirt"
+//                        ebayCategory.stringValue = "155226"
+//                        storeCategory.stringValue = "1"
+//                    } else {
+//                if let range3 = string.range(of: "bodysuit", options: .caseInsensitive) {
+//                        // match
+//                        print("match bodysuit")
+//                        style.stringValue = "bodysuit"
+//                        ebayCategory.stringValue = "53159"
+//                        storeCategory.stringValue = "29010495011"
+//                    } else {
+//                    // no match
+//                    print("no match")
+//                
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//                    }
+//          
                 let url = URL(string: result![0].image)
                 print(result![0].image)
                 
                 let image0 = result![0].image
                 print("image is \(image0)")
-                let hiRezImgURLbegin = "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/"
-                let hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$"
-                let lowImgURLbegin = "https://slimages.macys.com/is/image/MCY/"
-                let lowImgURLEnd = ""
+                hiRezImgURLbegin = "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/"
+                hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$"
+                lowImgURLbegin = "https://slimages.macys.com/is/image/MCY/"
+                lowImgURLEnd = ""
                 // print(lowImgURLEnd)
+                var imageCode = 0
+              //********************************
                 
+              
+//                if image0.contains("Swift") {
+//                    print("exists")
+//                }
+                if image0.contains("bloom") {
+                let imageLinkStart = image0.index(image0.startIndex, offsetBy: 45)
+                let imageLinkend = image0.index(image0.endIndex, offsetBy: -3)
+                let rangeA = imageLinkStart..<imageLinkend
+                imageCode = Int(image0[rangeA])!-7
+                HRimageCode = imageCode
+                print("Link code is \(imageCode)")
+                     hiRezImgURLbegin = "https://images.bloomingdalesassets.com/is/image/BLM/products/3/optimized/"
+                     hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1200&fit=fit,1&$filtersm$"
+                     lowImgURLbegin = "https://images.bloomingdales.com/is/image/BLM/"
+                     lowImgURLEnd = ""
+            
+                }else if image0.contains("macy") {
+                
+                
+                //*******************************
                 let start = image0.index(image0.startIndex, offsetBy: 39)
-                let end = image0.index(image0.endIndex, offsetBy: 0)
+                let end = image0.index(image0.endIndex, offsetBy: -3)
                 let range = start..<end
-                let imageCode = Int(image0[range])!-7
+                imageCode = Int(image0[range])!-7
                 HRimageCode = imageCode
                 print("image code is \(imageCode)")
+                }
+                
+                if image0 == "" {
+                    setAlternateImagetoALL()
+                    return
+                }else{
                 
                 //iterate and set image display
                 let images = [image1, image2, image3, image4,image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15]
@@ -919,10 +1004,13 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                                 // i!.image = NSImage(data: hddata)
                                 incrementer += 1
                             } catch {
+                                
                                 print("error!")
+                                i!.image = image1.alternateImage
                             }
                         }
                     }while incrementer <= 7
+                    
                 } else {
                     //******** ReviewModeSate is ON *********
                     print("review mode on")
@@ -961,7 +1049,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                                            ebayConditionSelector.selectItem(at: 0)
                                        }
                 }
-                
+                }
             } else {
                 
                 
@@ -1016,6 +1104,167 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
 
     }
     
+    @IBAction func colorSelected(_ sender: NSPopUpButton) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+           
+            if colorPicker.indexOfSelectedItem == 1 {
+                result![0].color = "Beige"
+            }else if colorPicker.indexOfSelectedItem == 2 {
+                result![0].color = "Black"
+            }else if colorPicker.indexOfSelectedItem == 3 {
+                result![0].color = "Blue"
+            }else if colorPicker.indexOfSelectedItem == 4 {
+                result![0].color = "Brown"
+            }else if colorPicker.indexOfSelectedItem == 5 {
+                result![0].color = "Charcoal"
+            }else if colorPicker.indexOfSelectedItem == 6 {
+                result![0].color = "Copper"
+            }else if colorPicker.indexOfSelectedItem == 7 {
+                result![0].color = "Gold"
+            }else if colorPicker.indexOfSelectedItem == 8 {
+                result![0].color = "Gray"
+            }else if colorPicker.indexOfSelectedItem == 9 {
+                result![0].color = "Green"
+            }else if colorPicker.indexOfSelectedItem == 10 {
+                result![0].color = "Multicolored"
+            }else if colorPicker.indexOfSelectedItem == 11 {
+                result![0].color = "Natural"
+            }else if colorPicker.indexOfSelectedItem == 12 {
+                result![0].color = "Navy"
+            }else if colorPicker.indexOfSelectedItem == 13 {
+                result![0].color = "Orange"
+            }else if colorPicker.indexOfSelectedItem == 14 {
+                result![0].color = "Pink"
+            }else if colorPicker.indexOfSelectedItem == 15 {
+                result![0].color = "Purple"
+            }else if colorPicker.indexOfSelectedItem == 16 {
+                result![0].color = "Red"
+            }else if colorPicker.indexOfSelectedItem == 17 {
+                result![0].color = "Silver"
+            }else if colorPicker.indexOfSelectedItem == 18 {
+                result![0].color = "Taupe"
+            }else if colorPicker.indexOfSelectedItem == 19 {
+                result![0].color = "Turquoise"
+            }else if colorPicker.indexOfSelectedItem == 20 {
+                result![0].color = "White"
+            }else if colorPicker.indexOfSelectedItem == 21 {
+                result![0].color = "Wine"
+            }else if colorPicker.indexOfSelectedItem == 22 {
+                result![0].color = "Yellow"
+            }else{
+                return
+            }
+             
+            if result![0].itemDescription.contains("**COLOR**"){
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: "**COLOR**", with: result![0].color)
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+            }else{
+                return
+                
+            }
+            }
+    
+       }
+    
+    
+    
+    @IBAction func sizeSelected(_ sender: NSPopUpButtonCell) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+               let realm = try! Realm(configuration: config)
+               try! realm.write {
+                
+                if stylePicker.indexOfSelectedItem == 1 {
+                    result![0].color = "Blouse"
+                }else if stylePicker.indexOfSelectedItem == 2 {
+                    result![0].color = "Bodysuit"
+                }else if stylePicker.indexOfSelectedItem == 3 {
+                    result![0].color = "Cami"
+                }else if stylePicker.indexOfSelectedItem == 4 {
+                    result![0].color = "Coat"
+                }else if stylePicker.indexOfSelectedItem == 5 {
+                    result![0].color = "Dress"
+                }else if stylePicker.indexOfSelectedItem == 6 {
+                    result![0].color = "Gown"
+                }else if stylePicker.indexOfSelectedItem == 7 {
+                    result![0].color = "Hoodie"
+                }else if stylePicker.indexOfSelectedItem == 8 {
+                    result![0].color = "Jacket"
+                }else if stylePicker.indexOfSelectedItem == 9 {
+                    result![0].color = "Jeans"
+                }else if stylePicker.indexOfSelectedItem == 10 {
+                    result![0].color = "Jumpsuit"
+                }else if stylePicker.indexOfSelectedItem == 11 {
+                    result![0].color = "Legging"
+                }else if stylePicker.indexOfSelectedItem == 12 {
+                    result![0].color = "Maxi"
+                }else if stylePicker.indexOfSelectedItem == 13 {
+                    result![0].color = "Mini"
+                }else if stylePicker.indexOfSelectedItem == 14 {
+                    result![0].color = "Overall"
+                }else if stylePicker.indexOfSelectedItem == 15 {
+                    result![0].color = "Pants"
+                }else if stylePicker.indexOfSelectedItem == 16 {
+                    result![0].color = "Pullover"
+                }else if stylePicker.indexOfSelectedItem == 17 {
+                    result![0].color = "Romper"
+                }else if stylePicker.indexOfSelectedItem == 18 {
+                    result![0].color = "Shirt"
+                }else if stylePicker.indexOfSelectedItem == 19 {
+                    result![0].color = "Shorts"
+                }else if stylePicker.indexOfSelectedItem == 20 {
+                    result![0].color = "Skirt"
+                }else if stylePicker.indexOfSelectedItem == 21 {
+                    result![0].color = "Sleepwear"
+                }else if stylePicker.indexOfSelectedItem == 22 {
+                    result![0].color = "Sweater"
+                }else if stylePicker.indexOfSelectedItem == 23 {
+                    result![0].color = "Sweatshirt"
+                }else if stylePicker.indexOfSelectedItem == 24 {
+                    result![0].color = "Tank"
+                }else if stylePicker.indexOfSelectedItem == 25 {
+                    result![0].color = "Tee"
+                }else if stylePicker.indexOfSelectedItem == 26 {
+                    result![0].color = "Top"
+                }else if stylePicker.indexOfSelectedItem == 27 {
+                    result![0].color = "T-Shirt"
+                }else if stylePicker.indexOfSelectedItem == 28 {
+                    result![0].color = "Trouser"
+                }else if stylePicker.indexOfSelectedItem == 29 {
+                    result![0].color = "Tunic"
+                }else if stylePicker.indexOfSelectedItem == 30 {
+                    result![0].color = "Vest"
+                }else if stylePicker.indexOfSelectedItem == 31 {
+                    result![0].color = "Wrap"
+                }else{
+                    return
+                }
+                    
+                if result![0].itemDescription.contains("**STYLE**"){
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: "**STYLE**", with: result![0].style)
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                }else{
+                    return
+                       
+                   }
+                   }
+    }
+    
+//    func updateitemDescription() {
+//        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+//                          let realm = try! Realm(configuration: config)
+//                          try! realm.write {
+//      //  let brandPlusWomens = result![0].brand + " Womens "
+//      //  let itemDescriptionPlusColor = result![0].itemDescription + " " + result![0].color + " "
+//     //   let wholeEnchilada = brandPlusWomens + itemDescriptionPlusColor + result![0].size
+//       // result![0].itemDescription = wholeEnchilada
+//
+//        result![0].itemDescription = result![0].brand + " Womens " + result![0].itemDescription + " " + result![0].color + " " + result![0].size
+//        }
+//    }
     
     @IBAction func addToInventory(_ sender: NSButton) {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
