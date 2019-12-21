@@ -22,6 +22,7 @@ class Product: Object, Codable {
     @objc dynamic var sizeType: String = ""
     @objc dynamic var vendorName: String = ""
     @objc dynamic var image: String = ""
+    @objc dynamic var code: String = ""
     @objc dynamic var imageSlot1: String = ""
     @objc dynamic var imageSlot2: String = ""
     @objc dynamic var imageSlot3: String = ""

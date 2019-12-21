@@ -101,13 +101,29 @@ var previouslyRun: String?
                 }else{
                     
                 for i in results! {
-                  // print(i.upc)
-                  // print(i.color.localizedCapitalized)
+                
+                    if i.image.contains("macy") {
+                        
+                        
+                        let imageLinkstart = i.image.replacingOccurrences(of: "http://slimages.macys.com/is/image/MCY/", with: "")
+                        let imageLinkEnd = imageLinkstart.replacingOccurrences(of: "%20", with: "")
+                        i.code = String(Int(imageLinkEnd)! - 7)
+                        
+                    }else if i.image.contains("bloom") {
+                        
+                        let imageLinkstart = i.image.replacingOccurrences(of: "http://images.bloomingdales.com/is/image/BLM/", with: "")
+                        let imageLinkEnd = imageLinkstart.replacingOccurrences(of: "%20", with: "")
+                        i.code = String(Int(imageLinkEnd)! - 7)
+                        
+                    }
+                    
+                    
                    i.color = i.color.localizedCapitalized
                    i.itemDescription = i.itemDescription.localizedCapitalized
                    i.vendorName = i.vendorName.localizedCapitalized
                    
                     //SET Brand Field from Vendor Name
+                    
                     if i.vendorName.contains("7 For All Mankind") {
                         i.brand = "7 For All Mankind"
                     }else if i.vendorName.contains("Adriano Goldschmied") {
@@ -254,6 +270,18 @@ var previouslyRun: String?
                         i.style = "Tunic"
                         i.ebayCategory = "53159"
                         i.storeCategory = "29010495011"
+                    }else if i.itemDescription.localizedCaseInsensitiveContains("tshirt"){
+                        i.style = "T-shirt"
+                        i.ebayCategory = "53159"
+                        i.storeCategory = "29010495011"
+                    }else if i.itemDescription.localizedCaseInsensitiveContains("t-shirt"){
+                        i.style = "T-shirt"
+                        i.ebayCategory = "53159"
+                        i.storeCategory = "29010495011"
+                    }else if i.itemDescription.localizedCaseInsensitiveContains("tee"){
+                        i.style = "Tee"
+                        i.ebayCategory = "53159"
+                        i.storeCategory = "29010495011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("blouse"){
                         i.style = "Blouse"
                         i.ebayCategory = "53159"
@@ -298,7 +326,7 @@ var previouslyRun: String?
                         i.style = "Romper"
                         i.ebayCategory = "3009"
                         i.storeCategory = "1"
-                    }else if i.itemDescription.localizedCaseInsensitiveContains("jeans"){
+                    }else if i.itemDescription.localizedCaseInsensitiveContains("jean"){
                         i.style = "Jeans"
                         i.ebayCategory = "11554"
                         i.storeCategory = "31775381011"
@@ -310,15 +338,15 @@ var previouslyRun: String?
                         i.style = "Dress"
                         i.ebayCategory = "63861"
                         i.storeCategory = "28973014011"
-                        }else if i.itemDescription.localizedCaseInsensitiveContains("wrap"){
+                    }else if i.itemDescription.localizedCaseInsensitiveContains("wrap"){
                         i.style = "Wrap"
                         i.ebayCategory = "63861"
                         i.storeCategory = "28973014011"
-                        }else if i.itemDescription.localizedCaseInsensitiveContains("gown"){
+                    }else if i.itemDescription.localizedCaseInsensitiveContains("gown"){
                         i.style = "Gown"
                         i.ebayCategory = "63861"
                         i.storeCategory = "28973014011"
-                        }else if i.itemDescription.localizedCaseInsensitiveContains("maxi"){
+                    }else if i.itemDescription.localizedCaseInsensitiveContains("maxi"){
                         i.style = "Maxi"
                         i.ebayCategory = "63861"
                         i.storeCategory = "28973014011"
@@ -346,6 +374,8 @@ var previouslyRun: String?
                         i.style = "Bodysuit"
                         i.ebayCategory = "53159"
                         i.storeCategory = "29010495011"
+                    }else{
+                        i.style = "**STYLE**"
                     }
                     
                     
@@ -354,12 +384,15 @@ var previouslyRun: String?
                     i.size = "**SIZE**"
                     }
                     
-                    if i.style == "" {
-                    i.style = "**STYLE**"
+                    
+                    let itemDescriptionStart = (i.brand + " Womens "  + i.itemDescription)
+                    let itemDescriptionEnd = (" " + i.color + " " + i.size)
+                    if itemDescriptionStart.localizedCaseInsensitiveContains(i.style) {
+                        i.itemDescription = itemDescriptionStart + itemDescriptionEnd
+                    }else{
+                    i.itemDescription = (i.brand + " Womens " + i.itemDescription + " " + i.style + " " + i.color + " " + i.size)
                     }
                     
-                    i.itemDescription = (i.brand + " Womens " + i.itemDescription + " " + i.color + " " + i.size)
-                       
                     if i.eBayConditionID == 0 {
                      i.eBayConditionID = 1000
                     }

@@ -6,23 +6,39 @@
 //  Copyright © 2019 chris rahn. All rights reserved.
 //
 
+
 import Cocoa
 import RealmSwift
-
-var HRimageCode: Int?
-var tempHRimageCode: Int?
 
 var hiRezImgURLbegin = "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/"
 var hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$"
 var lowImgURLbegin = "https://slimages.macys.com/is/image/MCY/"
 var lowImgURLEnd = ""
+var HRimageCode: Int?
+var tempHRimageCode: Int?
+var reviewModeState = "off"
 
+var HRZurl1: String?
+var HRZurl2: String?
+var HRZurl3: String?
+var HRZurl4: String?
+var HRZimg1Selected = false
+var HRZimg2Selected = false
+var HRZimg3Selected = false
+var HRZimg4Selected = false
+
+
+//var hiRezImgURLbegin = "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/"
+//var hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$"
+//var lowImgURLbegin = "https://slimages.macys.com/is/image/MCY/"
+//var lowImgURLEnd = ""
+//
 
 
 class MultiView: NSViewController, ScaleData, ScaleStatus {
     
   
-    
+ 
     var calculatedOunces: Float?
         
     var results: Results<Product>?
@@ -35,7 +51,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     var AltImgText1 = ""
     var AltImgText2 = ""
     var ovrUPC = ""
-    var reviewModeState = "off"
+    //var reviewModeState = "off"
     var inventoryCheckInModeState: String?
  
 
@@ -96,7 +112,10 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     @IBOutlet weak var ImgSelectPopUpbutton15: NSPopUpButton!
     @IBOutlet weak var ebayConditionSelector: NSPopUpButton!
     @IBOutlet weak var overrideShipping: NSPopUpButton!
-    
+    @IBOutlet weak var brandSelector: NSPopUpButton!
+    @IBOutlet weak var sizeSelector: NSPopUpButton!
+    @IBOutlet weak var sleeveLengthSelector: NSPopUpButton!
+//    @IBOutlet weak var sleeveStyleSelector: NSPopUpButton!
     
     @IBOutlet weak var sleeveLength: NSTextField!
     @IBOutlet weak var price: NSTextField!
@@ -243,6 +262,10 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         overrideShipping.removeAllItems()
         colorPicker.removeAllItems()
         stylePicker.removeAllItems()
+        brandSelector.removeAllItems()
+        sizeSelector.removeAllItems()
+        //sleeveStyleSelector.removeAllItems()
+        sleeveLengthSelector.removeAllItems()
         
     
         
@@ -266,6 +289,15 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         overrideShipping.addItems(withTitles: ["", "7.99", "8.99", "9.99", "13.99", "18.99", "Free"])
         colorPicker.addItems(withTitles: ["", "Beige", "Black", "Blue", "Brown", "Charcoal", "Copper", "Gold", "Gray", "Green", "Multicolored", "Natural", "Navy", "Orange", "Pink", "Purple", "Red", "Silver", "Taupe", "Turquoise", "White", "Wine", "Yellow"])
         stylePicker.addItems(withTitles: ["", "Blouse", "Bodysuit", "Cami", "Coat", "Dress", "Gown", "Hoodie", "Jacket", "Jeans", "Jumpsuit", "Legging" ,"Maxi", "Mini", "Overall", "Pants", "Pullover", "Romper", "Shirt", "Shorts", "Skirt", "Sleepwear", "Sweater", "Sweatshirt", "Tank", "Tee", "Top", "Trouser", "T-Shirt", "Tunic", "Vest", "Wrap"])
+        brandSelector.addItems(withTitles: ["", "7 For All Mankind", "Adriano Goldschmied", "ASTR The Label", "Bar III", "Carbon Copy", "Current Air", "Dee Elle", "Free People", "Ginger by Stella & Ginger", "Guess", "Heartloom", "Hudson", "JOA", "Joe's Jeans", "Kendall + Kylie", "Leyden", "Line & Dot", "Lucky Brand", "Lucy Paris", "Maison Jules", "Moon River", "Nanette Lepore", "Paige", "Project 28","Rachel Roy", "Rachel Zoe", "Sanctuary", "Topson Downs", "Trina Turk", "True Vintage"])
+        sizeSelector.addItems(withTitles: ["", "XXS", "XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL", "5XL", "6XL", "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22"])
+        //sleeveStyleSelector.addItems(withTitles: ["Short Sleeve", "Long Sleeve", "3/4 Sleeve", "Sleeveless"])
+        sleeveLengthSelector.addItems(withTitles: ["", "Short Sleeve", "Long Sleeve", "3/4 Sleeve", "Sleeveless"])
+
+        
+    
+    
+        
         // Select an item at a specific index
         ImgSelectPopUpbutton1.selectItem(at: 0)
         ImgSelectPopUpbutton2.selectItem(at: 0)
@@ -286,6 +318,11 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         overrideShipping.selectItem(at: 0)
         colorPicker.selectItem(at: 0)
         stylePicker.selectItem(at: 0)
+        brandSelector.selectItem(at: 0)
+        sizeSelector.selectItem(at: 0)
+        //sleeveStyleSelector.selectItem(at: 0)
+        sleeveLengthSelector.selectItem(at: 0)
+        
     }
     
     func storeImageInSlot1(arrayNum: Int) {
@@ -720,296 +757,109 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         let realm = try! Realm(configuration: config)
         results = realm.objects(Product.self)
             
-        //print("UHOH! \(results?.count as Any)")
         if results?.count != nil {
             searchString = UPCSearchField!.integerValue
-            print("Search String")
-            print(searchString)
+            //print("Search String")
+            //print(searchString)
             let predicate = NSPredicate(format: "upc == %@", NSNumber (value: searchString))
             result = results!.filter(predicate)
-            print("result")
-            print(result.self!)
-            
-            print(result?.count)
-            
-            
+           // print("result: \(result)")
             
             if (result?.count)! > 0 {
-                weightDisplay.stringValue = ""
-                shipping.stringValue = ""
-                UPCField.textColor = NSColor.black
-                itemDescriptionField.textColor = NSColor.black
-                setupPopUpButtons()
-                imageOverride1TxtField.stringValue = ""
-                imageOverride2TxtField.stringValue = ""
-                UPCField.stringValue = String(result![0].upc)
-                OriginalQty.stringValue = String(result![0].originalQty)
-                inventoryCount.stringValue = String(result![0].inventoryCount)
-                itemDescriptionField.stringValue = result![0].itemDescription
-                colorField.stringValue = String(result![0].color)
-                //price.stringValue = String(result![0].price)
-                //shipping.stringValue = String(result![0].shipping)
-                sku.stringValue = String(result![0].sku)
-                brand.stringValue = String(result![0].brand)
-                style.stringValue = String(result![0].style)
-                color.stringValue = String(result![0].color)
-                size.stringValue = String(result![0].size)
-                image.stringValue = String(result![0].image)
-                msrp.stringValue = String(result![0].msrp)
-                sleeveStyle.stringValue = String(result![0].sleeveStyle)
-                sleeveLength.stringValue = String(result![0].sleeveLength)
-                ebayCategory.stringValue = String(result![0].ebayCategory)
-                storeCategory.stringValue = String(result![0].storeCategory)
-               
-                sizeType.stringValue = String(result![0].sizeType)
-                ovrUPC = String(result![0].upc)
                 
-                
-//                if result![0].imageSlot8.isEmpty {
-//                    print("Nothing to see here")
-//                    emptyFlag.stringValue = "Nothing to see here"
-//                } else {
-//                    emptyFlag.stringValue = ""
-//                }
-
-//                let string = itemDescriptionField.stringValue
-//                if let range3 = string.range(of: "shirt", options: .caseInsensitive) {
-//                    // match
-//                    print("match shirt")
-//                    style.stringValue = "shirt"
-//                    ebayCategory.stringValue = "53159"
-//                    storeCategory.stringValue = "29010495011"
-//                } else {
-//
-//                if let range3 = string.range(of: "tank", options: .caseInsensitive) {
-//                    // match
-//                    print("match tank")
-//                    style.stringValue = "tank"
-//                    ebayCategory.stringValue = "53159"
-//                    storeCategory.stringValue = "29010495011"
-//                } else {
-//                if let range3 = string.range(of: "cami", options: .caseInsensitive) {
-//                        // match
-//                        print("match cami")
-//                        style.stringValue = "cami"
-//                        ebayCategory.stringValue = "53159"
-//                        storeCategory.stringValue = "29010495011"
-//                    } else {
-//                if let range3 = string.range(of: "top", options: .caseInsensitive) {
-//                        // match
-//                        print("match top")
-//                        style.stringValue = "top"
-//                        ebayCategory.stringValue = "53159"
-//                        storeCategory.stringValue = "29010495011"
-//                    } else {
-//                if let range3 = string.range(of: "blouse", options: .caseInsensitive) {
-//                        // match
-//                        print("match blouse")
-//                        style.stringValue = "blouse"
-//                        ebayCategory.stringValue = "53159"
-//                        storeCategory.stringValue = "29010495011"
-//                    } else {
-//                if let range3 = string.range(of: "sweater", options: .caseInsensitive) {
-//                        // match
-//                        print("match sweater")
-//                        style.stringValue = "sweater"
-//                        ebayCategory.stringValue = "63866"
-//                        storeCategory.stringValue = "29010495011"
-//                    } else {
-//                if let range3 = string.range(of: "skirt", options: .caseInsensitive) {
-//                        // match
-//                        print("match skirt")
-//                        style.stringValue = "skirt"
-//                        ebayCategory.stringValue = "63864"
-//                        storeCategory.stringValue = "33096451011"
-//                    } else {
-//                if let range3 = string.range(of: "shorts", options: .caseInsensitive) {
-//                        // match
-//                        print("match shorts")
-//                        style.stringValue = "shorts"
-//                        ebayCategory.stringValue = "11555"
-//                        storeCategory.stringValue = "31775416011"
-//                    } else {
-//                if let range3 = string.range(of: "pants", options: .caseInsensitive) {
-//                        // match
-//                        print("match pants")
-//                        style.stringValue = "pants"
-//                        ebayCategory.stringValue = "63863"
-//                        storeCategory.stringValue = "31775381011"
-//                    } else {
-//                if let range3 = string.range(of: "jumpsuit", options: .caseInsensitive) {
-//                        // match
-//                        print("match jumpsuit")
-//                        style.stringValue = "jumpsuit"
-//                        ebayCategory.stringValue = "3009"
-//                        storeCategory.stringValue = "1"
-//                    } else {
-//               if let range3 = string.range(of: "romper", options: .caseInsensitive) {
-//                        // match
-//                        print("match romper")
-//                        style.stringValue = "romper"
-//                        ebayCategory.stringValue = "3009"
-//                        storeCategory.stringValue = "1"
-//                    } else {
-//                if let range3 = string.range(of: "jeans", options: .caseInsensitive) {
-//                    // match
-//                    print("match jeans")
-//                    style.stringValue = "jeans"
-//                    ebayCategory.stringValue = "11554"
-//                    storeCategory.stringValue = "31775381011"
-//                } else {
-//                if let range3 = string.range(of: "sleepwear", options: .caseInsensitive) {
-//                        // match
-//                        print("match sleepwear")
-//                        style.stringValue = "sleepwear"
-//                        ebayCategory.stringValue = "63855"
-//                        storeCategory.stringValue = "1"
-//                    } else {
-//                if let range3 = string.range(of: "dress", options: .caseInsensitive) {
-//                        // match
-//                        print("match dress")
-//                        style.stringValue = "Dress"
-//                        ebayCategory.stringValue = "63861"
-//                        storeCategory.stringValue = "28973014011"
-//                    } else {
-//                if let range3 = string.range(of: "coat", options: .caseInsensitive) {
-//                        // match
-//                        print("match coat")
-//                        style.stringValue = "coat"
-//                        ebayCategory.stringValue = "63862"
-//                        storeCategory.stringValue = "1"
-//                    } else {
-//                if let range3 = string.range(of: "jacket", options: .caseInsensitive) {
-//                        // match
-//                        print("match jacket")
-//                        style.stringValue = "jacket"
-//                        ebayCategory.stringValue = "63862"
-//                        storeCategory.stringValue = "1"
-//                    } else {
-//                if let range3 = string.range(of: "vest", options: .caseInsensitive) {
-//                        // match
-//                        print("match vest")
-//                        style.stringValue = "vest"
-//                        ebayCategory.stringValue = "63862"
-//                        storeCategory.stringValue = "1"
-//                    } else {
-//                if let range3 = string.range(of: "hoodie", options: .caseInsensitive) {
-//                        // match
-//                        print("match hoodie")
-//                        style.stringValue = "hoodie"
-//                        ebayCategory.stringValue = "155226"
-//                        storeCategory.stringValue = "1"
-//                    } else {
-//                if let range3 = string.range(of: "sweatshirt", options: .caseInsensitive) {
-//                        // match
-//                        print("match sweatshirt")
-//                        style.stringValue = "sweatshirt"
-//                        ebayCategory.stringValue = "155226"
-//                        storeCategory.stringValue = "1"
-//                    } else {
-//                if let range3 = string.range(of: "bodysuit", options: .caseInsensitive) {
-//                        // match
-//                        print("match bodysuit")
-//                        style.stringValue = "bodysuit"
-//                        ebayCategory.stringValue = "53159"
-//                        storeCategory.stringValue = "29010495011"
-//                    } else {
-//                    // no match
-//                    print("no match")
-//                
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//                    }
-//          
-                let url = URL(string: result![0].image)
+                let imageCode = Int(result![0].code)
+                HRimageCode = Int(result![0].code)!
                 print(result![0].image)
-                
-                let image0 = result![0].image
-                print("image is \(image0)")
-                hiRezImgURLbegin = "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/"
-                hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$"
-                lowImgURLbegin = "https://slimages.macys.com/is/image/MCY/"
-                lowImgURLEnd = ""
-                // print(lowImgURLEnd)
-                var imageCode = 0
-              //********************************
-                
-              
-//                if image0.contains("Swift") {
-//                    print("exists")
-//                }
-                if image0.contains("bloom") {
-                let imageLinkStart = image0.index(image0.startIndex, offsetBy: 45)
-                let imageLinkend = image0.index(image0.endIndex, offsetBy: -3)
-                let rangeA = imageLinkStart..<imageLinkend
-                imageCode = Int(image0[rangeA])!-7
-                HRimageCode = imageCode
-                print("Link code is \(imageCode)")
-                     hiRezImgURLbegin = "https://images.bloomingdalesassets.com/is/image/BLM/products/3/optimized/"
-                     hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1200&fit=fit,1&$filtersm$"
-                     lowImgURLbegin = "https://images.bloomingdales.com/is/image/BLM/"
-                     lowImgURLEnd = ""
             
-                }else if image0.contains("macy") {
-                
-                
-                //*******************************
-                let start = image0.index(image0.startIndex, offsetBy: 39)
-                let end = image0.index(image0.endIndex, offsetBy: -3)
-                let range = start..<end
-                imageCode = Int(image0[range])!-7
-                HRimageCode = imageCode
-                print("image code is \(imageCode)")
-                }
-                
-                if image0 == "" {
+                if result![0].image.contains("macy") {
+                    HRimageCode = Int(result![0].code)!
+                    hiRezImgURLbegin = "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/"
+                    hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$"
+                    lowImgURLbegin = "https://slimages.macys.com/is/image/MCY/"
+                    lowImgURLEnd = ""
+                    
+                }else if result![0].image.contains("bloom") {
+                    HRimageCode = Int(result![0].code)!
+                    hiRezImgURLbegin = "https://images.bloomingdalesassets.com/is/image/BLM/products/3/optimized/"
+                    hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1200&fit=fit,1&$filtersm$"
+                    lowImgURLbegin = "https://images.bloomingdales.com/is/image/BLM/"
+                    lowImgURLEnd = ""
+                } else if result![0].image == "" {
                     setAlternateImagetoALL()
                     return
-                }else{
+                }
+    
                 
-                //iterate and set image display
-                let images = [image1, image2, image3, image4,image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15]
-                var incrementer = 0
-                
+
                 if reviewModeState == "off" {
+                    //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                    weightDisplay.stringValue = ""
+                    shipping.stringValue = ""
+                    UPCField.textColor = NSColor.black
+                    itemDescriptionField.textColor = NSColor.black
+                    setupPopUpButtons()
+                    imageOverride1TxtField.stringValue = ""
+                    imageOverride2TxtField.stringValue = ""
+                    UPCField.stringValue = String(result![0].upc)
+                    OriginalQty.stringValue = String(result![0].originalQty)
+                    inventoryCount.stringValue = String(result![0].inventoryCount)
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    colorField.stringValue = String(result![0].color)
+                    //price.stringValue = String(result![0].price)
+                    //shipping.stringValue = String(result![0].shipping)
+                    sku.stringValue = String(result![0].sku)
+                    brand.stringValue = String(result![0].brand)
+                    style.stringValue = String(result![0].style)
+                    color.stringValue = String(result![0].color)
+                    size.stringValue = String(result![0].size)
+                    image.stringValue = String(result![0].image)
+                    msrp.stringValue = String(result![0].msrp)
+                    sleeveStyle.stringValue = String(result![0].sleeveStyle)
+                    sleeveLength.stringValue = String(result![0].sleeveLength)
+                    ebayCategory.stringValue = String(result![0].ebayCategory)
+                    storeCategory.stringValue = String(result![0].storeCategory)
+           
+                    
+                    sizeType.stringValue = String(result![0].sizeType)
+                    ovrUPC = String(result![0].upc)
+                    
+                    //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                    
+                    //iterate and set image display
+                    DispatchQueue.global(qos: .userInitiated).async {
+                   // DispatchQueue.main.async {
+                    
+                        let images = [self.image1, self.image2, self.image3, self.image4,self.image5, self.image6, self.image7, self.image8, self.image9, self.image10, self.image11, self.image12, self.image13, self.image14, self.image15]
+                    var incrementer = 0
+                    
                     repeat {
                         for i in images {
-                            let url1 = URL(string: "\(lowImgURLbegin)\(imageCode + incrementer )\(lowImgURLEnd)")
-                            let hdurl1 = URL(string: "\(hiRezImgURLbegin)\(imageCode + incrementer )\(hiRezImgURLEnd)")
-                            // print(url1)
-                            arrayOfURLs.append(url1!)
-                            hdArrayOfURLs.append(hdurl1!)
-                            //print(hdArrayOfURLs)
+                            let url1 = URL(string: "\(lowImgURLbegin)\(imageCode! + incrementer )\(lowImgURLEnd)")
+                            let hdUrl1 = URL(string: "\(hiRezImgURLbegin)\(imageCode! + incrementer )\(hiRezImgURLEnd)")
+                            incrementer += 1
+                            print(url1)
+                            //HRimageCode = URL(string: "\(hiRezImgURLbegin)\(imageCode! + incrementer )\(hiRezImgURLEnd)")
+                            self.arrayOfURLs.append(url1!)
+                            self.hdArrayOfURLs.append(hdUrl1!)
                             do {
                                 let data = try Data(contentsOf: url1!)
-                                //let hddata = try Data(contentsOf: hdurl1!)
+                                DispatchQueue.main.async {
                                 i!.image = NSImage(data: data)
-                                // i!.image = NSImage(data: hddata)
-                                incrementer += 1
+                                //print(incrementer)
+                                //print("\(incrementer) time(s) around")
+                                }
                             } catch {
-                                
+                              DispatchQueue.main.async {
                                 print("error!")
-                                i!.image = image1.alternateImage
+                                i!.image = self.image1.alternateImage
+                            }
                             }
                         }
                     }while incrementer <= 7
+                    }
+                    
+                    
+                    
                     
                 } else {
                     //******** ReviewModeSate is ON *********
@@ -1049,7 +899,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                                            ebayConditionSelector.selectItem(at: 0)
                                        }
                 }
-                }
+
             } else {
                 
                 
@@ -1109,50 +959,162 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         let realm = try! Realm(configuration: config)
         try! realm.write {
            
+            let previousColor = result![0].color
+            
             if colorPicker.indexOfSelectedItem == 1 {
                 result![0].color = "Beige"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Beige")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 2 {
                 result![0].color = "Black"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Black")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 3 {
                 result![0].color = "Blue"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Blue")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 4 {
                 result![0].color = "Brown"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Brown")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 5 {
                 result![0].color = "Charcoal"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Charcoal")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 6 {
                 result![0].color = "Copper"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Copper")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 7 {
                 result![0].color = "Gold"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Gold")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 8 {
                 result![0].color = "Gray"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Gray")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 9 {
                 result![0].color = "Green"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Green")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 10 {
                 result![0].color = "Multicolored"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Multicolored")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 11 {
                 result![0].color = "Natural"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Natural")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 12 {
                 result![0].color = "Navy"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Navy")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 13 {
                 result![0].color = "Orange"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Orange")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 14 {
                 result![0].color = "Pink"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Pink")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 15 {
                 result![0].color = "Purple"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Purple")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 16 {
                 result![0].color = "Red"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Red")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 17 {
                 result![0].color = "Silver"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Silver")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 18 {
                 result![0].color = "Taupe"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Taupe")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 19 {
                 result![0].color = "Turquoise"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Turquoise")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 20 {
                 result![0].color = "White"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "White")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 21 {
                 result![0].color = "Wine"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Wine")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else if colorPicker.indexOfSelectedItem == 22 {
                 result![0].color = "Yellow"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: "Yellow")
+                color.stringValue = result![0].color
+                itemDescriptionField.stringValue = result![0].itemDescription
+                colorPicker.selectItem(at: 0)
+                
             }else{
                 return
             }
@@ -1169,75 +1131,369 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     
        }
     
+    @IBAction func colorManualOverride(_ sender: NSTextField) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+        let previousColor = result![0].color
+        print(previousColor)
+        result![0].color = color.stringValue
+        let newColor = color.stringValue
+        result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousColor, with: newColor)
+        itemDescriptionField.stringValue = result![0].itemDescription
+        colorPicker.selectItem(at: 0)
+            
+    }
+    }
     
-    
-    @IBAction func sizeSelected(_ sender: NSPopUpButtonCell) {
+    @IBAction func styleSelected(_ sender: NSPopUpButtonCell) {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
                let realm = try! Realm(configuration: config)
                try! realm.write {
                 
+                 let previousStyle = result![0].style
+                
                 if stylePicker.indexOfSelectedItem == 1 {
-                    result![0].color = "Blouse"
+                    result![0].style = "Blouse"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Blouse")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "53159"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "29010495011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 2 {
-                    result![0].color = "Bodysuit"
+                    result![0].style = "Bodysuit"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Bodysuit")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "53159"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "29010495011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 3 {
-                    result![0].color = "Cami"
+                    result![0].style = "Cami"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Cami")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "53159"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "29010495011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 4 {
-                    result![0].color = "Coat"
+                    result![0].style = "Coat"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Coat")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63862"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "1"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 5 {
-                    result![0].color = "Dress"
+                    result![0].style = "Dress"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Dress")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63861"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "28973014011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 6 {
-                    result![0].color = "Gown"
+                    result![0].style = "Gown"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Gown")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63861"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "28973014011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 7 {
-                    result![0].color = "Hoodie"
+                    result![0].style = "Hoodie"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Hoodie")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "155226"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "1"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 8 {
-                    result![0].color = "Jacket"
+                    result![0].style = "Jacket"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Jacket")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63862"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "1"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 9 {
-                    result![0].color = "Jeans"
+                    result![0].style = "Jeans"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Jeans")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "11554"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "31775381011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 10 {
-                    result![0].color = "Jumpsuit"
+                    result![0].style = "Jumpsuit"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Jumpsuit")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "3009"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "1"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 11 {
-                    result![0].color = "Legging"
+                    result![0].style = "Legging"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Legging")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63863"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "31775381011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 12 {
-                    result![0].color = "Maxi"
+                    result![0].style = "Maxi"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Maxi")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63861"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "28973014011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 13 {
-                    result![0].color = "Mini"
+                    result![0].style = "Mini"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Mini")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63864"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "33096451011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 14 {
-                    result![0].color = "Overall"
+                    result![0].style = "Overall"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Overall")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63863"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "31775381011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 15 {
-                    result![0].color = "Pants"
+                    result![0].style = "Pants"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Pants")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63863"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "31775381011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 16 {
-                    result![0].color = "Pullover"
+                    result![0].style = "Pullover"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Pullover")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "53159"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "29010495011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 17 {
-                    result![0].color = "Romper"
+                    result![0].style = "Romper"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Romper")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "3009"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "1"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 18 {
-                    result![0].color = "Shirt"
+                    result![0].style = "Shirt"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Shirt")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "53159"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "29010495011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 19 {
-                    result![0].color = "Shorts"
+                    result![0].style = "Shorts"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Shorts")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "11555"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "31775416011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 20 {
-                    result![0].color = "Skirt"
+                    result![0].style = "Skirt"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Skirt")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory =  "63864"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "33096451011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 21 {
-                    result![0].color = "Sleepwear"
+                    result![0].style = "Sleepwear"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Sleepwear")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63855"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "1"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 22 {
-                    result![0].color = "Sweater"
+                    result![0].style = "Sweater"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Sweater")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63866"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "29010495011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 23 {
-                    result![0].color = "Sweatshirt"
+                    result![0].style = "Sweatshirt"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Sweatshirt")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "155226"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "1"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 24 {
-                    result![0].color = "Tank"
+                    result![0].style = "Tank"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Tank")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "53159"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "29010495011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 25 {
-                    result![0].color = "Tee"
+                    result![0].style = "Tee"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Tee")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "53159"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "29010495011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 26 {
-                    result![0].color = "Top"
+                    result![0].style = "Top"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Top")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "53159"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "29010495011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 27 {
-                    result![0].color = "T-Shirt"
+                    result![0].style = "T-shirt"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "T-shirt")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "53159"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "29010495011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 28 {
-                    result![0].color = "Trouser"
+                    result![0].style = "Trouser"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Trouser")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63863"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "31775381011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 29 {
-                    result![0].color = "Tunic"
+                    result![0].style = "Tunic"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Tunic")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "53159"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "29010495011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 30 {
-                    result![0].color = "Vest"
+                    result![0].style = "Vest"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Vest")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63862"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "1"
+                    storeCategory.stringValue = result![0].storeCategory
+                    
+                    stylePicker.selectItem(at: 0)
+                    
                 }else if stylePicker.indexOfSelectedItem == 31 {
-                    result![0].color = "Wrap"
+                    result![0].style = "Wrap"
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: "Wrap")
+                    style.stringValue = result![0].style
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                    result![0].ebayCategory = "63861"
+                    ebayCategory.stringValue = result![0].ebayCategory
+                    result![0].storeCategory = "28973014011"
+                    storeCategory.stringValue = result![0].storeCategory
+                    stylePicker.selectItem(at: 0)
                 }else{
                     return
                 }
@@ -1252,6 +1508,457 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                    }
                    }
     }
+    
+    @IBAction func styleManualOverride(_ sender: NSTextField) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+        let previousStyle = result![0].style
+        print(previousStyle)
+        result![0].style = style.stringValue
+        let newStyle = style.stringValue
+        result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: newStyle)
+        itemDescriptionField.stringValue = result![0].itemDescription
+        stylePicker.selectItem(at: 0)
+    }
+    }
+    
+    
+    @IBAction func brandSelected(_ sender: NSPopUpButton) {
+
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+         
+          let previousBrand = result![0].brand
+         
+            if brandSelector.indexOfSelectedItem == 1 {
+                result![0].brand = "7 For All Mankind"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "7 For All Mankind")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 2 {
+                result![0].brand = "Adriano Goldschmied"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Adriano Goldschmied")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 3 {
+                result![0].brand = "ASTR The Label"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "ASTR The Label")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 4 {
+                result![0].brand = "Bar III"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Bar III")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 5 {
+                result![0].brand = "Carbon Copy"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Carbon Copy")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 6 {
+                result![0].brand = "Current Air"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Current Air")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 7 {
+                result![0].brand = "Dee Elle"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Dee Elle")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 8 {
+                result![0].brand = "Free People"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Free People")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 9 {
+                result![0].brand = "Ginger By Stella"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Ginger By Stella")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 10 {
+                result![0].brand = "Guess"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Guess")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 11 {
+                result![0].brand = "Heartloom"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Heartloom")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 12 {
+                result![0].brand = "Hudson"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Hudson")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 13 {
+                result![0].brand = "JOA"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "JOA")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 14 {
+                result![0].brand = "Joe's Jeans"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Joe's Jeans")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 15 {
+                result![0].brand = "Kendall + Kylie"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Kendall + Kylie")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 16 {
+                result![0].brand = "Leyden"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Leyden")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 17 {
+                result![0].brand = "Line & Dot"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Line & Dot")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 18 {
+                result![0].brand = "Lucky Brand"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Lucky Brand")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 19 {
+                result![0].brand = "Lucy Paris"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Lucy Paris")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 20 {
+                result![0].brand = "Maison Jules"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Maison Jules")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 21 {
+                result![0].brand = "Moon River"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Moon River")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 22 {
+                result![0].brand = "Nanette Lepore"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Nanette Lepore")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 23 {
+                result![0].brand = "Paige"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Paige")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 24 {
+                result![0].brand = "Project 28"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Project 28")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 25 {
+               result![0].brand = "Rachel Roy"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Rachel Roy")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 26 {
+                result![0].brand = "Rachel Zoe"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Rachel Zoe")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 27 {
+                result![0].brand = "Sanctuary"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Sanctuary")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 28 {
+                result![0].brand = "Topson Downs"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Topson Downs")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 29 {
+                result![0].brand = "Trina Turk"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "Trina Turk")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+            }else if brandSelector.indexOfSelectedItem == 30 {
+                result![0].brand = "True Vintage"
+                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: "True Vintage")
+                brand.stringValue = result![0].brand
+                itemDescriptionField.stringValue = result![0].itemDescription
+                brandSelector.selectItem(at: 0)
+                
+                }else{
+                    return
+                }
+                 
+                if result![0].itemDescription.contains("**BRAND**"){
+                    result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: "**BRAND**", with: result![0].brand)
+                    brand.stringValue = result![0].brand
+                    itemDescriptionField.stringValue = result![0].itemDescription
+                }else{
+                    return
+                    
+            }
+        }
+    }
+    
+    
+    @IBAction func brandManualOverride(_ sender: NSTextField) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+        let previousBrand = result![0].brand
+        result![0].brand = brand.stringValue
+        let newBrand = brand.stringValue
+        result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousBrand, with: newBrand)
+        itemDescriptionField.stringValue = result![0].itemDescription
+        brandSelector.selectItem(at: 0)
+    }
+    }
+    
+    
+    
+    @IBAction func sizeSelected(_ sender: NSPopUpButton) {
+        
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+            
+            let previousSize = result![0].size
+            
+            if sizeSelector.indexOfSelectedItem == 1 {
+                result![0].size = "XXS"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "XXS")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 2 {
+                result![0].size = "XS"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "XS")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 3 {
+                result![0].size = "S"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "S")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 4 {
+                result![0].size = "M"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "M")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 5 {
+                result![0].size = "L"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "L")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 6 {
+                result![0].size = "XL"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "XL")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 7 {
+                result![0].size = "XXL"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "XXL")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 8 {
+                result![0].size = "3XL"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "3XL")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 9 {
+                result![0].size = "4XL"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "4XL")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 10 {
+                result![0].size = "5XL"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "5XL")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 11 {
+                result![0].size = "6XL"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "6XL")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 12 {
+                result![0].size = "0"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "0")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 13 {
+                result![0].size = "2"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "2")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 14 {
+                result![0].size = "4"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "4")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 15 {
+                result![0].size = "6"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "6")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 16 {
+                result![0].size = "8"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "8")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 17 {
+                result![0].size = "10"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "10")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 18 {
+                result![0].size = "12"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "12")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 19 {
+                result![0].size = "14"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "14")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 20 {
+                result![0].size = "16"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "16")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 21 {
+                result![0].size = "18"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "18")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 22 {
+                result![0].size = "20"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "20")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+                
+            } else if sizeSelector.indexOfSelectedItem == 23 {
+                result![0].size = "22"
+                result![0].itemDescription = result![0].itemDescription.replacingLastOccurrenceOfString(previousSize, with: "22")
+                size.stringValue = result![0].size
+                itemDescriptionField.stringValue = result![0].itemDescription
+                sizeSelector.selectItem(at: 0)
+            }
+        }
+    }
+    
+    
+    @IBAction func sizeManualOverride(_ sender: NSTextField) {
+          let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+          let realm = try! Realm(configuration: config)
+          try! realm.write {
+          let previousSize = result![0].size
+          result![0].size = size.stringValue
+          let newSize = size.stringValue
+          result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousSize, with: newSize)
+          itemDescriptionField.stringValue = result![0].itemDescription
+          sizeSelector.selectItem(at: 0)
+      }
+      }
+    
     
 //    func updateitemDescription() {
 //        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
@@ -1310,6 +2017,18 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         image2.image = nil
         image3.image = nil
         image4.image = nil
+        image5.image = nil
+        image6.image = nil
+        image7.image = nil
+        image8.image = nil
+        image9.image = nil
+        image10.image = nil
+        image11.image = nil
+        image12.image = nil
+        image13.image = nil
+        image14.image = nil
+        image15.image = nil
+        
 
         
         let url1a = result![0].imageSlot1
@@ -1323,12 +2042,12 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             image3.image = image3.alternateImage
             image4.image = image4.alternateImage
         }else{
+            
+            
         let url1 = URL(string: (result![0].imageSlot1))
         let url2 = URL(string: (result![0].imageSlot2))
         let url3 = URL(string: (result![0].imageSlot3))
         let url4 = URL(string: (result![0].imageSlot4))
-        
-        
             
         do {
             if url1 != nil {
@@ -1478,94 +2197,185 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     //Display HD image @IBaction triggers
     
     @IBAction func Image1HighRezOpen(_ sender: NSButton) {
-        tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode!
+        if HRimageCode != nil {
+       // tempHRimageCode = HRimageCode
+        print("state is: \(reviewModeState)")
+        HRZurl1 = result![0].imageSlot1
+        HRZimg1Selected = true
         performSegue(withIdentifier: "SegueHD", sender: self)
+        }else{
+            return
+        }
     }
     
     @IBAction func Image2HighRezOpen(_ sender: NSButton) {
+        if HRimageCode != nil {
         tempHRimageCode = HRimageCode
         HRimageCode = HRimageCode! + 1
+        HRZurl2 = result![0].imageSlot2
+        HRZimg2Selected = true
         performSegue(withIdentifier: "SegueHD", sender: self)
+    }
     }
     
     @IBAction func Image3HighRezOpen(_ sender: NSButton) {
+        if HRimageCode != nil {
         tempHRimageCode = HRimageCode
         HRimageCode = HRimageCode! + 2
+        HRZurl3 = result![0].imageSlot3
+        HRZimg3Selected = true
         performSegue(withIdentifier: "SegueHD", sender: self)
+    }
     }
     
     @IBAction func Image4HighRezOpen(_ sender: NSButton) {
-        tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode! + 3
-        performSegue(withIdentifier: "SegueHD", sender: self)
+        if HRimageCode != nil {
+            tempHRimageCode = HRimageCode
+            HRimageCode = HRimageCode! + 3
+            HRZurl4 = result![0].imageSlot4
+            HRZimg4Selected = true
+            performSegue(withIdentifier: "SegueHD", sender: self)
+        }
     }
     
     @IBAction func Image5HighRezOpen(_ sender: NSButton) {
-        tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode! + 4
-        performSegue(withIdentifier: "SegueHD", sender: self)
+        if HRimageCode != nil {
+            tempHRimageCode = HRimageCode
+            HRimageCode = HRimageCode! + 4
+            performSegue(withIdentifier: "SegueHD", sender: self)
+        }
     }
     
     @IBAction func Image6HighRezOpen(_ sender: NSButton) {
-        tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode! + 5
-        performSegue(withIdentifier: "SegueHD", sender: self)
+        if HRimageCode != nil {
+            tempHRimageCode = HRimageCode
+            HRimageCode = HRimageCode! + 5
+            performSegue(withIdentifier: "SegueHD", sender: self)
+        }
     }
     
     @IBAction func Image7HighRezOpen(_ sender: NSButton) {
-        tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode! + 6
-        performSegue(withIdentifier: "SegueHD", sender: self)
-      }
-    
+        if HRimageCode != nil {
+            tempHRimageCode = HRimageCode
+            HRimageCode = HRimageCode! + 6
+            performSegue(withIdentifier: "SegueHD", sender: self)
+        }
+    }
     @IBAction func Image8HighRezOpen(_ sender: NSButton) {
-        tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode! + 7
-        performSegue(withIdentifier: "SegueHD", sender: self)
+        if HRimageCode != nil {
+            tempHRimageCode = HRimageCode
+            HRimageCode = HRimageCode! + 7
+            performSegue(withIdentifier: "SegueHD", sender: self)
+        }
     }
-
-  @IBAction func Image9HighRezOpen(_ sender: NSButton) {
-      tempHRimageCode = HRimageCode
-      HRimageCode = HRimageCode! + 8
-      performSegue(withIdentifier: "SegueHD", sender: self)
-  }
-  
+    
+    @IBAction func Image9HighRezOpen(_ sender: NSButton) {
+        if HRimageCode != nil {
+            tempHRimageCode = HRimageCode
+            HRimageCode = HRimageCode! + 8
+            performSegue(withIdentifier: "SegueHD", sender: self)
+        }
+    }
     @IBAction func Image10HighRezOpen(_ sender: NSButton) {
-        tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode! + 9
-        performSegue(withIdentifier: "SegueHD", sender: self)
+        if HRimageCode != nil {
+            tempHRimageCode = HRimageCode
+            HRimageCode = HRimageCode! + 9
+            performSegue(withIdentifier: "SegueHD", sender: self)
+        }
     }
-    
     @IBAction func Image11HighRezOpen(_ sender: NSButton) {
-        tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode! + 10
-        performSegue(withIdentifier: "SegueHD", sender: self)
+        if HRimageCode != nil {
+            tempHRimageCode = HRimageCode
+            HRimageCode = HRimageCode! + 10
+            performSegue(withIdentifier: "SegueHD", sender: self)
+        }
     }
-    
     @IBAction func Image12HighRezOpen(_ sender: NSButton) {
-        tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode! + 11
-        performSegue(withIdentifier: "SegueHD", sender: self)
+        if HRimageCode != nil {
+            tempHRimageCode = HRimageCode
+            HRimageCode = HRimageCode! + 11
+            performSegue(withIdentifier: "SegueHD", sender: self)
+        }
     }
-    
     @IBAction func Image13HighRezOpen(_ sender: NSButton) {
-        tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode! + 12
-        performSegue(withIdentifier: "SegueHD", sender: self)
+        if HRimageCode != nil {
+            tempHRimageCode = HRimageCode
+            HRimageCode = HRimageCode! + 12
+            performSegue(withIdentifier: "SegueHD", sender: self)
+        }
     }
     
     @IBAction func Image14HighRezOpen(_ sender: NSButton) {
-        tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode! + 13
-        performSegue(withIdentifier: "SegueHD", sender: self)
+        if HRimageCode != nil {
+            tempHRimageCode = HRimageCode
+            HRimageCode = HRimageCode! + 13
+            performSegue(withIdentifier: "SegueHD", sender: self)
+        }
     }
     @IBAction func Image15HighRezOpen(_ sender: NSButton) {
-        tempHRimageCode = HRimageCode
-        HRimageCode = HRimageCode! + 14
-        performSegue(withIdentifier: "SegueHD", sender: self)
+        if HRimageCode != nil {
+            tempHRimageCode = HRimageCode
+            HRimageCode = HRimageCode! + 14
+            performSegue(withIdentifier: "SegueHD", sender: self)
+        }
     }
     }
 
 
+//extension String
+//{
+//    func replacingLastOccurrenceOfString(_ searchString: String,
+//            with replacementString: String,
+//            caseInsensitive: Bool = true) -> String
+//    {
+//        let options: String.CompareOptions
+//        if caseInsensitive {
+//            options = [.backwards, .caseInsensitive]
+//        } else {
+//            options = [.backwards]
+//        }
+//
+//        if let range = self.range(of: searchString,
+//                options: options,
+//                range: nil,
+//                locale: nil) {
+//
+//            return self.replacingCharacters(in: range, with: replacementString)
+//        }
+//        return self
+//    }
+//}
 
+//extension String
+//{
+//    func stringByReplacingFirstOccurrenceOfString(target: String, withString replaceString: String) -> String {
+//        if let range = self.range(of: target) {
+//            return self.replacingCharacters(in: range, with: replaceString)
+//        }
+//        return self
+//    }
+//}
+
+extension String
+{
+    func replacingLastOccurrenceOfString(_ searchString: String,
+            with replacementString: String,
+            caseInsensitive: Bool = true) -> String
+    {
+        let options: String.CompareOptions
+        if caseInsensitive {
+            options = [.backwards, .caseInsensitive]
+        } else {
+            options = [.backwards]
+        }
+
+        if let range = self.range(of: searchString,
+                options: options,
+                range: nil,
+                locale: nil) {
+
+            return self.replacingCharacters(in: range, with: replacementString)
+        }
+        return self
+    }
+}

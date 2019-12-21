@@ -16,6 +16,7 @@ var counter = 0
 
 class HighRezImageViewController: NSViewController {
     
+    
     @IBOutlet weak var closeButton: NSButton!
     
        
@@ -28,14 +29,79 @@ class HighRezImageViewController: NSViewController {
     
     (closeButton.cell as! NSButtonCell).isBordered = false//The background color is used only when drawing borderless buttons.
     (closeButton.cell as! NSButtonCell).backgroundColor = NSColor.red
-   
-
-    
-     //let hiRezImgURLbegin = "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/"
-   //  let hiRezImgURLEnd = "_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$"
+       
+    if reviewModeState == "on" {
+        if HRZimg1Selected == true {
+            print("imag1 selected")
+            let url1 = URL(string:HRZurl1!)
+            do {
+                let data = try Data(contentsOf: url1!)
+                HighRezImageView1 = NSImage(data: data)
+            } catch {
+                print("error!")
+            }
+            do {
                 
-    print("HiRezIMageURLstatus \(hiRezImgURLbegin)")
-                   
+                HighRezImageView.image = HighRezImageView1
+            }
+            
+        } else if HRZimg2Selected == true {
+            print("imag2 selected")
+            let url1 = URL(string:HRZurl2!)
+            do {
+                let data = try Data(contentsOf: url1!)
+                HighRezImageView1 = NSImage(data: data)
+            } catch {
+                print("error!")
+            }
+            do {
+                
+                HighRezImageView.image = HighRezImageView1
+            }
+            
+            } else if HRZimg3Selected == true {
+            print("imag3 selected")
+            let url1 = URL(string:HRZurl3!)
+            do {
+                let data = try Data(contentsOf: url1!)
+                HighRezImageView1 = NSImage(data: data)
+            } catch {
+                print("error!")
+            }
+            do {
+                
+                HighRezImageView.image = HighRezImageView1
+            }
+            
+            } else if HRZimg4Selected == true {
+            print("imag4 selected")
+            let url1 = URL(string:HRZurl4!)
+            do {
+                let data = try Data(contentsOf: url1!)
+                HighRezImageView1 = NSImage(data: data)
+            } catch {
+                print("error!")
+            }
+            do {
+                
+                HighRezImageView.image = HighRezImageView1
+            }
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    }else{
                    let url1 = URL(string: "\(hiRezImgURLbegin)\(HRimageCode!)\(hiRezImgURLEnd)")
                    print("url1 is: \(url1)")
                    do {
@@ -50,17 +116,22 @@ class HighRezImageViewController: NSViewController {
         HighRezImageView.image = HighRezImageView1
     }
 
-}
+
  
 
     
-    @IBAction func CloseWindow(_ sender: NSButton) {
-        HRimageCode = tempHRimageCode
-        self.view.window?.close()
+   
+    
+}
     }
-    
+    @IBAction func CloseWindow(_ sender: NSButton) {
+        HRimageCode = tempHRimageCode!
+           self.view.window?.close()
+            HRZimg1Selected = false
+            HRZimg2Selected = false
+            HRZimg3Selected = false
+            HRZimg4Selected = false
+
+
 }
-    
-
- 
-
+}

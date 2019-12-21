@@ -21,7 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // ****Blowout REALM CONFIG****
   
-  //try! FileManager.default .removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
+  
+    //try! FileManager.default .removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
     
    
 
