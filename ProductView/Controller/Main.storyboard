@@ -1111,7 +1111,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField identifier="sleeveStyleLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QCW-Zy-l0D">
-                                <rect key="frame" x="2325" y="1251" width="79" height="16"/>
+                                <rect key="frame" x="2316" y="1300" width="79" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" identifier="sleeveStyleLabel" title="Sleeve Style" id="zd8-Et-XQN">
                                     <font key="font" metaFont="system"/>
@@ -1129,18 +1129,6 @@
                                 </textFieldCell>
                                 <connections>
                                     <action selector="sleeveStyleDidSet:" target="OUq-4Z-H7t" id="h4H-Wp-4Cd"/>
-                                </connections>
-                            </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PN7-58-PH3">
-                                <rect key="frame" x="2434" y="1202" width="96" height="22"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="5Dg-h0-Zbt">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <action selector="sleeveLengthDIdSet:" target="OUq-4Z-H7t" id="EgX-Lq-ZIh"/>
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jv4-L6-ql2">
@@ -1195,18 +1183,6 @@
                                 </textFieldCell>
                                 <connections>
                                     <action selector="ebayCategoryIDDidSet:" target="OUq-4Z-H7t" id="s66-Rg-vCH"/>
-                                </connections>
-                            </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="06T-gv-r72">
-                                <rect key="frame" x="1924" y="1144" width="96" height="22"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="9DG-im-ChO">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <action selector="storeCategoryDidset:" target="OUq-4Z-H7t" id="Hv1-cq-nib"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WQe-Yw-C0A">
@@ -1784,26 +1760,8 @@
                                     </menu>
                                 </popUpButtonCell>
                             </popUpButton>
-                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ZO-EE-baL">
-                                <rect key="frame" x="2435" y="1268" width="98" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="jQ4-PP-WFt" id="8gm-5x-bSo">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="yv0-76-xae">
-                                        <items>
-                                            <menuItem title="Item 1" state="on" id="jQ4-PP-WFt"/>
-                                            <menuItem title="Item 2" id="JZ0-YV-gan"/>
-                                            <menuItem title="Item 3" id="Y7M-1m-b5q"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                                <connections>
-                                    <action selector="sleeveLengthSelected:" target="OUq-4Z-H7t" id="cUb-Dq-5uw"/>
-                                </connections>
-                            </popUpButton>
                             <textField identifier="sleeveLengthLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3oG-vW-u9d">
-                                <rect key="frame" x="2437" y="1250" width="90" height="17"/>
+                                <rect key="frame" x="2437" y="1230" width="90" height="17"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Sleeve Length" id="ff9-uK-7Av">
                                     <font key="font" metaFont="system"/>
@@ -1884,15 +1842,6 @@
                                     <action selector="brandDidSet:" target="OUq-4Z-H7t" id="gcI-jw-mhS"/>
                                 </connections>
                             </comboBox>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="afg-5b-Ahr">
-                                <rect key="frame" x="2187" y="1139" width="96" height="21"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="bi6-F3-2uC">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0kY-FA-AUe">
                                 <rect key="frame" x="1857" y="1246" width="99" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1927,6 +1876,58 @@
                                     <action selector="sizeDidSet:" target="OUq-4Z-H7t" id="xTf-YG-ff8"/>
                                 </connections>
                             </comboBox>
+                            <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0jL-2z-Fgk">
+                                <rect key="frame" x="2429" y="1246" width="99" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="pUK-kT-Onf">
+                                    <font key="font" metaFont="titleBar"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <objectValues>
+                                        <string>Item 1</string>
+                                        <string>Item 2</string>
+                                        <string>Item 3</string>
+                                    </objectValues>
+                                </comboBoxCell>
+                                <connections>
+                                    <action selector="sleeveLengthDidSet:" target="OUq-4Z-H7t" id="7V0-iT-b7o"/>
+                                </connections>
+                            </comboBox>
+                            <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Qx-F6-aU1">
+                                <rect key="frame" x="1922" y="1189" width="121" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="VB4-KA-NNd">
+                                    <font key="font" metaFont="titleBar"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <objectValues>
+                                        <string>Item 1</string>
+                                        <string>Item 2</string>
+                                        <string>Item 3</string>
+                                    </objectValues>
+                                </comboBoxCell>
+                                <connections>
+                                    <action selector="storeCategoryDidset:" target="OUq-4Z-H7t" id="tvN-6O-hDY"/>
+                                </connections>
+                            </comboBox>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c7Y-BI-wnb">
+                                <rect key="frame" x="2185" y="1190" width="98" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="efp-Ml-IPw" id="mIL-jZ-m3I">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <menu key="menu" id="afC-T1-pZ8">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="efp-Ml-IPw"/>
+                                            <menuItem title="Item 2" id="hSS-Qh-mCl"/>
+                                            <menuItem title="Item 3" id="5Mx-3C-eaX"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="sizeTypeDidSet:" target="OUq-4Z-H7t" id="O0R-u3-5oN"/>
+                                </connections>
+                            </popUpButton>
                         </subviews>
                         <constraints>
                             <constraint firstItem="M3k-EC-T0T" firstAttribute="top" secondItem="btQ-XW-bGl" secondAttribute="top" constant="14" id="Wwn-Bj-coo"/>
@@ -1988,15 +1989,14 @@
                         <outlet property="scaleStatus" destination="RWt-66-ZEY" id="9aM-SM-nEt"/>
                         <outlet property="shipping" destination="Raj-IS-NSg" id="VHN-r7-RHa"/>
                         <outlet property="sizeSelector" destination="3b3-UE-k8B" id="hbg-Kq-z88"/>
-                        <outlet property="sizeType" destination="afg-5b-Ahr" id="y2N-bE-d4G"/>
+                        <outlet property="sizeTypeSelector" destination="c7Y-BI-wnb" id="EiP-li-Otr"/>
                         <outlet property="sku" destination="ZNa-Cr-7PF" id="egR-5L-1vm"/>
-                        <outlet property="sleeveLength" destination="PN7-58-PH3" id="Sgt-lJ-5cw"/>
                         <outlet property="sleeveLengthLabel" destination="3oG-vW-u9d" id="JOr-pm-3oH"/>
-                        <outlet property="sleeveLengthSelector" destination="6ZO-EE-baL" id="DjW-sN-fDX"/>
+                        <outlet property="sleeveLengthSelector" destination="0jL-2z-Fgk" id="DJm-HH-E08"/>
                         <outlet property="sleeveStyle" destination="eIK-3u-JsP" id="Eec-KM-zxl"/>
                         <outlet property="sleeveStyleLabel" destination="QCW-Zy-l0D" id="RcR-Xe-oWQ"/>
                         <outlet property="sleeveStyleSelector" destination="Thd-CX-wRc" id="DZd-UA-2eK"/>
-                        <outlet property="storeCategory" destination="06T-gv-r72" id="bG2-2f-ghb"/>
+                        <outlet property="storeCategorySelector" destination="2Qx-F6-aU1" id="R11-Vz-N1G"/>
                         <outlet property="styleSelector" destination="0kY-FA-AUe" id="OW7-5E-f47"/>
                         <outlet property="weightDisplay" destination="wjL-0l-i4v" id="8Cp-LU-3hF"/>
                         <segue destination="0nd-eh-LFA" kind="modal" identifier="SegueHD" id="VXD-GN-StR"/>

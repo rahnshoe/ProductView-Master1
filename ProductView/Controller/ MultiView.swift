@@ -110,9 +110,9 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     @IBOutlet weak var ebayConditionSelector: NSPopUpButton!
     @IBOutlet weak var overrideShipping: NSPopUpButton!
 
-  
-    @IBOutlet weak var sleeveLengthSelector: NSPopUpButton!
+     
     @IBOutlet weak var sleeveStyleSelector: NSPopUpButton!
+     @IBOutlet weak var sizeTypeSelector: NSPopUpButton!
     @IBOutlet weak var sleeveStyleLabel: NSTextField!
     @IBOutlet weak var sleeveLengthLabel: NSTextField!
     
@@ -121,8 +121,9 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     @IBOutlet weak var styleSelector: NSComboBox!
     @IBOutlet weak var colorSelector: NSComboBox!
     @IBOutlet weak var sizeSelector: NSComboBox!
+    @IBOutlet weak var sleeveLengthSelector: NSComboBox!
+    @IBOutlet weak var storeCategorySelector: NSComboBox!
     
-    @IBOutlet weak var sleeveLength: NSTextField!
     @IBOutlet weak var price: NSTextField!
     @IBOutlet weak var shipping: NSTextField!
     @IBOutlet weak var sku: NSTextField!
@@ -132,13 +133,12 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     @IBOutlet weak var sleeveStyle: NSTextField!
     @IBOutlet weak var msrp: NSTextField!
     @IBOutlet weak var ebayCategory: NSTextField!
-    @IBOutlet weak var storeCategory: NSTextField!
-    @IBOutlet weak var sizeType: NSTextField!
     @IBOutlet weak var image: NSTextField!
     @IBOutlet weak var OriginalQty: NSTextField!
     @IBOutlet weak var inventoryCount: NSTextField!
     @IBOutlet weak var qtyReceived: NSTextField!
     
+  
     
     
     @IBOutlet weak var imageOverride1TxtField: NSTextField!
@@ -215,7 +215,6 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     
     func hideSleeve() {
         sleeveLengthSelector.isHidden = true
-        sleeveLength.isHidden = true
         sleeveStyleSelector.isHidden = true
         sleeveStyle.isHidden = true
         sleeveLengthLabel.isHidden = true
@@ -225,7 +224,6 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     
     func unhideSleeve(){
         sleeveLengthSelector.isHidden = false
-        sleeveLength.isHidden = false
         sleeveStyleSelector.isHidden = false
         sleeveStyle.isHidden = false
         sleeveLengthLabel.isHidden = false
@@ -375,6 +373,22 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         }
     }
     
+    func setSizeTypeSelectorValue() {
+        if result![0].sizeType == "Juniors" {
+            sizeTypeSelector.selectItem(at: 1)
+        }else if result![0].sizeType == "Regular" {
+            sizeTypeSelector.selectItem(at: 2)
+        }else if result![0].sizeType == "Petite" {
+            sizeTypeSelector.selectItem(at: 3)
+        }else if result![0].sizeType == "Plus" {
+            sizeTypeSelector.selectItem(at: 4)
+        }else{
+            sizeTypeSelector.selectItem(at: 0)
+        }
+    }
+    
+    
+    
     func shippingTranslateCodeForDisplay() {
         let shippingDisplayValue = result![0].shipping
         if shippingDisplayValue == 912391 {
@@ -400,6 +414,30 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             shipping.stringValue = "free"
         }
     }
+    
+    func storeCategoryTranslateCodeForDisplay() -> String {
+           let storeCategoryDisplayValue = result![0].storeCategory
+           if storeCategoryDisplayValue == "1" {
+              storeCategorySelector.stringValue = "Other"
+           }else if storeCategoryDisplayValue == "28973014011" {
+               storeCategorySelector.stringValue = "Dresses"
+           }else if storeCategoryDisplayValue == "29010495011" {
+               storeCategorySelector.stringValue = "Tops"
+           }else if storeCategoryDisplayValue == "29074207011" {
+               storeCategorySelector.stringValue = "Swimwear"
+           }else if storeCategoryDisplayValue == "31775381011" {
+               storeCategorySelector.stringValue = "Pants"
+           }else if storeCategoryDisplayValue == "31775416011" {
+               storeCategorySelector.stringValue = "Shorts"
+           }else if storeCategoryDisplayValue == "33096451011" {
+               storeCategorySelector.stringValue = "Skirts"
+           }else if storeCategoryDisplayValue == "33305264011" {
+               storeCategorySelector.stringValue = "Mens Shoes"
+           }else if storeCategoryDisplayValue == "33305265011" {
+               storeCategorySelector.stringValue = "Womens Shoes"
+           }
+        return storeCategorySelector.stringValue
+       }
     
 
     func zeroOut() {
@@ -448,11 +486,11 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         sleeveStyle.stringValue = ""
         result![0].sleeveStyle = tempSleeveStyle
         let tempSleeveLength = result![0].sleeveLength
-        sleeveLength.stringValue = ""
+        sleeveLengthSelector.stringValue = ""
         result![0].sleeveLength = tempSleeveLength
         ebayCategory.stringValue = ""
-        storeCategory.stringValue = ""
-        sizeType.stringValue = ""
+        storeCategorySelector.stringValue = ""
+        sizeTypeSelector.stringValue = ""
         ebayConditionSelector.selectItem(at: 0)
         }
         try! realm.commitWrite()
@@ -507,11 +545,11 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             sleeveStyle.stringValue = ""
             result![0].sleeveStyle = tempSleeveStyle
             let tempSleeveLength = result![0].sleeveLength
-            sleeveLength.stringValue = ""
+            sleeveLengthSelector.stringValue = ""
             result![0].sleeveLength = tempSleeveLength
             ebayCategory.stringValue = ""
-            storeCategory.stringValue = ""
-            sizeType.stringValue = ""
+            storeCategorySelector.stringValue = ""
+            sizeTypeSelector.stringValue = ""
             ebayConditionSelector.selectItem(at: 0)
             
         }else{
@@ -560,11 +598,11 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             sleeveStyle.stringValue = ""
             result![0].sleeveStyle = tempSleeveStyle
             let tempSleeveLength = result![0].sleeveLength
-            sleeveLength.stringValue = ""
+            sleeveLengthSelector.stringValue = ""
             result![0].sleeveLength = tempSleeveLength
             ebayCategory.stringValue = ""
-            storeCategory.stringValue = ""
-            sizeType.stringValue = ""
+            storeCategorySelector.stringValue = ""
+            sizeTypeSelector.stringValue = ""
             ebayConditionSelector.selectItem(at: 0)
             }
             try! realm.commitWrite()
@@ -600,6 +638,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         sizeSelector.removeAllItems()
         sleeveStyleSelector.removeAllItems()
         sleeveLengthSelector.removeAllItems()
+        storeCategorySelector.removeAllItems()
+        sizeTypeSelector.removeAllItems()
         
     
         
@@ -626,8 +666,9 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         brandSelector.addItems(withObjectValues: ["", "7 For All Mankind", "Adriano Goldschmied", "ASTR The Label", "Bar III", "Carbon Copy", "Current Air", "Dee Elle", "Free People", "Ginger by Stella & Ginger", "Guess", "Heartloom", "Hudson", "JOA", "Joe's Jeans", "Kendall + Kylie", "Leyden", "Line & Dot", "Lucky Brand", "Lucy Paris", "Maison Jules", "Moon River", "Nanette Lepore", "Paige", "Project 28","Rachel Roy", "Rachel Zoe", "Sanctuary", "Topson Downs", "Trina Turk", "True Vintage"])
         sizeSelector.addItems(withObjectValues: ["", "XXS", "XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL", "5XL", "6XL", "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22"])
         sleeveStyleSelector.addItems(withTitles: ["Short Sleeve", "Long Sleeve", "3/4 Sleeve", "Sleeveless"])
-        sleeveLengthSelector.addItems(withTitles: ["", "Short Sleeve", "Long Sleeve", "3/4 Sleeve", "Sleeveless"])
-
+        sleeveLengthSelector.addItems(withObjectValues: ["", "Short Sleeve", "Long Sleeve", "3/4 Sleeve", "Sleeveless"])
+        storeCategorySelector.addItems(withObjectValues: ["", "Dresses", "Other", "Pants", "Shorts", "Skirts", "Swimwear", "Tops", "Mens Shoes", "Womens Shoes"])
+        sizeTypeSelector.addItems(withTitles: ["", "Juniors", "Regular", "Petite", "Plus"])
         
     
     
@@ -642,6 +683,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
        // sizeSelector.selectItem(at: 0)
         sleeveStyleSelector.selectItem(at: 0)
         sleeveLengthSelector.selectItem(at: 0)
+        sizeTypeSelector.selectItem(at: 0)
         
     }
     
@@ -796,11 +838,11 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             sleeveStyle.stringValue = ""
             result![0].sleeveStyle = tempSleeveStyle
             let tempSleeveLength = result![0].sleeveLength
-            sleeveLength.stringValue = ""
+            sleeveLengthSelector.stringValue = ""
             result![0].sleeveLength = tempSleeveLength
             ebayCategory.stringValue = ""
-            storeCategory.stringValue = ""
-            sizeType.stringValue = ""
+            storeCategorySelector.stringValue = ""
+            sizeTypeSelector.stringValue = ""
             ebayConditionSelector.selectItem(at: 0)
         qtyReceived.stringValue = "1"
             qtyReceived.backgroundColor = NSColor.yellow
@@ -853,11 +895,11 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             sleeveStyle.stringValue = ""
             result![0].sleeveStyle = tempSleeveStyle
             let tempSleeveLength = result![0].sleeveLength
-            sleeveLength.stringValue = ""
+            sleeveLengthSelector.stringValue = ""
             result![0].sleeveLength = tempSleeveLength
             ebayCategory.stringValue = ""
-            storeCategory.stringValue = ""
-            sizeType.stringValue = ""
+            storeCategorySelector.stringValue = ""
+            sizeTypeSelector.stringValue = ""
             ebayConditionSelector.selectItem(at: 0)
             UPCField.stringValue = "not found"
             UPCField.textColor = NSColor.red
@@ -1178,18 +1220,19 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     colorSelector.stringValue = String(result![0].color)
                     sizeSelector.stringValue = String(result![0].size)
                     image.stringValue = String(result![0].image)
+                    let msrpInt = Int(result![0].msrp)
+                    print("msrpInt: \(msrpInt)")
+                    print(result![0].msrp)
                     msrp.stringValue = String(result![0].msrp)
                     sleeveStyle.stringValue = String(result![0].sleeveStyle)
-                    sleeveLength.stringValue = String(result![0].sleeveLength)
-                    
-                    //ebayCategory.stringValue = String(result![0].ebayCategory)
+                    sleeveLengthSelector.stringValue = String(result![0].sleeveLength)
                     readAndSetEbayCategoryCode()
-                               
-                    storeCategory.stringValue = String(result![0].storeCategory)
+                    storeCategoryTranslateCodeForDisplay()
                     setEbayConditionSelectorValue()
-                    sizeType.stringValue = String(result![0].sizeType)
+                    setSizeTypeSelectorValue()
                     ovrUPC = String(result![0].upc)
                     shippingTranslateCodeForDisplay()
+            
                     
                     
                     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -1212,7 +1255,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                             let url1 = URL(string: "\(lowImgURLbegin)\(imageCode! + incrementer )\(lowImgURLEnd)")
                             let hdUrl1 = URL(string: "\(hiRezImgURLbegin)\(imageCode! + incrementer )\(hiRezImgURLEnd)")
                             incrementer += 1
-                            print(url1)
+                            //print(url1)
                             //HRimageCode = URL(string: "\(hiRezImgURLbegin)\(imageCode! + incrementer )\(hiRezImgURLEnd)")
                             self.arrayOfURLs.append(url1!)
                             self.hdArrayOfURLs.append(hdUrl1!)
@@ -1255,14 +1298,11 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     colorSelector.stringValue = String(result![0].color)
                     sizeSelector.stringValue = String(result![0].size)
                     sleeveStyle.stringValue = String(result![0].sleeveStyle)
-                    sleeveLength.stringValue = String(result![0].sleeveLength)
-                    
-                    //ebayCategory.stringValue = String(result![0].ebayCategory)
+                    sleeveLengthSelector.stringValue = String(result![0].sleeveLength)
                     readAndSetEbayCategoryCode()
-                    
-                    storeCategory.stringValue = String(result![0].storeCategory)
-       //             sizeType.stringValue = String(result![0].sizeType)
-                   setEbayConditionSelectorValue ()
+                    storeCategoryTranslateCodeForDisplay()
+                    setSizeTypeSelectorValue()
+                    setEbayConditionSelectorValue ()
                     
                 }
 
@@ -1313,115 +1353,22 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 sleeveStyle.stringValue = ""
                 result![0].sleeveStyle = tempSleeveStyle
                 let tempSleeveLength = result![0].sleeveLength
-                sleeveLength.stringValue = ""
+                sleeveLengthSelector.stringValue = ""
                 result![0].sleeveLength = tempSleeveLength
                 ebayCategory.stringValue = ""
-                storeCategory.stringValue = ""
-                sizeType.stringValue = ""
+                storeCategorySelector.stringValue = ""
+                sizeTypeSelector.stringValue = ""
                 ebayConditionSelector.selectItem(at: 0)
                 print("error.localizedDescription2")
             }
             
         } else {
             print("error")
-//         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-//            let realm = try! Realm(configuration: config)
-//            try! realm.write {
-//            setupPopUpButtons()
-//            image1.image = nil
-//            image2.image = nil
-//            image3.image = nil
-//            image4.image = nil
-//            image5.image = nil
-//            image6.image = nil
-//            image7.image = nil
-//            image8.image = nil
-//            image9.image = nil
-//            image10.image = nil
-//            image11.image = nil
-//            image12.image = nil
-//            image13.image = nil
-//            image14.image = nil
-//            image15.image = nil
-//            overrideShipping.selectItem(at: 0)
-//            weightDisplay.stringValue = ""
-//            inventoryCount.stringValue = ""
-//            msrp.stringValue = ""
-//            shipping.stringValue = ""
-//            overrideShipping.selectItem(at: 0)
-//            sku.stringValue = ""
-//            UPCField.stringValue = ""
-//            let tempItemDescription = result![0].itemDescription
-//            itemDescriptionField.stringValue = ""
-//            result![0].itemDescription = tempItemDescription
-//            let tempBrand = result![0].brand
-//            brandSelector.stringValue = ""
-//            result![0].brand = tempBrand
-//            let tempStyle = result![0].style
-//            styleSelector.stringValue = ""
-//            result![0].style = tempStyle
-//            let tempColor = result![0].color
-//            colorSelector.stringValue = ""
-//            result![0].color = tempColor
-//             let tempSize = result![0].size
-//            sizeSelector.stringValue = ""
-//            result![0].size = tempSize
-//            let tempSleeveStyle = result![0].sleeveStyle
-//            sleeveStyle.stringValue = ""
-//            result![0].sleeveStyle = tempSleeveStyle
-//            let tempSleeveLength = result![0].sleeveLength
-//            sleeveLength.stringValue = ""
-//            result![0].sleeveLength = tempSleeveLength
-//            ebayCategory.stringValue = ""
-//            storeCategory.stringValue = ""
-//            sizeType.stringValue = ""
-//            ebayConditionSelector.selectItem(at: 0)
-//           //itemDescriptionField.stringValue = "Enter Valid UPC in Search Bar"
-//            }
-//           // try! realm.commitWrite()
+
         }
 
     }
     
-    
-    @IBAction func sleeveLengthSelected(_ sender: NSPopUpButton) {
-        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-        let realm = try! Realm(configuration: config)
-        try! realm.write {
-            
-            let previousSleeveLength = result![0].sleeveLength
-            
-            if sleeveLengthSelector.indexOfSelectedItem == 1 {
-                result![0].sleeveLength = "Short Sleeve"
-                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousSleeveLength, with: "Short Sleeve")
-                sleeveLength.stringValue = result![0].sleeveLength
-                itemDescriptionField.stringValue = result![0].itemDescription
-                sleeveLengthSelector.selectItem(at: 0)
-                
-            }else if sleeveLengthSelector.indexOfSelectedItem == 2 {
-                result![0].sleeveLength = "Long Sleeve"
-                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousSleeveLength, with: "Long Sleeve")
-                sleeveLength.stringValue = result![0].sleeveLength
-                itemDescriptionField.stringValue = result![0].itemDescription
-                sleeveLengthSelector.selectItem(at: 0)
-                
-            }else if sleeveLengthSelector.indexOfSelectedItem == 3 {
-                result![0].sleeveLength = "3/4 Sleeve"
-                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousSleeveLength, with: "3/4 Sleeve")
-                sleeveLength.stringValue = result![0].sleeveLength
-                itemDescriptionField.stringValue = result![0].itemDescription
-                sleeveLengthSelector.selectItem(at: 0)
-                
-            }else if sleeveLengthSelector.indexOfSelectedItem == 4 {
-                result![0].sleeveLength = "Sleeveless"
-                result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousSleeveLength, with: "Sleeveless")
-                sleeveLength.stringValue = result![0].sleeveLength
-                itemDescriptionField.stringValue = result![0].itemDescription
-                sleeveLengthSelector.selectItem(at: 0)
-                
-            }
-        }
-    }
     
     @IBAction func addToInventory(_ sender: NSButton) {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
@@ -1489,9 +1436,10 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     }
     
     func updateimages(){
-        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-        let realm = try! Realm(configuration: config)
-        
+        //let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        //let realm = try! Realm(configuration: config)
+       //  try! realm.write {
+            
         image1.image = nil
         image2.image = nil
         image3.image = nil
@@ -1600,7 +1548,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         switch segue.identifier {
          case "OVERRIDEIMGSEGUE":
-        var vc = segue.destinationController as! OverrideIMG
+        let vc = segue.destinationController as! OverrideIMG
         AltImgText1 = String(describing: hdArrayOfURLs[7])
         AltImgText2 = String(describing: hdArrayOfURLs[8])
         vc.altImg1 = AltImgText1
@@ -1735,7 +1683,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Blouse"
                 result![0].storeCategory = "29010495011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Tops"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1745,7 +1693,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Bodysuit"
                 result![0].storeCategory = "29010495011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Tops"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1754,7 +1702,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Cami"
                 result![0].storeCategory = "29010495011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Tops"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1763,7 +1711,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "63862"
                 ebayCategory.stringValue = "Coat"
                 result![0].storeCategory = "1"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Other"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1772,7 +1720,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "63861"
                 ebayCategory.stringValue = "Dress"
                 result![0].storeCategory = "28973014011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Dresses"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1781,7 +1729,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "63861"
                 ebayCategory.stringValue = "Gown"
                 result![0].storeCategory = "28973014011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Dresses"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1790,7 +1738,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "155226"
                 ebayCategory.stringValue = "Hoodie"
                 result![0].storeCategory = "1"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Other"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1799,7 +1747,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "63862"
                 ebayCategory.stringValue = "Jacket"
                 result![0].storeCategory = "1"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Other"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1808,7 +1756,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "11554"
                 ebayCategory.stringValue = "Jeans"
                 result![0].storeCategory = "31775381011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Other"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1817,7 +1765,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "3009"
                 ebayCategory.stringValue = "Jumpsuit"
                 result![0].storeCategory = "1"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Other"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1826,7 +1774,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "63863"
                 ebayCategory.stringValue = "Legging"
                 result![0].storeCategory = "31775381011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Pants"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1835,7 +1783,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "63861"
                 ebayCategory.stringValue = "Maxi"
                 result![0].storeCategory = "28973014011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Dresses"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1844,7 +1792,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "63864"
                 ebayCategory.stringValue = "Mini"
                 result![0].storeCategory = "33096451011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Dresses"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1853,7 +1801,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "63863"
                 ebayCategory.stringValue = "Overall"
                 result![0].storeCategory = "31775381011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Pants"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1862,7 +1810,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "63863"
                 ebayCategory.stringValue = "Pants"
                 result![0].storeCategory = "31775381011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Pants"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1871,7 +1819,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Pullover"
                 result![0].storeCategory = "29010495011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Tops"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1880,7 +1828,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "3009"
                 ebayCategory.stringValue = "Romper"
                 result![0].storeCategory = "1"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Other"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1889,7 +1837,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Shirt"
                 result![0].storeCategory = "29010495011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Tops"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1898,7 +1846,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "11555"
                 ebayCategory.stringValue = "Shorts"
                 result![0].storeCategory = "31775416011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Shorts"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1907,7 +1855,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory =  "63864"
                 ebayCategory.stringValue = "Skirt"
                 result![0].storeCategory = "33096451011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Skirts"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1916,7 +1864,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "63855"
                 ebayCategory.stringValue = "Sleepwear"
                 result![0].storeCategory = "1"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Other"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1925,7 +1873,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "63866"
                 ebayCategory.stringValue = "Sweater"
                 result![0].storeCategory = "29010495011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Tops"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1934,7 +1882,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "155226"
                 ebayCategory.stringValue = "Sweatshirt"
                 result![0].storeCategory = "1"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Other"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1943,7 +1891,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Tank"
                 result![0].storeCategory = "29010495011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Tops"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1952,7 +1900,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Tee"
                 result![0].storeCategory = "29010495011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Tops"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1961,7 +1909,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Top"
                 result![0].storeCategory = "29010495011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Tops"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1970,7 +1918,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "T-shirt"
                 result![0].storeCategory = "29010495011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Tops"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1980,7 +1928,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "63863"
                 ebayCategory.stringValue = "Trouser"
                 result![0].storeCategory = "31775381011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Pants"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1989,7 +1937,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Tunic"
                 result![0].storeCategory = "29010495011"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Tops"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -1998,7 +1946,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 result![0].ebayCategory = "63862"
                 ebayCategory.stringValue = "Vest"
                 result![0].storeCategory = "1"
-                storeCategory.stringValue = result![0].storeCategory
+                storeCategorySelector.stringValue = "Other"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
                 
@@ -2006,8 +1954,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 unhideSleeve()
                 result![0].ebayCategory = "63861"
                 ebayCategory.stringValue = "Wrap"
-                result![0].storeCategory = "28973014011"
-                storeCategory.stringValue = result![0].storeCategory
+                result![0].storeCategory = "Dresses"
+                storeCategorySelector.stringValue = "Dresses"
                 self.styleSelector.isEnabled = false
                 self.styleSelector.isEnabled = true
             }else{
@@ -2084,11 +2032,16 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         }
     }
     
-    @IBAction func sleeveLengthDIdSet(_ sender: NSTextField) {
+    @IBAction func sleeveLengthDidSet(_ sender: NSComboBox) {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
         let realm = try! Realm(configuration: config)
         try! realm.write {
-            result![0].sleeveLength = sleeveLength.stringValue
+            
+            let previousSleeveLength = result![0].sleeveLength
+            result![0].sleeveLength = sleeveLengthSelector.stringValue
+            let newSleeveLength = sleeveLengthSelector.stringValue
+            result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousSleeveLength, with: newSleeveLength)
+            itemDescriptionField.stringValue = result![0].itemDescription
             self.sleeveLengthSelector.isEnabled = false
             self.sleeveLengthSelector.isEnabled = true
         }
@@ -2102,19 +2055,79 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         }
     }
     
-    @IBAction func storeCategoryDidset(_ sender: NSTextField) {
+    @IBAction func storeCategoryDidset(_ sender: NSComboBox) {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
         let realm = try! Realm(configuration: config)
         try! realm.write {
-            result![0].storeCategory = storeCategory.stringValue
+            var previousStoreCategory: String?
+            let savedStoreCategory = result![0].storeCategory
+            if savedStoreCategory == "1" {
+                previousStoreCategory = "Other"
+            }else if savedStoreCategory == "28973014011" {
+                previousStoreCategory = "Dresses"
+            }else if savedStoreCategory == "29010495011" {
+                previousStoreCategory = "Tops"
+            }else if savedStoreCategory == "29074207011" {
+                previousStoreCategory = "Swimwear"
+            }else if savedStoreCategory == "31775381011" {
+                previousStoreCategory = "Pants"
+            }else if savedStoreCategory == "31775416011" {
+                previousStoreCategory = "Shorts"
+            }else if savedStoreCategory == "33096451011" {
+                previousStoreCategory = "Skirts"
+            }else if savedStoreCategory == "33305264011" {
+                previousStoreCategory = "Mens Shoes"
+            }else if savedStoreCategory == "33305265011" {
+                previousStoreCategory = "Womens Shoes"
+            }
+            
+            if storeCategorySelector.indexOfSelectedItem == 1 {
+                result![0].storeCategory = "28973014011"
+            }else if storeCategorySelector.indexOfSelectedItem == 2 {
+                result![0].storeCategory = "1"
+            }else if storeCategorySelector.indexOfSelectedItem == 3 {
+                result![0].storeCategory = "31775381011"
+            }else if storeCategorySelector.indexOfSelectedItem == 4 {
+                result![0].storeCategory = "31775416011"
+            }else if storeCategorySelector.indexOfSelectedItem == 5 {
+                result![0].storeCategory = "33096451011"
+            }else if storeCategorySelector.indexOfSelectedItem == 6 {
+                result![0].storeCategory = "29074207011"
+            }else if storeCategorySelector.indexOfSelectedItem == 7 {
+                result![0].storeCategory = "29010495011"
+            }else if storeCategorySelector.indexOfSelectedItem == 8 {
+                result![0].storeCategory = "33305264011"
+            }else if storeCategorySelector.indexOfSelectedItem == 9 {
+                result![0].storeCategory = "33305265011"
+            }
+            
+            let newStoreCategory = storeCategorySelector.stringValue
+            result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStoreCategory!, with: newStoreCategory)
+            itemDescriptionField.stringValue = result![0].itemDescription
+            self.storeCategorySelector.isEnabled = false
+            self.storeCategorySelector.isEnabled = true
         }
     }
     
-    @IBAction func sizeTypeDidSet(_ sender: NSTextField) {
+    @IBAction func sizeTypeDidSet(_ sender: NSPopUpButton) {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
         let realm = try! Realm(configuration: config)
         try! realm.write {
-            result![0].sizeType = sizeType.stringValue
+            let previousSizeType = result![0].sizeType
+            if sizeTypeSelector.indexOfSelectedItem == 1 {
+                result![0].sizeType = "Juniors"
+            }else if sizeTypeSelector.indexOfSelectedItem == 2 {
+                result![0].sizeType = "Regular"
+                }else if sizeTypeSelector.indexOfSelectedItem == 3 {
+                result![0].sizeType = "Oetite"
+                }else if sizeTypeSelector.indexOfSelectedItem == 4 {
+                result![0].sizeType = "Plus"
+            }
+            let newSizeType = sizeTypeSelector.stringValue
+            result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousSizeType, with: newSizeType)
+            itemDescriptionField.stringValue = result![0].itemDescription
+            self.sizeTypeSelector.isEnabled = false
+            self.sizeTypeSelector.isEnabled = true
         }
     }
     
