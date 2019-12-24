@@ -20,6 +20,7 @@ class ViewController: NSViewController {
 //
 var results: Results<Product>?
 var previouslyRun: String?
+var postFixValue = 000
 //var result: Results<Product>?
 //// var realmDBurl = URL(string: "")
 //var searchString: Int = 0
@@ -36,8 +37,8 @@ var previouslyRun: String?
 //    @IBOutlet weak var quantityField: NSTextField!
 //
     @IBOutlet weak var startButton: NSButton!
-    
     @IBOutlet weak var previousRun: NSButtonCell!
+    @IBOutlet weak var setSKU: NSTextField!
     
     
     //
@@ -101,6 +102,15 @@ var previouslyRun: String?
                 }else{
                     
                 for i in results! {
+                    
+                    if setSKU.stringValue != "" {
+                       postFixValue = postFixValue + 1
+                       //setSKU.integerValue = setSKU.integerValue + 1
+                        i.sku = String(setSKU.integerValue)
+                        i.sku = "AZ" + i.sku + "_" + String(postFixValue)
+                        
+                        
+                    }
                 
                     if i.image.contains("macy") {
                         
