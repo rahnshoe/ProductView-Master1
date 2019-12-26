@@ -58,18 +58,18 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     
     var scale = OhausScale()
     
-    let shipCodeFree = 999308
-    let shipCode3_99 = 912391
-    let shipCode4_99 = 1001736
-    let shipCode5_99 = 912401
-    let shipCode6_99 = 851453
-    let shipCode7_99 = 851436
-    let shipCode8_99 = 851450
-    let shipCope9_99 = 912425
-    let shipcode13_99 = 1001772
-    let shipCode18_99 = 851451
-    var ecomDashShipCode: Int?
-    
+//    let shipCodeFree = 999308
+//    let shipCode3_99 = 912391
+//    let shipCode4_99 = 1001736
+//    let shipCode5_99 = 912401
+//    let shipCode6_99 = 851453
+//    let shipCode7_99 = 851436
+//    let shipCode8_99 = 851450
+//    let shipCope9_99 = 912425
+//    let shipcode13_99 = 1001772
+//    let shipCode18_99 = 851451
+//    var ecomDashShipCode: Int?
+//
   
     
     @IBOutlet weak var UPCSearchField: NSSearchField!
@@ -117,6 +117,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     @IBOutlet weak var sleeveLengthLabel: NSTextField!
     
     
+    @IBOutlet weak var shippingSelector: NSComboBox!
     @IBOutlet weak var brandSelector: NSComboBox!
     @IBOutlet weak var styleSelector: NSComboBox!
     @IBOutlet weak var colorSelector: NSComboBox!
@@ -173,7 +174,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         setupPopUpButtons()
         scale.scaleDelegate = self
         scale.scaleStatusDelegate = self
-        //scale.scaleBegin()
+        scale.scaleBegin()
         counter = 0
         
         
@@ -182,28 +183,36 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     }
     
     func shippingCalculator() {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
         print(calculatedOunces!)
     
               
               if calculatedOunces! <= 4{
-                  shipping.stringValue = "3.99"
-                ecomDashShipCode = shipCode3_99
+                  //shipping.stringValue = "3.99"
+                shippingSelector.selectItem(at: 1)
+                result![0].shipping = 912391
                   
               }else if calculatedOunces! <= 8{
-                  shipping.stringValue = "4.99"
-                  ecomDashShipCode = shipCode4_99
+             //     shipping.stringValue = "4.99"
+                 shippingSelector.selectItem(at: 2)
+                 result![0].shipping = 1001736
                   
               }else if calculatedOunces! <= 12{
-                  shipping.stringValue = "5.99"
-                  ecomDashShipCode = shipCode5_99
+             //     shipping.stringValue = "5.99"
+                 shippingSelector.selectItem(at: 3)
+                 result![0].shipping = 912401
                   
               }else if calculatedOunces! < 16 {
-                   shipping.stringValue = "6.99"
-                  ecomDashShipCode = shipCode6_99
+            //       shipping.stringValue = "6.99"
+                 shippingSelector.selectItem(at: 4)
+                 result![0].shipping = 851453
                    
               }else if calculatedOunces! >= 16 {
-                  shipping.stringValue = "6.99"
-                  ecomDashShipCode = shipCode6_99
+           //       shipping.stringValue = "6.99"
+                 shippingSelector.selectItem(at: 4)
+                 result![0].shipping = 851453
         }
               
 //              }else if overrideShipping.selectedItem = 1 {
@@ -211,7 +220,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
 //                        ecomDashShipCode = shipCode7_99
                     
     }
-    
+    }
     
     func hideSleeve() {
         sleeveLengthSelector.isHidden = true
@@ -392,26 +401,35 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     func shippingTranslateCodeForDisplay() {
         let shippingDisplayValue = result![0].shipping
         if shippingDisplayValue == 912391 {
-            shipping.stringValue = "3.99"
+            shippingSelector.selectItem(at: 1)
+            //shipping.stringValue = "3.99"
         }else if shippingDisplayValue == 1001736 {
-            shipping.stringValue = "4.99"
+            shippingSelector.selectItem(at: 2)
+            //shipping.stringValue = "4.99"
         }else if shippingDisplayValue == 912401 {
-            shipping.stringValue = "5.99"
+            shippingSelector.selectItem(at: 3)
+            //shipping.stringValue = "5.99"
         }else if shippingDisplayValue == 851453{
-            shipping.stringValue = "6.99"
+            shippingSelector.selectItem(at: 4)
+            //shipping.stringValue = "6.99"
         }else if shippingDisplayValue == 851436{
-            shipping.stringValue = "7.99"
-            print("ship string value: \(shipping.stringValue)")
+            shippingSelector.selectItem(at: 5)
+           // shipping.stringValue = "7.99"
         }else if shippingDisplayValue == 851450 {
-            shipping.stringValue = "8.99"
+            shippingSelector.selectItem(at: 6)
+            //shipping.stringValue = "8.99"
         }else if shippingDisplayValue == 912425 {
-            shipping.stringValue = "9.99"
+            shippingSelector.selectItem(at: 7)
+            //shipping.stringValue = "9.99"
         }else if shippingDisplayValue == 1001772 {
-            shipping.stringValue = "13.99"
+            shippingSelector.selectItem(at: 8)
+            //shipping.stringValue = "13.99"
         }else if shippingDisplayValue == 851451{
-            shipping.stringValue = "18.99"
+            shippingSelector.selectItem(at: 9)
+            //shipping.stringValue = "18.99"
         }else if shippingDisplayValue == 999308 {
-            shipping.stringValue = "free"
+            shippingSelector.selectItem(at: 10)
+            //shipping.stringValue = "free"
         }
     }
     
@@ -518,12 +536,12 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             image13.image = nil
             image14.image = nil
             image15.image = nil
-            overrideShipping.selectItem(at: 0)
+            shippingSelector.selectItem(at: 0)
             weightDisplay.stringValue = ""
             inventoryCount.stringValue = ""
             msrp.stringValue = ""
-            shipping.stringValue = ""
-            overrideShipping.selectItem(at: 0)
+            price.stringValue = ""
+            shippingSelector.selectItem(at: 0)
             sku.stringValue = ""
             UPCField.stringValue = ""
             let tempItemDescription = result![0].itemDescription
@@ -549,8 +567,9 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             result![0].sleeveLength = tempSleeveLength
             ebayCategory.stringValue = ""
             storeCategorySelector.stringValue = ""
-            sizeTypeSelector.stringValue = ""
+            sizeTypeSelector.selectItem(at: 0)
             ebayConditionSelector.selectItem(at: 0)
+            SearchBar(self)
             
         }else{
             
@@ -571,12 +590,12 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             image13.image = nil
             image14.image = nil
             image15.image = nil
-            overrideShipping.selectItem(at: 0)
+            shippingSelector.selectItem(at: 0)
             weightDisplay.stringValue = ""
             inventoryCount.stringValue = ""
             msrp.stringValue = ""
-            shipping.stringValue = ""
-            overrideShipping.selectItem(at: 0)
+            price.stringValue = ""
+            shippingSelector.selectItem(at: 0)
             sku.stringValue = ""
             UPCField.stringValue = ""
             let tempItemDescription = result![0].itemDescription
@@ -602,8 +621,9 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             result![0].sleeveLength = tempSleeveLength
             ebayCategory.stringValue = ""
             storeCategorySelector.stringValue = ""
-            sizeTypeSelector.stringValue = ""
+            sizeTypeSelector.selectItem(at: 0)
             ebayConditionSelector.selectItem(at: 0)
+            SearchBar(self)
             }
             try! realm.commitWrite()
         }
@@ -631,7 +651,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         ImgSelectPopUpbutton14.removeAllItems()
         ImgSelectPopUpbutton15.removeAllItems()
         ebayConditionSelector.removeAllItems()
-        overrideShipping.removeAllItems()
+        shippingSelector.removeAllItems()
         colorSelector.removeAllItems()
         styleSelector.removeAllItems()
         brandSelector.removeAllItems()
@@ -660,7 +680,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         ImgSelectPopUpbutton14.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
         ImgSelectPopUpbutton15.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
         ebayConditionSelector.addItems(withTitles: ["", "New", "New Other", "New W/ Defects"])
-        overrideShipping.addItems(withTitles: ["", "7.99", "8.99", "9.99", "13.99", "18.99", "Free"])
+        shippingSelector.addItems(withObjectValues: ["", "3.99", "4.99", "5.99", "6.99", "7.99", "8.99", "9.99", "13.99", "18.99", "Free"])
         colorSelector.addItems(withObjectValues: ["", "Beige", "Black", "Blue", "Brown", "Charcoal", "Copper", "Gold", "Gray", "Green", "Multicolored", "Natural", "Navy", "Orange", "Pink", "Purple", "Red", "Silver", "Taupe", "Turquoise", "White", "Wine", "Yellow"])
         styleSelector.addItems(withObjectValues: ["", "Blouse", "Bodysuit", "Cami", "Coat", "Dress", "Gown", "Hoodie", "Jacket", "Jeans", "Jumpsuit", "Legging" ,"Maxi", "Mini", "Overall", "Pants", "Pullover", "Romper", "Shirt", "Shorts", "Skirt", "Sleepwear", "Sweater", "Sweatshirt", "Tank", "Tee", "Top", "Trouser", "T-Shirt", "Tunic", "Vest", "Wrap"])
         brandSelector.addItems(withObjectValues: ["", "7 For All Mankind", "Adriano Goldschmied", "ASTR The Label", "Bar III", "Carbon Copy", "Current Air", "Dee Elle", "Free People", "Ginger by Stella & Ginger", "Guess", "Heartloom", "Hudson", "JOA", "Joe's Jeans", "Kendall + Kylie", "Leyden", "Line & Dot", "Lucky Brand", "Lucy Paris", "Maison Jules", "Moon River", "Nanette Lepore", "Paige", "Project 28","Rachel Roy", "Rachel Zoe", "Sanctuary", "Topson Downs", "Trina Turk", "True Vintage"])
@@ -676,13 +696,13 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         // Select an item at a specific index
         clearimageSelectedPopUpButtons()
         ebayConditionSelector.selectItem(at: 0)
-        overrideShipping.selectItem(at: 0)
+        //shippingSelector.selectItem(at: 0)
         //colorSelector.selectItem(at: 0)
         //styleSelector.selectItem(at: 0)
         //brandSelector.selectItem(at: 0)
        // sizeSelector.selectItem(at: 0)
-        sleeveStyleSelector.selectItem(at: 0)
-        sleeveLengthSelector.selectItem(at: 0)
+        //sleeveStyleSelector.selectItem(at: 0)
+        //sleeveLengthSelector.selectItem(at: 0)
         sizeTypeSelector.selectItem(at: 0)
         
     }
@@ -811,7 +831,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             image13.image = nil
             image14.image = nil
             image15.image = nil
-            overrideShipping.selectItem(at: 0)
+            shippingSelector.selectItem(at: 0)
             weightDisplay.stringValue = ""
             inventoryCount.stringValue = ""
             msrp.stringValue = ""
@@ -1199,7 +1219,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 if reviewModeState == "off" {
                     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     weightDisplay.stringValue = ""
-                    shipping.stringValue = ""
+                   // shipping.stringValue = ""
                     UPCField.textColor = NSColor.black
                     itemDescriptionField.textColor = NSColor.black
                     setupPopUpButtons()
@@ -1210,20 +1230,15 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     inventoryCount.stringValue = String(result![0].inventoryCount)
                     itemDescriptionField.stringValue = result![0].itemDescription
                     colorSelector.stringValue = String(result![0].color)
-             
-                    
-                    //price.stringValue = String(result![0].price)
-                    //shipping.stringValue = String(result![0].shipping)
                     sku.stringValue = String(result![0].sku)
                     brandSelector.stringValue = String(result![0].brand)
                     styleSelector.stringValue = String(result![0].style)
                     colorSelector.stringValue = String(result![0].color)
                     sizeSelector.stringValue = String(result![0].size)
                     image.stringValue = String(result![0].image)
-                    let msrpInt = Int(result![0].msrp)
-                    print("msrpInt: \(msrpInt)")
-                    print(result![0].msrp)
+                    //let msrpInt = Int(result![0].msrp)
                     msrp.stringValue = String(result![0].msrp)
+                    price.doubleValue = result![0].price
                     sleeveStyle.stringValue = String(result![0].sleeveStyle)
                     sleeveLengthSelector.stringValue = String(result![0].sleeveLength)
                     readAndSetEbayCategoryCode()
@@ -1379,54 +1394,54 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         self.qtyReceived.stringValue = "1"
     
         
-        if inventoryCheckInModeState == "on" {
-             result![0].shipping = ecomDashShipCode!
-        let overrideShippingIndex = overrideShipping.indexOfSelectedItem
-            
-            if overrideShippingIndex == 0 {
-                return
-                 }else if overrideShippingIndex == 1 {
-                      ecomDashShipCode = 851436
-                  }else if overrideShippingIndex == 2 {
-                      ecomDashShipCode = 851450
-                  }else if overrideShippingIndex == 3 {
-                      ecomDashShipCode = 912425
-                  }else if overrideShippingIndex == 4 {
-                      ecomDashShipCode = 1001772
-                  }else if overrideShippingIndex == 5 {
-                      ecomDashShipCode = 851451
-                  }else if overrideShippingIndex == 6 {
-                      ecomDashShipCode = 999308
-                  }
-               result![0].shipping = ecomDashShipCode!
-        }
+//        if inventoryCheckInModeState == "on" {
+//             result![0].shipping = ecomDashShipCode!
+//        let overrideShippingIndex = overrideShipping.indexOfSelectedItem
+//
+//            if overrideShippingIndex == 0 {
+//                return
+//                 }else if overrideShippingIndex == 1 {
+//                      ecomDashShipCode = 851436
+//                  }else if overrideShippingIndex == 2 {
+//                      ecomDashShipCode = 851450
+//                  }else if overrideShippingIndex == 3 {
+//                      ecomDashShipCode = 912425
+//                  }else if overrideShippingIndex == 4 {
+//                      ecomDashShipCode = 1001772
+//                  }else if overrideShippingIndex == 5 {
+//                      ecomDashShipCode = 851451
+//                  }else if overrideShippingIndex == 6 {
+//                      ecomDashShipCode = 999308
+//                  }
+//               result![0].shipping = ecomDashShipCode!
+//        }
         }
     }
     
     
-    @IBAction func oversizeShipSelected(_ sender: NSPopUpButton) {
-        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-        let realm = try! Realm(configuration: config)
-        try! realm.write {
-        let overrideShippingIndex = overrideShipping.indexOfSelectedItem
-                   if overrideShippingIndex == 1 {
-                       ecomDashShipCode = 851436
-                   }else if overrideShippingIndex == 2 {
-                       ecomDashShipCode = 851450
-                   }else if overrideShippingIndex == 3 {
-                      ecomDashShipCode = 912425
-                   }else if overrideShippingIndex == 4 {
-                       ecomDashShipCode = 1001772
-                   }else if overrideShippingIndex == 5 {
-                       ecomDashShipCode = 851451
-                   }else if overrideShippingIndex == 6 {
-                       ecomDashShipCode = 999308
-                   }
-        result![0].shipping = ecomDashShipCode!
-            shippingTranslateCodeForDisplay()
-            
-    }
-    }
+//    @IBAction func oversizeShipSelected(_ sender: NSPopUpButton) {
+//        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+//        let realm = try! Realm(configuration: config)
+//        try! realm.write {
+//        let overrideShippingIndex = overrideShipping.indexOfSelectedItem
+//                   if overrideShippingIndex == 1 {
+//                       ecomDashShipCode = 851436
+//                   }else if overrideShippingIndex == 2 {
+//                       ecomDashShipCode = 851450
+//                   }else if overrideShippingIndex == 3 {
+//                      ecomDashShipCode = 912425
+//                   }else if overrideShippingIndex == 4 {
+//                       ecomDashShipCode = 1001772
+//                   }else if overrideShippingIndex == 5 {
+//                       ecomDashShipCode = 851451
+//                   }else if overrideShippingIndex == 6 {
+//                       ecomDashShipCode = 999308
+//                   }
+//        result![0].shipping = ecomDashShipCode!
+//            shippingTranslateCodeForDisplay()
+//
+//    }
+//    }
     
     
     
@@ -2005,11 +2020,35 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         }
     }
     
-    @IBAction func shippingDidSet(_ sender: NSTextField) {
+    @IBAction func shippingDidSet(_ sender: NSComboBox) {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
         let realm = try! Realm(configuration: config)
         try! realm.write {
-            result![0].shipping = shipping.integerValue
+            //           let previousShipping = String(result![0].shipping)
+            //            let newShipping = String(shippingSelector.integerValue)
+            if shippingSelector.indexOfSelectedItem == 1 {
+                result![0].shipping = 912391
+            }else if shippingSelector.indexOfSelectedItem == 2 {
+                result![0].shipping = 1001736
+            }else if shippingSelector.indexOfSelectedItem == 3 {
+                result![0].shipping = 912401
+            }else if shippingSelector.indexOfSelectedItem == 4 {
+                result![0].shipping = 851453
+            }else if shippingSelector.indexOfSelectedItem == 5 {
+                result![0].shipping = 851436
+            }else if shippingSelector.indexOfSelectedItem == 6 {
+                result![0].shipping = 851450
+            }else if shippingSelector.indexOfSelectedItem == 7 {
+                result![0].shipping = 912425
+            }else if shippingSelector.indexOfSelectedItem == 8 {
+                result![0].shipping = 1001772
+            }else if shippingSelector.indexOfSelectedItem == 9 {
+                result![0].shipping = 851451
+            }else if shippingSelector.indexOfSelectedItem == 10 {
+                result![0].shipping = 999308
+            }
+            self.shippingSelector.isEnabled = false
+            self.shippingSelector.isEnabled = true
         }
     }
     
@@ -2119,7 +2158,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             }else if sizeTypeSelector.indexOfSelectedItem == 2 {
                 result![0].sizeType = "Regular"
                 }else if sizeTypeSelector.indexOfSelectedItem == 3 {
-                result![0].sizeType = "Oetite"
+                result![0].sizeType = "Petite"
                 }else if sizeTypeSelector.indexOfSelectedItem == 4 {
                 result![0].sizeType = "Plus"
             }

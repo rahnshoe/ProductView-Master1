@@ -54,14 +54,19 @@ class OhausScale: NSViewController {
         }
     
     func appendCharacteristicOperation(_ characteristic:CBCharacteristic, operationType:OperationType, data: Data? = nil) {
-                let data = data ?? characteristic.value ?? Data()
+        var data: Data?
+        data = data ?? characteristic.value ?? Data()
+        print("data \(String(describing: data))")
                 if counter < 2 {
                 counter += 1
-            let hexString = data.hexString
+            let hexString = data!.hexString
                 hexStringString = String(hexString)
                     print(hexString)
             let mutableMultilineString = hexStringString
-                    if counter > 1 {
+                    
+                    print("hexString: \(hexString)")
+                    
+                    if counter > 1  && hexString.count == 40 {
                     let startingIndex = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 6)
                         let endingIndex = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 23)
                     let range = startingIndex..<endingIndex
@@ -106,7 +111,10 @@ class OhausScale: NSViewController {
                         scaleDelegate?.displayWeight(weight: tempWeight!, lbs: lbs!, ounces: ounces!, ounceFraction: ounceFraction!)
                        
                         } else {
-                        
+                        print("dataB4return: \(data)")
+                        data = nil
+                        print("dataAfterreturn: \(data)")
+                        return
                     }
                 } else {
                     counter = 1
