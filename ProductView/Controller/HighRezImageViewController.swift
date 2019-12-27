@@ -103,7 +103,7 @@ class HighRezImageViewController: NSViewController {
     
     }else{
                    let url1 = URL(string: "\(hiRezImgURLbegin)\(HRimageCode!)\(hiRezImgURLEnd)")
-                   print("url1 is: \(url1)")
+                   //print("url1 is: \(url1)")
                    do {
                        let data = try Data(contentsOf: url1!)
                        HighRezImageView1 = NSImage(data: data)

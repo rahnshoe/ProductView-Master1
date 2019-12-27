@@ -68,8 +68,8 @@ class OverrideIMG: NSViewController {
         
         url1 = URL(string: override8.stringValue)
         url2 = URL(string: override9.stringValue)
-        print("URL1: ",url1)
-        print("URL2: ",url2)
+       // print("URL1: ",url1)
+       // print("URL2: ",url2)
         
         let data = try? Data(contentsOf: url1!)
         altImg_img1.image = NSImage(data: data!)

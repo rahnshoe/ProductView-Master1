@@ -174,7 +174,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         setupPopUpButtons()
         scale.scaleDelegate = self
         scale.scaleStatusDelegate = self
-        scale.scaleBegin()
+        _ = scale.scaleBegin()
         counter = 0
         
         
@@ -1242,7 +1242,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     sleeveStyle.stringValue = String(result![0].sleeveStyle)
                     sleeveLengthSelector.stringValue = String(result![0].sleeveLength)
                     readAndSetEbayCategoryCode()
-                    storeCategoryTranslateCodeForDisplay()
+                    _ = storeCategoryTranslateCodeForDisplay()
                     setEbayConditionSelectorValue()
                     setSizeTypeSelectorValue()
                     ovrUPC = String(result![0].upc)
@@ -1315,7 +1315,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     sleeveStyle.stringValue = String(result![0].sleeveStyle)
                     sleeveLengthSelector.stringValue = String(result![0].sleeveLength)
                     readAndSetEbayCategoryCode()
-                    storeCategoryTranslateCodeForDisplay()
+                    _ = storeCategoryTranslateCodeForDisplay()
                     setSizeTypeSelectorValue()
                     setEbayConditionSelectorValue ()
                     

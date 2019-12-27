@@ -49,7 +49,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     print(Realm.Configuration.defaultConfiguration.fileURL!)
     
     
-  let realm = try! Realm()        // Insert code here to initialize your application
+  //let realm = try! Realm()        // Insert code here to initialize your application
  
  }
 

@@ -67,64 +67,80 @@ class OhausScale: NSViewController {
                     print("hexString: \(hexString)")
                     
                     if counter > 1  && hexString.count == 40 {
-                    let startingIndex = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 6)
-                        let endingIndex = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 23)
-                    let range = startingIndex..<endingIndex
-                        let substring1 = mutableMultilineString!.substring(with: range)
+                        //                    let startingIndex = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 6)
+                        //                        let endingIndex = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 23)
+                        //                    let range = startingIndex..<endingIndex
+                        //                        let substring1 = mutableMultilineString!.substring(with: range)
                         
-                        let startingIndex1 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 6)
-                            let endingIndex1 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 8)
-                        let range1 = startingIndex1..<endingIndex1
-                            let substring2 = mutableMultilineString!.substring(with: range1)
-                       // print("substring2: \(substring2)")
+                        var substr = mutableMultilineString!.dropFirst(6)
+                        substr = substr.dropLast(6)
+                        let substring1 = String(substr)
+                        
+                        //                        let startingIndex1 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 6)
+                        //                            let endingIndex1 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 8)
+                        //                        let range1 = startingIndex1..<endingIndex1
+                        //                            let substring2 = mutableMultilineString!.substring(with: range1)
+                        var substr2 = mutableMultilineString!.dropFirst(6)
+                        substr2 = substr2.dropLast(32)
+                        let substring2 = String(substr2)
+                        
+                        //print("substring2: \(substring2)")
                         let tempWeight1 = hexStringtoAscii(substring2)
-                       // print("tempweight1: \(tempWeight1)")
+                        // print("tempweight1: \(tempWeight1)")
                         lbs = Int(tempWeight1)
-                     
                         
-                       let startingIndex2 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 10)
-                            let endingIndex2 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 14)
-                        let range2 = startingIndex2..<endingIndex2
-                            let substring3 = mutableMultilineString!.substring(with: range2)
-                       // print("substring3: \(substring3)")
-                        let tempWeight2 = hexStringtoAscii(substring3)
-                        //print("tempweight2: \(tempWeight2)")
-                        ounces = Int(tempWeight2)
-                      //  print("ounces: \(ounces!)")
                         
-                        let startingIndex3 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 16)
-                             let endingIndex3 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 22)
-                         let range3 = startingIndex3..<endingIndex3
-                             let substring4 = mutableMultilineString!.substring(with: range3)
+                        //                        let startingIndex2 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 10)
+                        //                        let endingIndex2 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 14)
+                        //                        let range2 = startingIndex2..<endingIndex2
+                        //                        let substring3 = mutableMultilineString!.substring(with: range2)
+                        //
+                        var substr3 = mutableMultilineString!.dropFirst(10)
+                        substr3 = substr3.dropLast(26)
+                        let substring3 = String(substr3)
+                        
                         // print("substring3: \(substring3)")
-                         let tempWeight3 = hexStringtoAscii(substring4)
-                         //print("tempweight3: \(tempWeight3)")
+                        let tempWeight2 = hexStringtoAscii(substring3)
+                        // print("tempweight2: \(tempWeight2)")
+                        ounces = Int(tempWeight2)
+                        //  print("ounces: \(ounces!)")
+                        
+                        //                        let startingIndex3 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 16)
+                        //                        let endingIndex3 = mutableMultilineString!.index(mutableMultilineString!.startIndex, offsetBy: 22)
+                        //                        let range3 = startingIndex3..<endingIndex3
+                        //                        let substring4 = mutableMultilineString!.substring(with: range3)
+                        
+                        var substr4 = mutableMultilineString!.dropFirst(16)
+                        substr4 = substr4.dropLast(20)
+                        let substring4 = String(substr3)
+                        
+                        //print("substring4: \(substring4)")
+                        let tempWeight3 = hexStringtoAscii(substring4)
+                        //print("tempweight3: \(tempWeight3)")
                         ounceFraction = Int(tempWeight3)
                         // print("ounceFraction: \(ounceFraction!)")
-                         
                         
                         
-                        
-                     print("substring1: \(substring1)")
+                        print("substring1: \(substring1)")
                         tempWeight = hexStringtoAscii(substring1)
-                       // print("tempweight: \(tempWeight)")
+                        // print("tempweight: \(tempWeight)")
                         scaleDelegate?.displayWeight(weight: tempWeight!, lbs: lbs!, ounces: ounces!, ounceFraction: ounceFraction!)
-                       
-                        } else {
-                        print("dataB4return: \(data)")
+                        
+                    } else {
+                        //  print("dataB4return: \(data)")
                         data = nil
-                        print("dataAfterreturn: \(data)")
+                        // print("dataAfterreturn: \(data)")
                         return
                     }
                 } else {
                     counter = 1
-                }
-
-            }
-
-    
         }
+        
+    }
     
+    
+}
+
         func hexStringtoAscii(_ hexString : String) -> String {
     
             let pattern = "(0x)?([0-9a-f]{2})"
