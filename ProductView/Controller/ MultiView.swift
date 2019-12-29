@@ -2280,7 +2280,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             var upcArray: [Int] = []
             var skuArray: [String] = []
             let nextSkuInArray: String?
-            
+            var code: String?
             for i in results! {
                 skuArray.append(i.sku)
                 upcArray.append(i.upc)
@@ -2306,10 +2306,34 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             }
             
             if nextSkuInArray != nil {
-                realm.create(Product.self, value: ["upc": UPCSearchField.integerValue, "msrp": msrp.stringValue, "UPCField": UPCSearchField.integerValue, "sku": nextSkuInArray! , "vendorName": "XXXXXXXXXXXXXXXXXX", "image": image.stringValue], update: .modified)
+                if image.stringValue != "" && image.stringValue.contains("macy") {
+                               let imageLinkstart = image.stringValue.replacingOccurrences(of: "http://slimages.macys.com/is/image/MCY/", with: "")
+                                                  let imageLinkEnd = imageLinkstart.replacingOccurrences(of: "%20", with: "")
+                                                      code = String(Int(imageLinkEnd)! - 7)
+                                                  
+                           }else if image.stringValue.contains("bloom") {
+                               let imageLinkstart = image.stringValue.replacingOccurrences(of: "http://images.bloomingdales.com/is/image/BLM/", with: "")
+                                                  let imageLinkEnd = imageLinkstart.replacingOccurrences(of: "%20", with: "")
+                                                      code = String(Int(imageLinkEnd)! - 7)
+                                              }
+                
+                
+                realm.create(Product.self, value: ["upc": UPCSearchField.integerValue, "msrp": msrp.stringValue, "UPCField": UPCSearchField.integerValue, "sku": nextSkuInArray! , "vendorName": "XXXXXXXXXXXXXXXXXX", "image": image.stringValue, "code": code!], update: .modified)
             }else{
-                realm.create(Product.self, value: ["upc": UPCSearchField.integerValue, "msrp": msrp.stringValue, "UPCField": UPCSearchField.integerValue, "vendorName": "XXXXXXXXXXXXXXXXXX", "image": image.stringValue], update: .modified)
+                if image.stringValue != "" && image.stringValue.contains("macy") {
+                               let imageLinkstart = image.stringValue.replacingOccurrences(of: "http://slimages.macys.com/is/image/MCY/", with: "")
+                                                  let imageLinkEnd = imageLinkstart.replacingOccurrences(of: "%20", with: "")
+                                                      code = String(Int(imageLinkEnd)! - 7)
+                                                  
+                           }else if image.stringValue.contains("bloom") {
+                               let imageLinkstart = image.stringValue.replacingOccurrences(of: "http://images.bloomingdales.com/is/image/BLM/", with: "")
+                                                  let imageLinkEnd = imageLinkstart.replacingOccurrences(of: "%20", with: "")
+                                                      code = String(Int(imageLinkEnd)! - 7)
+                                              }
+                realm.create(Product.self, value: ["upc": UPCSearchField.integerValue, "msrp": msrp.stringValue, "UPCField": UPCSearchField.integerValue, "vendorName": "XXXXXXXXXXXXXXXXXX", "image": image.stringValue, "code": code!], update: .modified)
             }
+            
+           
             
             SearchBar(self)
         }
