@@ -108,7 +108,10 @@ var postFixValue = 000
                        //setSKU.integerValue = setSKU.integerValue + 1
                         i.sku = String(setSKU.integerValue)
                         i.sku = "AZ" + i.sku + "_" + String(postFixValue)
-                        
+                    }
+                    
+                    if i.msrp.contains("$") {
+                        i.msrp = String(i.msrp.dropFirst(1))
                         
                     }
                 

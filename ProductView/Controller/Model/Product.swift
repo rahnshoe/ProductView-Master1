@@ -27,7 +27,7 @@ class Product: Object, Codable {
     @objc dynamic var imageSlot2: String = ""
     @objc dynamic var imageSlot3: String = ""
     @objc dynamic var imageSlot4: String = ""
-    @objc dynamic var price: Double = 0
+    @objc dynamic var price: String = ""
     @objc dynamic var shipping: Int = 0
     @objc dynamic var style: String = ""
     @objc dynamic var sleeveStyle: String = ""

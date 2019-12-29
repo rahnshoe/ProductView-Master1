@@ -53,6 +53,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     var ovrUPC = ""
     //var reviewModeState = "off"
     var inventoryCheckInModeState: String?
+    var percentageOffMsrp: Float?
  
 
     
@@ -111,6 +112,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     @IBOutlet weak var overrideShipping: NSPopUpButton!
 
      
+    @IBOutlet weak var percentageOffMsrpSelector: NSComboBox!
     @IBOutlet weak var sleeveStyleSelector: NSPopUpButton!
      @IBOutlet weak var sizeTypeSelector: NSPopUpButton!
     @IBOutlet weak var sleeveStyleLabel: NSTextField!
@@ -227,7 +229,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         sleeveStyleSelector.isHidden = true
         sleeveStyle.isHidden = true
         sleeveLengthLabel.isHidden = true
-        sleeveStyleLabel.isHidden = true
+        //sleeveStyleLabel.isHidden = true
         
     }
     
@@ -236,7 +238,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         sleeveStyleSelector.isHidden = false
         sleeveStyle.isHidden = false
         sleeveLengthLabel.isHidden = false
-        sleeveStyleLabel.isHidden = false
+        //sleeveStyleLabel.isHidden = false
     }
     
     func readAndSetEbayCategoryCode() {
@@ -651,6 +653,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         ImgSelectPopUpbutton14.removeAllItems()
         ImgSelectPopUpbutton15.removeAllItems()
         ebayConditionSelector.removeAllItems()
+        percentageOffMsrpSelector.removeAllItems()
         shippingSelector.removeAllItems()
         colorSelector.removeAllItems()
         styleSelector.removeAllItems()
@@ -660,6 +663,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         sleeveLengthSelector.removeAllItems()
         storeCategorySelector.removeAllItems()
         sizeTypeSelector.removeAllItems()
+        
         
     
         
@@ -680,6 +684,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         ImgSelectPopUpbutton14.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
         ImgSelectPopUpbutton15.addItems(withTitles: ["", "Image 1", "Image 2", "Image 3", "Image 4"])
         ebayConditionSelector.addItems(withTitles: ["", "New", "New Other", "New W/ Defects"])
+        percentageOffMsrpSelector.addItems(withObjectValues: ["", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%"])
         shippingSelector.addItems(withObjectValues: ["", "3.99", "4.99", "5.99", "6.99", "7.99", "8.99", "9.99", "13.99", "18.99", "Free"])
         colorSelector.addItems(withObjectValues: ["", "Beige", "Black", "Blue", "Brown", "Charcoal", "Copper", "Gold", "Gray", "Green", "Multicolored", "Natural", "Navy", "Orange", "Pink", "Purple", "Red", "Silver", "Taupe", "Turquoise", "White", "Wine", "Yellow"])
         styleSelector.addItems(withObjectValues: ["", "Blouse", "Bodysuit", "Cami", "Coat", "Dress", "Gown", "Hoodie", "Jacket", "Jeans", "Jumpsuit", "Legging" ,"Maxi", "Mini", "Overall", "Pants", "Pullover", "Romper", "Shirt", "Shorts", "Skirt", "Sleepwear", "Sweater", "Sweatshirt", "Tank", "Tee", "Top", "Trouser", "T-Shirt", "Tunic", "Vest", "Wrap"])
@@ -814,6 +819,9 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     }
     
     @IBAction func inventoryCheckInMode(_ sender: NSButton) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
         if sender.state == .on{
         inventoryCheckInModeState =  "on"
             image1.image = nil
@@ -835,15 +843,14 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             weightDisplay.stringValue = ""
             inventoryCount.stringValue = ""
             msrp.stringValue = ""
-            shipping.stringValue = ""
-            overrideShipping.selectItem(at: 0)
+            price.stringValue = ""
             sku.stringValue = ""
             UPCField.stringValue = ""
             let tempItemDescription = result![0].itemDescription
             itemDescriptionField.stringValue = ""
             result![0].itemDescription = tempItemDescription
             let tempBrand = result![0].brand
-            brandSelector.stringValue = ""
+            brandSelector.selectItem(at: 0)
             result![0].brand = tempBrand
             let tempStyle = result![0].style
             styleSelector.stringValue = ""
@@ -866,6 +873,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             ebayConditionSelector.selectItem(at: 0)
         qtyReceived.stringValue = "1"
             qtyReceived.backgroundColor = NSColor.yellow
+             SearchBar(self)
         }else{
              qtyReceived.backgroundColor = NSColor.white
             qtyReceived.stringValue = ""
@@ -888,19 +896,17 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             image13.image = nil
             image14.image = nil
             image15.image = nil
-            overrideShipping.selectItem(at: 0)
             weightDisplay.stringValue = ""
             inventoryCount.stringValue = ""
             msrp.stringValue = ""
-            shipping.stringValue = ""
-            overrideShipping.selectItem(at: 0)
+            shippingSelector.selectItem(at: 0)
             sku.stringValue = ""
             UPCField.stringValue = ""
             let tempItemDescription = result![0].itemDescription
             itemDescriptionField.stringValue = ""
             result![0].itemDescription = tempItemDescription
             let tempBrand = result![0].brand
-            brandSelector.stringValue = ""
+            brandSelector.selectItem(at: 0)
             result![0].brand = tempBrand
             let tempStyle = result![0].style
             styleSelector.stringValue = ""
@@ -926,7 +932,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             itemDescriptionField.stringValue = "not found"
             itemDescriptionField.textColor = NSColor.red
             
-            
+            }
 
         }
     }
@@ -1172,7 +1178,6 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         }
     }
     
-
     
     @IBAction func SearchBar(_ sender: Any) {
         arrayOfURLs = []
@@ -1180,21 +1185,75 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
         let realm = try! Realm(configuration: config)
         results = realm.objects(Product.self)
+        let imageCode: Int?
+       
+   
+        if UPCSearchField.stringValue.count != 12 {
+            print("clear all fields placeholder code")
+            setupPopUpButtons()
+            image1.image = nil
+            image2.image = nil
+            image3.image = nil
+            image4.image = nil
+            image5.image = nil
+            image6.image = nil
+            image7.image = nil
+            image8.image = nil
+            image9.image = nil
+            image10.image = nil
+            image11.image = nil
+            image12.image = nil
+            image13.image = nil
+            image14.image = nil
+            image15.image = nil
+            inventoryCount.stringValue = ""
+            msrp.stringValue = ""
+            percentageOffMsrpSelector.selectItem(at: 0)
+            price.stringValue = ""
+            shippingSelector.selectItem(at: 0)
+            sku.stringValue = ""
+            UPCField.stringValue = ""
+            itemDescriptionField.stringValue = ""
+            brandSelector.selectItem(at: 0)
+            styleSelector.selectItem(at: 0)
+            colorSelector.selectItem(at: 0)
+            sizeSelector.selectItem(at: 0)
+            sleeveStyleSelector.selectItem(at: 0)
+            sleeveLengthSelector.selectItem(at: 0)
+            ebayCategory.stringValue = ""
+            storeCategorySelector.selectItem(at: 0)
+            sizeTypeSelector.selectItem(at: 0)
+            ebayConditionSelector.selectItem(at: 0)
+            image.stringValue = ""
             
-       // if results?.count != nil {
-        if UPCSearchField.stringValue != "" && results?.count != nil && UPCSearchField.stringValue.count == 12 {
+            
+            
+        } else {
+
+
+
+      
+          if UPCSearchField.stringValue != "" && results?.count != nil && UPCSearchField.stringValue.count == 12 {
             searchString = UPCSearchField!.integerValue
-            //print("Search String")
-            //print(searchString)
+           // print("Search String \(searchString)")
             let predicate = NSPredicate(format: "upc == %@", NSNumber (value: searchString))
             result = results!.filter(predicate)
-           // print("result: \(result)")
-            
-            if (result?.count)! > 0 {
+            print("result: \(String(describing: result))")
+            print("result count \(result!.count)")
+            if (result?.count)! == 1 {
                 
-                let imageCode = Int(result![0].code)
-                HRimageCode = Int(result![0].code)!
+                if result![0].code != "" {
+               // let imageCode = Int(result![0].code)
+                    imageCode = Int(result![0].code)
+                HRimageCode = Int(result![0].code)
                 print(result![0].image)
+                }else{
+                   // let imageCode: Int?
+                    imageCode = 00000000
+                    
+                }
+            
+                
             
                 if result![0].image.contains("macy") {
                     HRimageCode = Int(result![0].code)!
@@ -1211,8 +1270,9 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     lowImgURLEnd = ""
                 } else if result![0].image == "" {
                     setAlternateImagetoALL()
-                    return
-                }
+                    }
+              
+                    
     
                 
 
@@ -1225,6 +1285,9 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     setupPopUpButtons()
                     imageOverride1TxtField.stringValue = ""
                     imageOverride2TxtField.stringValue = ""
+    //*************
+                    price.stringValue = ""
+                    
                     UPCField.stringValue = String(result![0].upc)
                     OriginalQty.stringValue = String(result![0].originalQty)
                     inventoryCount.stringValue = String(result![0].inventoryCount)
@@ -1238,7 +1301,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     image.stringValue = String(result![0].image)
                     //let msrpInt = Int(result![0].msrp)
                     msrp.stringValue = String(result![0].msrp)
-                    price.doubleValue = result![0].price
+                    price.stringValue = result![0].price
                     sleeveStyle.stringValue = String(result![0].sleeveStyle)
                     sleeveLengthSelector.stringValue = String(result![0].sleeveLength)
                     readAndSetEbayCategoryCode()
@@ -1322,9 +1385,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 }
 
             } else {
-                
-                
-                print("error.localizedDescription")
+ print("error.localizedDescription2")
                 setupPopUpButtons()
                 image1.image = nil
                 image2.image = nil
@@ -1341,47 +1402,48 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 image13.image = nil
                 image14.image = nil
                 image15.image = nil
-                overrideShipping.selectItem(at: 0)
                 weightDisplay.stringValue = ""
                 inventoryCount.stringValue = ""
                 msrp.stringValue = ""
-                shipping.stringValue = ""
-                overrideShipping.selectItem(at: 0)
+                price.doubleValue = 0
+                shippingSelector.selectItem(at: 0)
                 sku.stringValue = ""
                 UPCField.stringValue = ""
-                let tempItemDescription = result![0].itemDescription
-                itemDescriptionField.stringValue = ""
-                result![0].itemDescription = tempItemDescription
-                let tempBrand = result![0].brand
+                //let tempItemDescription = result![0].itemDescription
+                itemDescriptionField.textColor = .red
+                itemDescriptionField.stringValue = "not found"
+                //result![0].itemDescription = tempItemDescription
+                //let tempBrand = result![0].brand
                 brandSelector.stringValue = ""
-                result![0].brand = tempBrand
-                let tempStyle = result![0].style
+                //result![0].brand = tempBrand
+                //let tempStyle = result![0].style
                 styleSelector.stringValue = ""
-                result![0].style = tempStyle
-                let tempColor = result![0].color
+                //result![0].style = tempStyle
+                //let tempColor = result![0].color
                 colorSelector.stringValue = ""
-                result![0].color = tempColor
-                 let tempSize = result![0].size
+                //result![0].color = tempColor
+                // let tempSize = result![0].size
                 sizeSelector.stringValue = ""
-                result![0].size = tempSize
-                let tempSleeveStyle = result![0].sleeveStyle
+                //result![0].size = tempSize
+                //let tempSleeveStyle = result![0].sleeveStyle
                 sleeveStyle.stringValue = ""
-                result![0].sleeveStyle = tempSleeveStyle
-                let tempSleeveLength = result![0].sleeveLength
+                //result![0].sleeveStyle = tempSleeveStyle
+                //let tempSleeveLength = result![0].sleeveLength
                 sleeveLengthSelector.stringValue = ""
-                result![0].sleeveLength = tempSleeveLength
+                //result![0].sleeveLength = tempSleeveLength
                 ebayCategory.stringValue = ""
                 storeCategorySelector.stringValue = ""
                 sizeTypeSelector.stringValue = ""
                 ebayConditionSelector.selectItem(at: 0)
-                print("error.localizedDescription2")
-            }
+               
             
+            }
+
         } else {
             print("error")
 
         }
-
+        }
     }
     
     
@@ -2011,12 +2073,51 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                }
     }
     
+    @IBAction func percentageOffMsrpDidSet(_ sender: NSComboBox) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+            if percentageOffMsrpSelector.indexOfSelectedItem == 1 {
+                percentageOffMsrp = 0.1
+            }else if percentageOffMsrpSelector.indexOfSelectedItem == 2 {
+                percentageOffMsrp = 0.2
+            }else if percentageOffMsrpSelector.indexOfSelectedItem == 3 {
+                percentageOffMsrp = 0.3
+            }else if percentageOffMsrpSelector.indexOfSelectedItem == 4 {
+                percentageOffMsrp = 0.4
+            }else if percentageOffMsrpSelector.indexOfSelectedItem == 5 {
+                percentageOffMsrp = 0.5
+            }else if percentageOffMsrpSelector.indexOfSelectedItem == 6 {
+                percentageOffMsrp = 0.6
+            }else if percentageOffMsrpSelector.indexOfSelectedItem == 7 {
+                percentageOffMsrp = 0.7
+            }else if percentageOffMsrpSelector.indexOfSelectedItem == 8 {
+                percentageOffMsrp = 0.8
+            }else if percentageOffMsrpSelector.indexOfSelectedItem == 9 {
+                percentageOffMsrp = 0.9
+            }
+            print(result![0].msrp)
+            //let trimDollarSignMsrp = result![0].msrp.dropFirst(1)
+            let msrpValue = Float(result![0].msrp)
+            print(msrpValue!)
+            var discountedPrice = msrpValue! - (percentageOffMsrp! * msrpValue!)
+            print(discountedPrice.rounded())
+            discountedPrice = (discountedPrice * 100).rounded() / 100
+            print("discount price: \(discountedPrice)")
+            let twoDecimalPlaces = String(format: "%.2f", discountedPrice)
+            result![0].price = twoDecimalPlaces
+            price.stringValue = result![0].price
+            percentageOffMsrpSelector.selectItem(at: 0)
+            self.percentageOffMsrpSelector.isEnabled = false
+            self.percentageOffMsrpSelector.isEnabled = true
+        }
+    }
     
     @IBAction func priceDidSet(_ sender: NSTextField) {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
         let realm = try! Realm(configuration: config)
         try! realm.write {
-            result![0].price = price.doubleValue
+            result![0].price = price.stringValue
         }
     }
     
@@ -2171,6 +2272,48 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     }
     
     
+    @IBAction func appendToDB(_ sender: NSButton) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+            
+            var upcArray: [Int] = []
+            var skuArray: [String] = []
+            let nextSkuInArray: String?
+            
+            for i in results! {
+                skuArray.append(i.sku)
+                upcArray.append(i.upc)
+            }
+            
+            //           let lastUpcInArray = upcArray.last
+            //            print("last upc: \(lastUpcInArray!)")
+            //            print("upc field \(UPCSearchField.integerValue)")
+            //            if let index = upcArray.firstIndex(of: UPCSearchField.integerValue) {
+            //            print("index: \(index)")
+            //            }
+            
+            let lastSkuInArray = Int(skuArray.last!.dropFirst(4))
+            //print("last number in array: \(String(describing: lastSkuInArray))")
+            let skuPrefix = String(skuArray.last!.dropLast(3))
+            // print("skuPrefix \(skuPrefix)")
+            
+            if upcArray.firstIndex(of: UPCSearchField.integerValue) != nil {
+                nextSkuInArray = nil
+            }else{
+                nextSkuInArray = skuPrefix + String(lastSkuInArray! + 1)
+               // print("nextSkuInArray: \(String(describing: nextSkuInArray))")
+            }
+            
+            if nextSkuInArray != nil {
+                realm.create(Product.self, value: ["upc": UPCSearchField.integerValue, "msrp": msrp.stringValue, "UPCField": UPCSearchField.integerValue, "sku": nextSkuInArray! , "vendorName": "XXXXXXXXXXXXXXXXXX", "image": image.stringValue], update: .modified)
+            }else{
+                realm.create(Product.self, value: ["upc": UPCSearchField.integerValue, "msrp": msrp.stringValue, "UPCField": UPCSearchField.integerValue, "vendorName": "XXXXXXXXXXXXXXXXXX", "image": image.stringValue], update: .modified)
+            }
+            
+            SearchBar(self)
+        }
+    }
     
     
     //Display HD image @IBaction triggers

@@ -1110,15 +1110,6 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField identifier="sleeveStyleLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QCW-Zy-l0D">
-                                <rect key="frame" x="2316" y="1300" width="79" height="16"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" identifier="sleeveStyleLabel" title="Sleeve Style" id="zd8-Et-XQN">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eIK-3u-JsP">
                                 <rect key="frame" x="2316" y="1202" width="96" height="21"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1906,6 +1897,61 @@
                                     <action selector="shippingDidSet:" target="OUq-4Z-H7t" id="YcG-R6-UZX"/>
                                 </connections>
                             </comboBox>
+                            <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V8N-4z-VFl">
+                                <rect key="frame" x="120" y="1202" width="99" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="IMi-cJ-lBb">
+                                    <font key="font" metaFont="titleBar"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <objectValues>
+                                        <string>Item 1</string>
+                                        <string>Item 2</string>
+                                        <string>Item 3</string>
+                                    </objectValues>
+                                </comboBoxCell>
+                                <connections>
+                                    <action selector="percentageOffMsrpDidSet:" target="OUq-4Z-H7t" id="C1x-9M-ceW"/>
+                                </connections>
+                            </comboBox>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0iK-79-uXg">
+                                <rect key="frame" x="131" y="1182" width="75" height="16"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="% off MSRP" id="gST-Fx-AVG">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YvC-dW-koW">
+                                <rect key="frame" x="2309" y="1342" width="123" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="append to DB" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2HN-hk-op6">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="appendToDB:" target="OUq-4Z-H7t" id="qMN-Hg-tIs"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWg-JV-rFc">
+                                <rect key="frame" x="109" y="1201" width="13" height="22"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="$" id="Mte-Pn-NGe">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LCb-0S-xvl">
+                                <rect key="frame" x="232" y="1199" width="10" height="22"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="$" id="QGE-C8-HXM">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="M3k-EC-T0T" firstAttribute="top" secondItem="btQ-XW-bGl" secondAttribute="top" constant="14" id="Wwn-Bj-coo"/>
@@ -1961,6 +2007,7 @@
                         <outlet property="msrp" destination="jv4-L6-ql2" id="cIS-f2-I0E"/>
                         <outlet property="override8" destination="zXW-oO-haZ" id="DsT-KF-rW2"/>
                         <outlet property="override9" destination="rT5-hC-j8S" id="a23-9O-6Kb"/>
+                        <outlet property="percentageOffMsrpSelector" destination="V8N-4z-VFl" id="CO8-2H-EdZ"/>
                         <outlet property="price" destination="aa4-Xp-j4m" id="QJI-7Z-wqw"/>
                         <outlet property="qtyReceived" destination="zem-Md-bM3" id="LU7-wM-hdE"/>
                         <outlet property="scaleStatus" destination="RWt-66-ZEY" id="9aM-SM-nEt"/>
@@ -1971,7 +2018,6 @@
                         <outlet property="sleeveLengthLabel" destination="3oG-vW-u9d" id="JOr-pm-3oH"/>
                         <outlet property="sleeveLengthSelector" destination="0jL-2z-Fgk" id="DJm-HH-E08"/>
                         <outlet property="sleeveStyle" destination="eIK-3u-JsP" id="Eec-KM-zxl"/>
-                        <outlet property="sleeveStyleLabel" destination="QCW-Zy-l0D" id="RcR-Xe-oWQ"/>
                         <outlet property="sleeveStyleSelector" destination="Thd-CX-wRc" id="DZd-UA-2eK"/>
                         <outlet property="storeCategorySelector" destination="2Qx-F6-aU1" id="R11-Vz-N1G"/>
                         <outlet property="styleSelector" destination="0kY-FA-AUe" id="OW7-5E-f47"/>
