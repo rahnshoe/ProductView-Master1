@@ -55,9 +55,14 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     var inventoryCheckInModeState: String?
     var percentageOffMsrp: Float?
  
-
-    
     var scale = OhausScale()
+    
+    var prodCountArray: [Int] = []
+    var stringArray: [String] = []
+    var upcArray: [Int] = []
+    
+    
+    
     
 //    let shipCodeFree = 999308
 //    let shipCode3_99 = 912391
@@ -90,6 +95,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     @IBOutlet weak var image3: NSButton!
     @IBOutlet weak var image2: NSButton!
     @IBOutlet weak var image1: NSButton!
+    @IBOutlet weak var noImagesCheckBox: NSButtonCell!
     
     @IBOutlet weak var itemDescriptionField: NSTextField!
     
@@ -109,31 +115,40 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     @IBOutlet weak var ImgSelectPopUpbutton14: NSPopUpButton!
     @IBOutlet weak var ImgSelectPopUpbutton15: NSPopUpButton!
     @IBOutlet weak var ebayConditionSelector: NSPopUpButton!
-    @IBOutlet weak var overrideShipping: NSPopUpButton!
-
+    @IBOutlet weak var productSelector: NSPopUpButton!
+    
      
     @IBOutlet weak var percentageOffMsrpSelector: NSComboBox!
-    @IBOutlet weak var sleeveStyleSelector: NSPopUpButton!
      @IBOutlet weak var sizeTypeSelector: NSPopUpButton!
-    @IBOutlet weak var sleeveStyleLabel: NSTextField!
     @IBOutlet weak var sleeveLengthLabel: NSTextField!
-    
+    @IBOutlet weak var styleLabel: NSTextField!
+    @IBOutlet weak var necklineLabel: NSTextField!
+    @IBOutlet weak var waistLabel: NSTextField!
+    @IBOutlet weak var inseamLabel: NSTextField!
+    @IBOutlet weak var riseLabel: NSTextField!
     
     @IBOutlet weak var shippingSelector: NSComboBox!
     @IBOutlet weak var brandSelector: NSComboBox!
-    @IBOutlet weak var styleSelector: NSComboBox!
+    @IBOutlet weak var typeSelector: NSComboBox!
     @IBOutlet weak var colorSelector: NSComboBox!
     @IBOutlet weak var sizeSelector: NSComboBox!
     @IBOutlet weak var sleeveLengthSelector: NSComboBox!
     @IBOutlet weak var storeCategorySelector: NSComboBox!
+    @IBOutlet weak var styleSelector: NSComboBox!
+    @IBOutlet weak var necklineSelector: NSComboBox!
+    @IBOutlet weak var materialSelector: NSComboBox!
+    @IBOutlet weak var occasionSelector: NSComboBox!
+    @IBOutlet weak var patternSelector: NSComboBox!
+    @IBOutlet weak var waistSelector: NSComboBox!
+    @IBOutlet weak var inseamSelector: NSComboBox!
+    @IBOutlet weak var riseSelector: NSComboBox!
     
     @IBOutlet weak var price: NSTextField!
-    @IBOutlet weak var shipping: NSTextField!
     @IBOutlet weak var sku: NSTextField!
 
    
 
-    @IBOutlet weak var sleeveStyle: NSTextField!
+
     @IBOutlet weak var msrp: NSTextField!
     @IBOutlet weak var ebayCategory: NSTextField!
     @IBOutlet weak var image: NSTextField!
@@ -172,7 +187,23 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
   }
    
     override func viewDidLoad() {
+        
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        results = realm.objects(Product.self)
+        var prodCount = 0
+        if results != nil{
+            for _ in results! {
+                prodCount = prodCount + 1
+                prodCountArray.append(prodCount)
+            }
+            stringArray = prodCountArray.map { String($0) }
+            stringArray.insert("", at: 0)
+            //print(stringArray)
+        }
+        
         hideSleeve()
+        hideWaist()
         setupPopUpButtons()
         scale.scaleDelegate = self
         scale.scaleStatusDelegate = self
@@ -226,144 +257,196 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     
     func hideSleeve() {
         sleeveLengthSelector.isHidden = true
-        sleeveStyleSelector.isHidden = true
-        sleeveStyle.isHidden = true
         sleeveLengthLabel.isHidden = true
-        //sleeveStyleLabel.isHidden = true
+        styleSelector.isHidden = true
+        necklineSelector.isHidden = true
+        styleLabel.isHidden = true
+        necklineLabel.isHidden = true
         
     }
     
     func unhideSleeve(){
         sleeveLengthSelector.isHidden = false
-        sleeveStyleSelector.isHidden = false
-        sleeveStyle.isHidden = false
         sleeveLengthLabel.isHidden = false
-        //sleeveStyleLabel.isHidden = false
+        styleSelector.isHidden = false
+        necklineSelector.isHidden = false
+        styleLabel.isHidden = false
+        necklineLabel.isHidden = false
+    }
+    
+    
+    func hideWaist(){
+        waistSelector.isHidden = true
+        waistLabel.isHidden = true
+        inseamSelector.isHidden = true
+        inseamLabel.isHidden = true
+        riseSelector.isHidden = true
+        riseLabel.isHidden = true
+    }
+    
+    func unHideWaist(){
+        waistSelector.isHidden = false
+        waistLabel.isHidden = false
+        inseamSelector.isHidden = false
+        inseamLabel.isHidden = false
+        riseSelector.isHidden = false
+        riseLabel.isHidden = false
     }
     
     func readAndSetEbayCategoryCode() {
         if  result![0].ebayCategory == "53159" {
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Blouse"
             
         }else if result![0].ebayCategory == "53159"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Bodysuit"
             
         }else if result![0].ebayCategory == "53159"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Cami"
             
         }else if result![0].ebayCategory == "63862"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Coat"
             
         }else if result![0].ebayCategory == "63861"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Dress"
             
         }else if result![0].ebayCategory == "63861"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Gown"
             
         }else if result![0].ebayCategory == "155226"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Hoodie"
             
         }else if result![0].ebayCategory == "63862"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Jacket"
             
         }else if result![0].ebayCategory == "11554"{
             hideSleeve()
+            unHideWaist()
             ebayCategory.stringValue = "Jeans"
             
         }else if result![0].ebayCategory == "3009"{
             unhideSleeve()
+            unHideWaist()
             ebayCategory.stringValue = "Jumpsuit"
             
         }else if result![0].ebayCategory == "63863"{
             hideSleeve()
+            unHideWaist()
             ebayCategory.stringValue = "Legging"
             
         }else if result![0].ebayCategory == "63861"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Maxi"
             
         }else if result![0].ebayCategory == "63864"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Mini"
             
         }else if result![0].ebayCategory == "63863"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Overall"
             
         }else if result![0].ebayCategory == "63863"{
             hideSleeve()
+            unHideWaist()
             ebayCategory.stringValue = "Pants"
             
         }else if result![0].ebayCategory == "53159"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Pullover"
             
         }else if result![0].ebayCategory == "3009"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Romper"
             
         }else if result![0].ebayCategory == "53159"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Shirt"
             
         }else if result![0].ebayCategory == "11555"{
             hideSleeve()
+            unHideWaist()
             ebayCategory.stringValue = "Shorts"
             
         }else if result![0].ebayCategory == "63864"{
             hideSleeve()
+            unHideWaist()
             ebayCategory.stringValue = "Skirt"
             
         }else if result![0].ebayCategory == "63855"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Sleepwear"
             
         }else if result![0].ebayCategory == "63866"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Sweater"
             
         }else if result![0].ebayCategory == "155226"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Sweatshirt"
             
         }else if result![0].ebayCategory == "53159"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Tank"
             
         }else if result![0].ebayCategory == "53159"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Tee"
             
         }else if result![0].ebayCategory == "53159"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Top"
             
         }else if result![0].ebayCategory == "53159"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "T-shirt"
             
         }else if result![0].ebayCategory == "63863"{
             hideSleeve()
+            unHideWaist()
             ebayCategory.stringValue = "Trouser"
             
         }else if result![0].ebayCategory == "53159"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Tunic"
             
         }else if result![0].ebayCategory == "63862"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Vest"
             
         }else if result![0].ebayCategory == "63861"{
             unhideSleeve()
+            hideWaist()
             ebayCategory.stringValue = "Wrap"
             
         }else{
@@ -461,59 +544,109 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     
 
     func zeroOut() {
-        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-        let realm = try! Realm(configuration: config)
-        try! realm.write {
-        image1.image = nil
-        image2.image = nil
-        image3.image = nil
-        image4.image = nil
-        image5.image = nil
-        image6.image = nil
-        image7.image = nil
-        image8.image = nil
-        image9.image = nil
-        image10.image = nil
-        image11.image = nil
-        image12.image = nil
-        image13.image = nil
-        image14.image = nil
-        image15.image = nil
-        overrideShipping.selectItem(at: 0)
-        weightDisplay.stringValue = ""
-        inventoryCount.stringValue = ""
-        msrp.stringValue = ""
-        shipping.stringValue = ""
-        overrideShipping.selectItem(at: 0)
-        sku.stringValue = ""
-        UPCField.stringValue = ""
-        let tempItemDescription = result![0].itemDescription
-        itemDescriptionField.stringValue = ""
-        result![0].itemDescription = tempItemDescription
-        let tempBrand = result![0].brand
-        brandSelector.stringValue = ""
-        result![0].brand = tempBrand
-        let tempStyle = result![0].style
-        styleSelector.stringValue = ""
-        result![0].style = tempStyle
-        let tempColor = result![0].color
-        colorSelector.stringValue = ""
-        result![0].color = tempColor
-         let tempSize = result![0].size
-        sizeSelector.stringValue = ""
-        result![0].size = tempSize
-        let tempSleeveStyle = result![0].sleeveStyle
-        sleeveStyle.stringValue = ""
-        result![0].sleeveStyle = tempSleeveStyle
-        let tempSleeveLength = result![0].sleeveLength
-        sleeveLengthSelector.stringValue = ""
-        result![0].sleeveLength = tempSleeveLength
-        ebayCategory.stringValue = ""
-        storeCategorySelector.stringValue = ""
-        sizeTypeSelector.stringValue = ""
-        ebayConditionSelector.selectItem(at: 0)
-        }
-        try! realm.commitWrite()
+        image1.image = nil //
+        image2.image = nil //
+        image3.image = nil //
+        image4.image = nil //
+        image5.image = nil //
+        image6.image = nil //
+        image7.image = nil //
+        image8.image = nil //
+        image9.image = nil //
+        image10.image = nil //
+        image11.image = nil //
+        image12.image = nil //
+        image13.image = nil //
+        image14.image = nil //
+        image15.image = nil //
+        shippingSelector.selectItem(at: 0) //
+        weightDisplay.stringValue = "" //
+        inventoryCount.stringValue = "" //
+        msrp.stringValue = "" //
+        price.stringValue = "" //
+        sku.stringValue = "" //
+        UPCField.stringValue = "" //
+        let tempItemDescription = result![0].itemDescription //
+        itemDescriptionField.stringValue = "" //
+        result![0].itemDescription = tempItemDescription //
+        let tempBrand = result![0].brand //
+        brandSelector.stringValue = "" //
+        result![0].brand = tempBrand //
+        let tempType = result![0].type //
+        typeSelector.stringValue = "" //
+        result![0].type = tempType //
+        let tempColor = result![0].color //
+        colorSelector.stringValue = "" //
+        result![0].color = tempColor //
+         let tempSize = result![0].size //
+        sizeSelector.stringValue = "" //
+        result![0].size = tempSize //
+        let tempSleeveLength = result![0].sleeveLength //
+        sleeveLengthSelector.stringValue = "" //
+        result![0].sleeveLength = tempSleeveLength //
+        ebayCategory.stringValue = "" //
+        storeCategorySelector.selectItem(at: 0) //
+        sizeTypeSelector.selectItem(at: 0) //
+        ebayConditionSelector.selectItem(at: 0) //
+        styleSelector.selectItem(at: 0)
+        necklineSelector.selectItem(at: 0)
+        materialSelector.selectItem(at: 0)
+        occasionSelector.selectItem(at: 0)
+        patternSelector.selectItem(at: 0)
+        waistSelector.selectItem(at: 0)
+        inseamSelector.selectItem(at: 0)
+        riseSelector.selectItem(at: 0)
+        image.stringValue = "" //
+        imageOverride1TxtField.stringValue = "" //
+        imageOverride2TxtField.stringValue = "" //
+    }
+    
+    
+    func zeroOutSearch() {
+        image1.image = nil //
+        image2.image = nil //
+        image3.image = nil //
+        image4.image = nil //
+        image5.image = nil //
+        image6.image = nil //
+        image7.image = nil //
+        image8.image = nil //
+        image9.image = nil //
+        image10.image = nil //
+        image11.image = nil //
+        image12.image = nil //
+        image13.image = nil //
+        image14.image = nil //
+        image15.image = nil //
+        shippingSelector.selectItem(at: 0) //
+        weightDisplay.stringValue = "" //
+        inventoryCount.stringValue = "" //
+        msrp.stringValue = "" //
+        price.stringValue = "" //
+        sku.stringValue = "" //
+        UPCField.stringValue = "" //
+
+        itemDescriptionField.stringValue = "" //
+        brandSelector.selectItem(at: 0) //
+        typeSelector.selectItem(at: 0) //
+        colorSelector.selectItem(at: 0) //
+        sizeSelector.selectItem(at: 0) //
+        sleeveLengthSelector.selectItem(at: 0)//
+        ebayCategory.stringValue = "" //
+        storeCategorySelector.selectItem(at: 0) //
+        sizeTypeSelector.selectItem(at: 0) //
+        ebayConditionSelector.selectItem(at: 0) //
+        styleSelector.selectItem(at: 0)
+        necklineSelector.selectItem(at: 0)
+        materialSelector.selectItem(at: 0)
+        occasionSelector.selectItem(at: 0)
+        patternSelector.selectItem(at: 0)
+        waistSelector.selectItem(at: 0)
+        inseamSelector.selectItem(at: 0)
+        riseSelector.selectItem(at: 0)
+        image.stringValue = "" //
+        imageOverride1TxtField.stringValue = "" //
+        imageOverride2TxtField.stringValue = "" //
     }
     
     @IBAction func reviewMode(_ sender: NSButtonCell) {
@@ -523,108 +656,109 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         if sender.state == .on{
         print("on")
             reviewModeState = "on"
-            image1.image = nil
-            image2.image = nil
-            image3.image = nil
-            image4.image = nil
-            image5.image = nil
-            image6.image = nil
-            image7.image = nil
-            image8.image = nil
-            image9.image = nil
-            image10.image = nil
-            image11.image = nil
-            image12.image = nil
-            image13.image = nil
-            image14.image = nil
-            image15.image = nil
-            shippingSelector.selectItem(at: 0)
-            weightDisplay.stringValue = ""
-            inventoryCount.stringValue = ""
-            msrp.stringValue = ""
-            price.stringValue = ""
-            shippingSelector.selectItem(at: 0)
-            sku.stringValue = ""
-            UPCField.stringValue = ""
-            let tempItemDescription = result![0].itemDescription
-            itemDescriptionField.stringValue = ""
-            result![0].itemDescription = tempItemDescription
-            let tempBrand = result![0].brand
-            brandSelector.stringValue = ""
-            result![0].brand = tempBrand
-            let tempStyle = result![0].style
-            styleSelector.stringValue = ""
-            result![0].style = tempStyle
-            let tempColor = result![0].color
-            colorSelector.stringValue = ""
-            result![0].color = tempColor
-             let tempSize = result![0].size
-            sizeSelector.stringValue = ""
-            result![0].size = tempSize
-            let tempSleeveStyle = result![0].sleeveStyle
-            sleeveStyle.stringValue = ""
-            result![0].sleeveStyle = tempSleeveStyle
-            let tempSleeveLength = result![0].sleeveLength
-            sleeveLengthSelector.stringValue = ""
-            result![0].sleeveLength = tempSleeveLength
-            ebayCategory.stringValue = ""
-            storeCategorySelector.stringValue = ""
-            sizeTypeSelector.selectItem(at: 0)
-            ebayConditionSelector.selectItem(at: 0)
+            zeroOut()
+//            image1.image = nil
+//            image2.image = nil
+//            image3.image = nil
+//            image4.image = nil
+//            image5.image = nil
+//            image6.image = nil
+//            image7.image = nil
+//            image8.image = nil
+//            image9.image = nil
+//            image10.image = nil
+//            image11.image = nil
+//            image12.image = nil
+//            image13.image = nil
+//            image14.image = nil
+//            image15.image = nil
+//            shippingSelector.selectItem(at: 0)
+//            weightDisplay.stringValue = ""
+//            inventoryCount.stringValue = ""
+//            msrp.stringValue = ""
+//            price.stringValue = ""
+//            sku.stringValue = ""
+//            UPCField.stringValue = ""
+//            let tempItemDescription = result![0].itemDescription
+//            itemDescriptionField.stringValue = ""
+//            result![0].itemDescription = tempItemDescription
+//            let tempBrand = result![0].brand
+//            brandSelector.stringValue = ""
+//            result![0].brand = tempBrand
+//            let tempType = result![0].type
+//            typeSelector.stringValue = ""
+//            result![0].type = tempType
+//            let tempColor = result![0].color
+//            colorSelector.stringValue = ""
+//            result![0].color = tempColor
+//             let tempSize = result![0].size
+//            sizeSelector.stringValue = ""
+//            result![0].size = tempSize
+//            let tempSleeveStyle = result![0].sleeveStyle
+//            result![0].sleeveStyle = tempSleeveStyle
+//            let tempSleeveLength = result![0].sleeveLength
+//            sleeveLengthSelector.stringValue = ""
+//            result![0].sleeveLength = tempSleeveLength
+//            ebayCategory.stringValue = ""
+//            storeCategorySelector.stringValue = ""
+//            sizeTypeSelector.selectItem(at: 0)
+//            ebayConditionSelector.selectItem(at: 0)
+            
             SearchBar(self)
             
         }else{
             
             print("off")
             reviewModeState = "off"
-            image1.image = nil
-            image2.image = nil
-            image3.image = nil
-            image4.image = nil
-            image5.image = nil
-            image6.image = nil
-            image7.image = nil
-            image8.image = nil
-            image9.image = nil
-            image10.image = nil
-            image11.image = nil
-            image12.image = nil
-            image13.image = nil
-            image14.image = nil
-            image15.image = nil
-            shippingSelector.selectItem(at: 0)
-            weightDisplay.stringValue = ""
-            inventoryCount.stringValue = ""
-            msrp.stringValue = ""
-            price.stringValue = ""
-            shippingSelector.selectItem(at: 0)
-            sku.stringValue = ""
-            UPCField.stringValue = ""
-            let tempItemDescription = result![0].itemDescription
-            itemDescriptionField.stringValue = ""
-            result![0].itemDescription = tempItemDescription
-            let tempBrand = result![0].brand
-            brandSelector.stringValue = ""
-            result![0].brand = tempBrand
-            let tempStyle = result![0].style
-            styleSelector.stringValue = ""
-            result![0].style = tempStyle
-            let tempColor = result![0].color
-            colorSelector.stringValue = ""
-            result![0].color = tempColor
-             let tempSize = result![0].size
-            sizeSelector.stringValue = ""
-            result![0].size = tempSize
-            let tempSleeveStyle = result![0].sleeveStyle
-            sleeveStyle.stringValue = ""
-            result![0].sleeveStyle = tempSleeveStyle
-            let tempSleeveLength = result![0].sleeveLength
-            sleeveLengthSelector.stringValue = ""
-            result![0].sleeveLength = tempSleeveLength
-            ebayCategory.stringValue = ""
-            storeCategorySelector.stringValue = ""
-            sizeTypeSelector.selectItem(at: 0)
-            ebayConditionSelector.selectItem(at: 0)
+            zeroOut()
+//            image1.image = nil
+//            image2.image = nil
+//            image3.image = nil
+//            image4.image = nil
+//            image5.image = nil
+//            image6.image = nil
+//            image7.image = nil
+//            image8.image = nil
+//            image9.image = nil
+//            image10.image = nil
+//            image11.image = nil
+//            image12.image = nil
+//            image13.image = nil
+//            image14.image = nil
+//            image15.image = nil
+//            shippingSelector.selectItem(at: 0)
+//            weightDisplay.stringValue = ""
+//            inventoryCount.stringValue = ""
+//            msrp.stringValue = ""
+//            price.stringValue = ""
+//            shippingSelector.selectItem(at: 0)
+//            sku.stringValue = ""
+//            UPCField.stringValue = ""
+//            let tempItemDescription = result![0].itemDescription
+//            itemDescriptionField.stringValue = ""
+//            result![0].itemDescription = tempItemDescription
+//            let tempBrand = result![0].brand
+//            brandSelector.stringValue = ""
+//            result![0].brand = tempBrand
+//            let tempType = result![0].type
+//            typeSelector.stringValue = ""
+//            result![0].type = tempType
+//            let tempColor = result![0].color
+//            colorSelector.stringValue = ""
+//            result![0].color = tempColor
+//             let tempSize = result![0].size
+//            sizeSelector.stringValue = ""
+//            result![0].size = tempSize
+//            let tempSleeveStyle = result![0].sleeveStyle
+//            result![0].sleeveStyle = tempSleeveStyle
+//            let tempSleeveLength = result![0].sleeveLength
+//            sleeveLengthSelector.stringValue = ""
+//            result![0].sleeveLength = tempSleeveLength
+//            ebayCategory.stringValue = ""
+//            storeCategorySelector.stringValue = ""
+//            sizeTypeSelector.selectItem(at: 0)
+//            ebayConditionSelector.selectItem(at: 0)
+            
             SearchBar(self)
             }
             try! realm.commitWrite()
@@ -656,13 +790,21 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         percentageOffMsrpSelector.removeAllItems()
         shippingSelector.removeAllItems()
         colorSelector.removeAllItems()
-        styleSelector.removeAllItems()
+        typeSelector.removeAllItems()
         brandSelector.removeAllItems()
         sizeSelector.removeAllItems()
-        sleeveStyleSelector.removeAllItems()
         sleeveLengthSelector.removeAllItems()
         storeCategorySelector.removeAllItems()
         sizeTypeSelector.removeAllItems()
+        styleSelector.removeAllItems()
+        necklineSelector.removeAllItems()
+        materialSelector.removeAllItems()
+        occasionSelector.removeAllItems()
+        patternSelector.removeAllItems()
+        waistSelector.removeAllItems()
+        inseamSelector.removeAllItems()
+        riseSelector.removeAllItems()
+        productSelector.removeAllItems()
         
         
     
@@ -687,15 +829,22 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         percentageOffMsrpSelector.addItems(withObjectValues: ["", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%"])
         shippingSelector.addItems(withObjectValues: ["", "3.99", "4.99", "5.99", "6.99", "7.99", "8.99", "9.99", "13.99", "18.99", "Free"])
         colorSelector.addItems(withObjectValues: ["", "Beige", "Black", "Blue", "Brown", "Charcoal", "Copper", "Gold", "Gray", "Green", "Multicolored", "Natural", "Navy", "Orange", "Pink", "Purple", "Red", "Silver", "Taupe", "Turquoise", "White", "Wine", "Yellow"])
-        styleSelector.addItems(withObjectValues: ["", "Blouse", "Bodysuit", "Cami", "Coat", "Dress", "Gown", "Hoodie", "Jacket", "Jeans", "Jumpsuit", "Legging" ,"Maxi", "Mini", "Overall", "Pants", "Pullover", "Romper", "Shirt", "Shorts", "Skirt", "Sleepwear", "Sweater", "Sweatshirt", "Tank", "Tee", "Top", "Trouser", "T-Shirt", "Tunic", "Vest", "Wrap"])
+        typeSelector.addItems(withObjectValues: ["", "Blouse", "Bodysuit", "Cami", "Coat", "Dress", "Gown", "Hoodie", "Jacket", "Jeans", "Jumpsuit", "Legging" ,"Maxi", "Mini", "Overall", "Pants", "Pullover", "Romper", "Shirt", "Shorts", "Skirt", "Sleepwear", "Sweater", "Sweatshirt", "Tank", "Tee", "Top", "Trouser", "T-Shirt", "Tunic", "Vest", "Wrap"])
         brandSelector.addItems(withObjectValues: ["", "7 For All Mankind", "Adriano Goldschmied", "ASTR The Label", "Bar III", "Carbon Copy", "Current Air", "Dee Elle", "Free People", "Ginger by Stella & Ginger", "Guess", "Heartloom", "Hudson", "JOA", "Joe's Jeans", "Kendall + Kylie", "Leyden", "Line & Dot", "Lucky Brand", "Lucy Paris", "Maison Jules", "Moon River", "Nanette Lepore", "Paige", "Project 28","Rachel Roy", "Rachel Zoe", "Sanctuary", "Topson Downs", "Trina Turk", "True Vintage"])
         sizeSelector.addItems(withObjectValues: ["", "XXS", "XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL", "5XL", "6XL", "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22"])
-        sleeveStyleSelector.addItems(withTitles: ["Short Sleeve", "Long Sleeve", "3/4 Sleeve", "Sleeveless"])
         sleeveLengthSelector.addItems(withObjectValues: ["", "Short Sleeve", "Long Sleeve", "3/4 Sleeve", "Sleeveless"])
         storeCategorySelector.addItems(withObjectValues: ["", "Dresses", "Other", "Pants", "Shorts", "Skirts", "Swimwear", "Tops", "Mens Shoes", "Womens Shoes"])
         sizeTypeSelector.addItems(withTitles: ["", "Juniors", "Regular", "Petite", "Plus"])
+        styleSelector.addItems(withObjectValues: ["", "Basic", "Camisole", "Cropped", "Jersey", "Kimono", "Ringer", "Tunic"])
+        necklineSelector.addItems(withObjectValues: ["", "Boat Neck", "Collared","Cowl Neck", "Crew Neck", "Halter", "Henley", "High Neck", "Mock Neck", "Off the Shoulder", "One Shoulder", "Round Neck", "Scoop Neck", "Square Neck", "Sweetheart", "Turtleneck", "V-Neck"])
+        materialSelector.addItems(withObjectValues: ["", "Polyester", "Cotton", "Nylon", "Acetate", "Alfa", "Alginate", "Alpaca", "Angora", "Animal Hair", "Aramid", "Bamboo", "Camel", "Cashgora", "Cashmere", "Chlorofiber", "Coir", "Cupro", "Elastodiene", "Elastolefin", "Elastomultiester", "Faux Fur", "Faux Leather", "Flax", "Fluorofiber", "Fur", "Guanaco", "Hemp", "Henequen", "Jute", "Kapok", "Leather", "Linen", "Llama", "Lyocell", "Maguey", "Manila Hemp", "Modacrylic", "Modal", "Mohair", "Patent Leather", "Polyacrylate Fiber", "Polyamide", "Polycarbamide", "Polyethylene", "Polyimide", "Polylactide", "Polypropylene", "Polyurethane", "Ramie", "Silk", "Sisal", "Spandex", "Suede", "Sunn", "Tiacetate", "Trivinyl", "Vicuna", "Viscose", "Wool", "Yak"])
+        occasionSelector.addItems(withObjectValues: ["", "Casual", "Business", "Formal", "Party/Cocktail", "Travel", "Wedding", "Workwear"])
+        patternSelector.addItems(withObjectValues: ["", "Solid", "Floral", "Striped", "Polka Dot", "Geometric", "Argyle/Diamond", "Camouflage", "Check", "Colorblock", "Fair Isle", "Herringbone", "Paisley", "Plaid"])
+        waistSelector.addItems(withObjectValues: ["", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" ])
+        inseamSelector.addItems(withObjectValues: ["", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40"])
+        riseSelector.addItems(withObjectValues: ["", "Ultra Low", "Low", "Mid", "High"])
+        productSelector.addItems(withTitles: stringArray)
         
-    
     
         
         // Select an item at a specific index
@@ -824,53 +973,54 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         try! realm.write {
         if sender.state == .on{
         inventoryCheckInModeState =  "on"
-            image1.image = nil
-            image2.image = nil
-            image3.image = nil
-            image4.image = nil
-            image5.image = nil
-            image6.image = nil
-            image7.image = nil
-            image8.image = nil
-            image9.image = nil
-            image10.image = nil
-            image11.image = nil
-            image12.image = nil
-            image13.image = nil
-            image14.image = nil
-            image15.image = nil
-            shippingSelector.selectItem(at: 0)
-            weightDisplay.stringValue = ""
-            inventoryCount.stringValue = ""
-            msrp.stringValue = ""
-            price.stringValue = ""
-            sku.stringValue = ""
-            UPCField.stringValue = ""
-            let tempItemDescription = result![0].itemDescription
-            itemDescriptionField.stringValue = ""
-            result![0].itemDescription = tempItemDescription
-            let tempBrand = result![0].brand
-            brandSelector.selectItem(at: 0)
-            result![0].brand = tempBrand
-            let tempStyle = result![0].style
-            styleSelector.stringValue = ""
-            result![0].style = tempStyle
-            let tempColor = result![0].color
-            colorSelector.stringValue = ""
-            result![0].color = tempColor
-             let tempSize = result![0].size
-            sizeSelector.stringValue = ""
-            result![0].size = tempSize
-            let tempSleeveStyle = result![0].sleeveStyle
-            sleeveStyle.stringValue = ""
-            result![0].sleeveStyle = tempSleeveStyle
-            let tempSleeveLength = result![0].sleeveLength
-            sleeveLengthSelector.stringValue = ""
-            result![0].sleeveLength = tempSleeveLength
-            ebayCategory.stringValue = ""
-            storeCategorySelector.stringValue = ""
-            sizeTypeSelector.stringValue = ""
-            ebayConditionSelector.selectItem(at: 0)
+              zeroOut()
+//            image1.image = nil
+//            image2.image = nil
+//            image3.image = nil
+//            image4.image = nil
+//            image5.image = nil
+//            image6.image = nil
+//            image7.image = nil
+//            image8.image = nil
+//            image9.image = nil
+//            image10.image = nil
+//            image11.image = nil
+//            image12.image = nil
+//            image13.image = nil
+//            image14.image = nil
+//            image15.image = nil
+//            shippingSelector.selectItem(at: 0)
+//            weightDisplay.stringValue = ""
+//            inventoryCount.stringValue = ""
+//            msrp.stringValue = ""
+//            price.stringValue = ""
+//            sku.stringValue = ""
+//            UPCField.stringValue = ""
+//            let tempItemDescription = result![0].itemDescription
+//            itemDescriptionField.stringValue = ""
+//            result![0].itemDescription = tempItemDescription
+//            let tempBrand = result![0].brand
+//            brandSelector.selectItem(at: 0)
+//            result![0].brand = tempBrand
+//            let tempType = result![0].type
+//            typeSelector.stringValue = ""
+//            result![0].type = tempType
+//            let tempColor = result![0].color
+//            colorSelector.stringValue = ""
+//            result![0].color = tempColor
+//             let tempSize = result![0].size
+//            sizeSelector.stringValue = ""
+//            result![0].size = tempSize
+//            let tempSleeveStyle = result![0].sleeveStyle
+//            result![0].sleeveStyle = tempSleeveStyle
+//            let tempSleeveLength = result![0].sleeveLength
+//            sleeveLengthSelector.stringValue = ""
+//            result![0].sleeveLength = tempSleeveLength
+//            ebayCategory.stringValue = ""
+//            storeCategorySelector.stringValue = ""
+//            sizeTypeSelector.stringValue = ""
+//            ebayConditionSelector.selectItem(at: 0)
+//
         qtyReceived.stringValue = "1"
             qtyReceived.backgroundColor = NSColor.yellow
              SearchBar(self)
@@ -881,52 +1031,53 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             
             
             setupPopUpButtons()
-            image1.image = nil
-            image2.image = nil
-            image3.image = nil
-            image4.image = nil
-            image5.image = nil
-            image6.image = nil
-            image7.image = nil
-            image8.image = nil
-            image9.image = nil
-            image10.image = nil
-            image11.image = nil
-            image12.image = nil
-            image13.image = nil
-            image14.image = nil
-            image15.image = nil
-            weightDisplay.stringValue = ""
-            inventoryCount.stringValue = ""
-            msrp.stringValue = ""
-            shippingSelector.selectItem(at: 0)
-            sku.stringValue = ""
-            UPCField.stringValue = ""
-            let tempItemDescription = result![0].itemDescription
-            itemDescriptionField.stringValue = ""
-            result![0].itemDescription = tempItemDescription
-            let tempBrand = result![0].brand
-            brandSelector.selectItem(at: 0)
-            result![0].brand = tempBrand
-            let tempStyle = result![0].style
-            styleSelector.stringValue = ""
-            result![0].style = tempStyle
-            let tempColor = result![0].color
-            colorSelector.stringValue = ""
-            result![0].color = tempColor
-             let tempSize = result![0].size
-            sizeSelector.stringValue = ""
-            result![0].size = tempSize
-            let tempSleeveStyle = result![0].sleeveStyle
-            sleeveStyle.stringValue = ""
-            result![0].sleeveStyle = tempSleeveStyle
-            let tempSleeveLength = result![0].sleeveLength
-            sleeveLengthSelector.stringValue = ""
-            result![0].sleeveLength = tempSleeveLength
-            ebayCategory.stringValue = ""
-            storeCategorySelector.stringValue = ""
-            sizeTypeSelector.stringValue = ""
-            ebayConditionSelector.selectItem(at: 0)
+              zeroOut()
+//            image1.image = nil
+//            image2.image = nil
+//            image3.image = nil
+//            image4.image = nil
+//            image5.image = nil
+//            image6.image = nil
+//            image7.image = nil
+//            image8.image = nil
+//            image9.image = nil
+//            image10.image = nil
+//            image11.image = nil
+//            image12.image = nil
+//            image13.image = nil
+//            image14.image = nil
+//            image15.image = nil
+//            weightDisplay.stringValue = ""
+//            inventoryCount.stringValue = ""
+//            msrp.stringValue = ""
+//            shippingSelector.selectItem(at: 0)
+//            sku.stringValue = ""
+//            UPCField.stringValue = ""
+//            let tempItemDescription = result![0].itemDescription
+//            itemDescriptionField.stringValue = ""
+//            result![0].itemDescription = tempItemDescription
+//            let tempBrand = result![0].brand
+//            brandSelector.selectItem(at: 0)
+//            result![0].brand = tempBrand
+//            let tempType = result![0].type
+//            typeSelector.stringValue = ""
+//            result![0].type = tempType
+//            let tempColor = result![0].color
+//            colorSelector.stringValue = ""
+//            result![0].color = tempColor
+//             let tempSize = result![0].size
+//            sizeSelector.stringValue = ""
+//            result![0].size = tempSize
+//            let tempSleeveStyle = result![0].sleeveStyle
+//            result![0].sleeveStyle = tempSleeveStyle
+//            let tempSleeveLength = result![0].sleeveLength
+//            sleeveLengthSelector.stringValue = ""
+//            result![0].sleeveLength = tempSleeveLength
+//            ebayCategory.stringValue = ""
+//            storeCategorySelector.stringValue = ""
+//            sizeTypeSelector.stringValue = ""
+//            ebayConditionSelector.selectItem(at: 0)
+            
             UPCField.stringValue = "not found"
             UPCField.textColor = NSColor.red
             itemDescriptionField.stringValue = "not found"
@@ -1178,6 +1329,13 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         }
     }
     
+    func splitAtFirst(str: String, delimiter: String) -> (String)? {
+        guard let upperIndex = (str.range(of: delimiter)?.upperBound), let _ = (str.range(of: delimiter)?.lowerBound) else { return nil }
+       //let firstPart: String = .init(str.prefix(upTo: lowerIndex))
+       let lastPart: String = .init(str.suffix(from: upperIndex))
+       return (lastPart)
+    }
+
     
     @IBAction func SearchBar(_ sender: Any) {
         arrayOfURLs = []
@@ -1191,40 +1349,40 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         if UPCSearchField.stringValue.count != 12 {
             print("clear all fields placeholder code")
             setupPopUpButtons()
-            image1.image = nil
-            image2.image = nil
-            image3.image = nil
-            image4.image = nil
-            image5.image = nil
-            image6.image = nil
-            image7.image = nil
-            image8.image = nil
-            image9.image = nil
-            image10.image = nil
-            image11.image = nil
-            image12.image = nil
-            image13.image = nil
-            image14.image = nil
-            image15.image = nil
-            inventoryCount.stringValue = ""
-            msrp.stringValue = ""
-            percentageOffMsrpSelector.selectItem(at: 0)
-            price.stringValue = ""
-            shippingSelector.selectItem(at: 0)
-            sku.stringValue = ""
-            UPCField.stringValue = ""
-            itemDescriptionField.stringValue = ""
-            brandSelector.selectItem(at: 0)
-            styleSelector.selectItem(at: 0)
-            colorSelector.selectItem(at: 0)
-            sizeSelector.selectItem(at: 0)
-            sleeveStyleSelector.selectItem(at: 0)
-            sleeveLengthSelector.selectItem(at: 0)
-            ebayCategory.stringValue = ""
-            storeCategorySelector.selectItem(at: 0)
-            sizeTypeSelector.selectItem(at: 0)
-            ebayConditionSelector.selectItem(at: 0)
-            image.stringValue = ""
+            zeroOutSearch()
+//            image1.image = nil
+//            image2.image = nil
+//            image3.image = nil
+//            image4.image = nil
+//            image5.image = nil
+//            image6.image = nil
+//            image7.image = nil
+//            image8.image = nil
+//            image9.image = nil
+//            image10.image = nil
+//            image11.image = nil
+//            image12.image = nil
+//            image13.image = nil
+//            image14.image = nil
+//            image15.image = nil
+//            inventoryCount.stringValue = ""
+//            msrp.stringValue = ""
+//            percentageOffMsrpSelector.selectItem(at: 0)
+//            price.stringValue = ""
+//            shippingSelector.selectItem(at: 0)
+//            sku.stringValue = ""
+//            UPCField.stringValue = ""
+//            itemDescriptionField.stringValue = ""
+//            brandSelector.selectItem(at: 0)
+//            typeSelector.selectItem(at: 0)
+//            colorSelector.selectItem(at: 0)
+//            sizeSelector.selectItem(at: 0)
+//            sleeveLengthSelector.selectItem(at: 0)
+//            ebayCategory.stringValue = ""
+//            storeCategorySelector.selectItem(at: 0)
+//            sizeTypeSelector.selectItem(at: 0)
+//            ebayConditionSelector.selectItem(at: 0)
+//            image.stringValue = ""
             
             
             
@@ -1277,17 +1435,18 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                 
 
                 if reviewModeState == "off" {
-                    //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-                    weightDisplay.stringValue = ""
-                   // shipping.stringValue = ""
+                    
                     UPCField.textColor = NSColor.black
                     itemDescriptionField.textColor = NSColor.black
                     setupPopUpButtons()
                     imageOverride1TxtField.stringValue = ""
                     imageOverride2TxtField.stringValue = ""
-    //*************
+                    weightDisplay.stringValue = ""
                     price.stringValue = ""
-                    
+                    noImagesCheckBox.state = NSControl.StateValue.off
+                    if (result![0].imageSlot1) == "******************************" {
+                        noImagesCheckBox.state = NSControl.StateValue.on
+                    }
                     UPCField.stringValue = String(result![0].upc)
                     OriginalQty.stringValue = String(result![0].originalQty)
                     inventoryCount.stringValue = String(result![0].inventoryCount)
@@ -1295,15 +1454,32 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     colorSelector.stringValue = String(result![0].color)
                     sku.stringValue = String(result![0].sku)
                     brandSelector.stringValue = String(result![0].brand)
-                    styleSelector.stringValue = String(result![0].style)
+                    typeSelector.stringValue = String(result![0].type)
                     colorSelector.stringValue = String(result![0].color)
                     sizeSelector.stringValue = String(result![0].size)
                     image.stringValue = String(result![0].image)
-                    //let msrpInt = Int(result![0].msrp)
                     msrp.stringValue = String(result![0].msrp)
                     price.stringValue = result![0].price
-                    sleeveStyle.stringValue = String(result![0].sleeveStyle)
                     sleeveLengthSelector.stringValue = String(result![0].sleeveLength)
+                    styleSelector.stringValue = String(result![0].style)
+                    necklineSelector.stringValue = String(result![0].neckline)
+                    materialSelector.stringValue = String(result![0].material)
+                    occasionSelector.stringValue = String(result![0].occasion)
+                    patternSelector.stringValue = String(result![0].pattern)
+                    waistSelector.stringValue = String(result![0].waist)
+                    inseamSelector.stringValue = String(result![0].inseam)
+                    riseSelector.stringValue = String(result![0].rise)
+                    
+                    
+                    let str = String(result![0].sku)
+                    let rowNum = Int(splitAtFirst(str: str, delimiter: "_")!)
+                    //print(rowNum)
+                    productSelector.selectItem(at: rowNum!)
+                    
+                    
+                    
+                    
+                    
                     readAndSetEbayCategoryCode()
                     _ = storeCategoryTranslateCodeForDisplay()
                     setEbayConditionSelectorValue()
@@ -1311,16 +1487,20 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     ovrUPC = String(result![0].upc)
                     shippingTranslateCodeForDisplay()
             
+                
                     
-                    
-                    //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-                    
-                    if result![0].style == "Jeans" || result![0].style == "Legging" || result![0].style == "Pants" || result![0].style == "Shorts" || result![0].style == "Skirt" || result![0].style == "Trouser"{
+                    if result![0].type == "Jeans" || result![0].type == "Legging" || result![0].type == "Pants" || result![0].type == "Shorts" || result![0].type == "Skirt" || result![0].type == "Trouser"{
                         hideSleeve()
+                        unHideWaist()
                     }else{
                         unhideSleeve()
+                        hideWaist()
                     }
                     
+                    
+                    if result![0].image == "" {
+                        return
+                    } else {
                     //iterate and set image display
                     DispatchQueue.global(qos: .userInitiated).async {
                    // DispatchQueue.main.async {
@@ -1353,7 +1533,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                         }
                     }while incrementer <= 7
                     }
-                    
+                    }
                     
                     
                     
@@ -1363,6 +1543,11 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     UPCField.textColor = NSColor.black
                     itemDescriptionField.textColor = NSColor.black
                     updateimages()
+                    noImagesCheckBox.state = NSControl.StateValue.off
+                    if (result![0].imageSlot1) == "******************************" {
+                        noImagesCheckBox.state = NSControl.StateValue.on
+                    }
+                    
                     inventoryCount.stringValue = String(result![0].inventoryCount)
                     clearimageSelectedPopUpButtons()
                     msrp.stringValue = String(result![0].msrp)
@@ -1372,11 +1557,18 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
                     itemDescriptionField.stringValue = String(result![0].itemDescription)
                     shippingTranslateCodeForDisplay()
                     brandSelector.stringValue = String(result![0].brand)
-                    styleSelector.stringValue = String(result![0].style)
+                    typeSelector.stringValue = String(result![0].type)
                     colorSelector.stringValue = String(result![0].color)
                     sizeSelector.stringValue = String(result![0].size)
-                    sleeveStyle.stringValue = String(result![0].sleeveStyle)
                     sleeveLengthSelector.stringValue = String(result![0].sleeveLength)
+                    styleSelector.stringValue = String(result![0].style)
+                    necklineSelector.stringValue = String(result![0].neckline)
+                    materialSelector.stringValue = String(result![0].material)
+                    occasionSelector.stringValue = String(result![0].occasion)
+                    patternSelector.stringValue = String(result![0].pattern)
+                    waistSelector.stringValue = String(result![0].waist)
+                    inseamSelector.stringValue = String(result![0].inseam)
+                    riseSelector.stringValue = String(result![0].rise)
                     readAndSetEbayCategoryCode()
                     _ = storeCategoryTranslateCodeForDisplay()
                     setSizeTypeSelectorValue()
@@ -1387,54 +1579,40 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
             } else {
  print("error.localizedDescription2")
                 setupPopUpButtons()
-                image1.image = nil
-                image2.image = nil
-                image3.image = nil
-                image4.image = nil
-                image5.image = nil
-                image6.image = nil
-                image7.image = nil
-                image8.image = nil
-                image9.image = nil
-                image10.image = nil
-                image11.image = nil
-                image12.image = nil
-                image13.image = nil
-                image14.image = nil
-                image15.image = nil
-                weightDisplay.stringValue = ""
-                inventoryCount.stringValue = ""
-                msrp.stringValue = ""
-                price.doubleValue = 0
-                shippingSelector.selectItem(at: 0)
-                sku.stringValue = ""
-                UPCField.stringValue = ""
-                //let tempItemDescription = result![0].itemDescription
-                itemDescriptionField.textColor = .red
-                itemDescriptionField.stringValue = "not found"
-                //result![0].itemDescription = tempItemDescription
-                //let tempBrand = result![0].brand
-                brandSelector.stringValue = ""
-                //result![0].brand = tempBrand
-                //let tempStyle = result![0].style
-                styleSelector.stringValue = ""
-                //result![0].style = tempStyle
-                //let tempColor = result![0].color
-                colorSelector.stringValue = ""
-                //result![0].color = tempColor
-                // let tempSize = result![0].size
-                sizeSelector.stringValue = ""
-                //result![0].size = tempSize
-                //let tempSleeveStyle = result![0].sleeveStyle
-                sleeveStyle.stringValue = ""
-                //result![0].sleeveStyle = tempSleeveStyle
-                //let tempSleeveLength = result![0].sleeveLength
-                sleeveLengthSelector.stringValue = ""
-                //result![0].sleeveLength = tempSleeveLength
-                ebayCategory.stringValue = ""
-                storeCategorySelector.stringValue = ""
-                sizeTypeSelector.stringValue = ""
-                ebayConditionSelector.selectItem(at: 0)
+                zeroOutSearch()
+//                image1.image = nil
+//                image2.image = nil
+//                image3.image = nil
+//                image4.image = nil
+//                image5.image = nil
+//                image6.image = nil
+//                image7.image = nil
+//                image8.image = nil
+//                image9.image = nil
+//                image10.image = nil
+//                image11.image = nil
+//                image12.image = nil
+//                image13.image = nil
+//                image14.image = nil
+//                image15.image = nil
+//                weightDisplay.stringValue = ""
+//                inventoryCount.stringValue = ""
+//                msrp.stringValue = ""
+//                price.doubleValue = 0
+//                shippingSelector.selectItem(at: 0)
+//                sku.stringValue = ""
+//                UPCField.stringValue = ""
+//                itemDescriptionField.textColor = .red
+//                itemDescriptionField.stringValue = "not found"
+//                brandSelector.stringValue = ""
+//                typeSelector.stringValue = ""
+//                colorSelector.stringValue = ""
+//                sizeSelector.stringValue = ""
+//                sleeveLengthSelector.stringValue = ""
+//                ebayCategory.stringValue = ""
+//                storeCategorySelector.stringValue = ""
+//                sizeTypeSelector.stringValue = ""
+//                ebayConditionSelector.selectItem(at: 0)
                
             
             }
@@ -1454,58 +1632,8 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         inventoryCount.stringValue = String(qtyReceived.intValue + inventoryCount.intValue)
         result![0].inventoryCount = inventoryCount.integerValue
         self.qtyReceived.stringValue = "1"
-    
-        
-//        if inventoryCheckInModeState == "on" {
-//             result![0].shipping = ecomDashShipCode!
-//        let overrideShippingIndex = overrideShipping.indexOfSelectedItem
-//
-//            if overrideShippingIndex == 0 {
-//                return
-//                 }else if overrideShippingIndex == 1 {
-//                      ecomDashShipCode = 851436
-//                  }else if overrideShippingIndex == 2 {
-//                      ecomDashShipCode = 851450
-//                  }else if overrideShippingIndex == 3 {
-//                      ecomDashShipCode = 912425
-//                  }else if overrideShippingIndex == 4 {
-//                      ecomDashShipCode = 1001772
-//                  }else if overrideShippingIndex == 5 {
-//                      ecomDashShipCode = 851451
-//                  }else if overrideShippingIndex == 6 {
-//                      ecomDashShipCode = 999308
-//                  }
-//               result![0].shipping = ecomDashShipCode!
-//        }
         }
     }
-    
-    
-//    @IBAction func oversizeShipSelected(_ sender: NSPopUpButton) {
-//        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-//        let realm = try! Realm(configuration: config)
-//        try! realm.write {
-//        let overrideShippingIndex = overrideShipping.indexOfSelectedItem
-//                   if overrideShippingIndex == 1 {
-//                       ecomDashShipCode = 851436
-//                   }else if overrideShippingIndex == 2 {
-//                       ecomDashShipCode = 851450
-//                   }else if overrideShippingIndex == 3 {
-//                      ecomDashShipCode = 912425
-//                   }else if overrideShippingIndex == 4 {
-//                       ecomDashShipCode = 1001772
-//                   }else if overrideShippingIndex == 5 {
-//                       ecomDashShipCode = 851451
-//                   }else if overrideShippingIndex == 6 {
-//                       ecomDashShipCode = 999308
-//                   }
-//        result![0].shipping = ecomDashShipCode!
-//            shippingTranslateCodeForDisplay()
-//
-//    }
-//    }
-    
-    
     
     
     @IBAction func updateImages(_ sender: NSButton) {
@@ -1744,297 +1872,327 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     }
     
     
-    @IBAction func styleDidSet(_ sender: NSComboBox) {
+    @IBAction func typeDidSet(_ sender: NSComboBox) {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
         let realm = try! Realm(configuration: config)
         try! realm.write {
-            let previousStyle = result![0].style
-            result![0].style = styleSelector.stringValue
-            let newStyle = styleSelector.stringValue
-            result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousStyle, with: newStyle)
+            let previousType = result![0].type
+            result![0].type = typeSelector.stringValue
+            let newType = typeSelector.stringValue
+            result![0].itemDescription = result![0].itemDescription.replacingOccurrences(of: previousType, with: newType)
             itemDescriptionField.stringValue = result![0].itemDescription
             
             //*********************************************************************************************************
-            if styleSelector.indexOfSelectedItem == 1 {
+            if typeSelector.indexOfSelectedItem == 1 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Blouse"
                 result![0].storeCategory = "29010495011"
                 storeCategorySelector.stringValue = "Tops"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
                 
-            }else if styleSelector.indexOfSelectedItem == 2 {
+            }else if typeSelector.indexOfSelectedItem == 2 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Bodysuit"
                 result![0].storeCategory = "29010495011"
                 storeCategorySelector.stringValue = "Tops"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 3 {
+            }else if typeSelector.indexOfSelectedItem == 3 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Cami"
                 result![0].storeCategory = "29010495011"
                 storeCategorySelector.stringValue = "Tops"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 4 {
+            }else if typeSelector.indexOfSelectedItem == 4 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "63862"
                 ebayCategory.stringValue = "Coat"
                 result![0].storeCategory = "1"
                 storeCategorySelector.stringValue = "Other"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 5 {
+            }else if typeSelector.indexOfSelectedItem == 5 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "63861"
                 ebayCategory.stringValue = "Dress"
                 result![0].storeCategory = "28973014011"
                 storeCategorySelector.stringValue = "Dresses"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 6 {
+            }else if typeSelector.indexOfSelectedItem == 6 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "63861"
                 ebayCategory.stringValue = "Gown"
                 result![0].storeCategory = "28973014011"
                 storeCategorySelector.stringValue = "Dresses"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 7 {
+            }else if typeSelector.indexOfSelectedItem == 7 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "155226"
                 ebayCategory.stringValue = "Hoodie"
                 result![0].storeCategory = "1"
                 storeCategorySelector.stringValue = "Other"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 8 {
+            }else if typeSelector.indexOfSelectedItem == 8 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "63862"
                 ebayCategory.stringValue = "Jacket"
                 result![0].storeCategory = "1"
                 storeCategorySelector.stringValue = "Other"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 9 {
+            }else if typeSelector.indexOfSelectedItem == 9 {
                 hideSleeve()
+                unHideWaist()
                 result![0].ebayCategory = "11554"
                 ebayCategory.stringValue = "Jeans"
                 result![0].storeCategory = "31775381011"
                 storeCategorySelector.stringValue = "Other"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 10 {
+            }else if typeSelector.indexOfSelectedItem == 10 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "3009"
                 ebayCategory.stringValue = "Jumpsuit"
                 result![0].storeCategory = "1"
                 storeCategorySelector.stringValue = "Other"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 11 {
+            }else if typeSelector.indexOfSelectedItem == 11 {
                 hideSleeve()
+                unHideWaist()
                 result![0].ebayCategory = "63863"
                 ebayCategory.stringValue = "Legging"
                 result![0].storeCategory = "31775381011"
                 storeCategorySelector.stringValue = "Pants"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 12 {
+            }else if typeSelector.indexOfSelectedItem == 12 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "63861"
                 ebayCategory.stringValue = "Maxi"
                 result![0].storeCategory = "28973014011"
                 storeCategorySelector.stringValue = "Dresses"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 13 {
+            }else if typeSelector.indexOfSelectedItem == 13 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "63864"
                 ebayCategory.stringValue = "Mini"
                 result![0].storeCategory = "33096451011"
                 storeCategorySelector.stringValue = "Dresses"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 14 {
+            }else if typeSelector.indexOfSelectedItem == 14 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "63863"
                 ebayCategory.stringValue = "Overall"
                 result![0].storeCategory = "31775381011"
                 storeCategorySelector.stringValue = "Pants"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 15 {
+            }else if typeSelector.indexOfSelectedItem == 15 {
                 hideSleeve()
+                unHideWaist()
                 result![0].ebayCategory = "63863"
                 ebayCategory.stringValue = "Pants"
                 result![0].storeCategory = "31775381011"
                 storeCategorySelector.stringValue = "Pants"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 16 {
+            }else if typeSelector.indexOfSelectedItem == 16 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Pullover"
                 result![0].storeCategory = "29010495011"
                 storeCategorySelector.stringValue = "Tops"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 17 {
+            }else if typeSelector.indexOfSelectedItem == 17 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "3009"
                 ebayCategory.stringValue = "Romper"
                 result![0].storeCategory = "1"
                 storeCategorySelector.stringValue = "Other"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 18 {
+            }else if typeSelector.indexOfSelectedItem == 18 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Shirt"
                 result![0].storeCategory = "29010495011"
                 storeCategorySelector.stringValue = "Tops"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 19 {
+            }else if typeSelector.indexOfSelectedItem == 19 {
                 hideSleeve()
+                unHideWaist()
                 result![0].ebayCategory = "11555"
                 ebayCategory.stringValue = "Shorts"
                 result![0].storeCategory = "31775416011"
                 storeCategorySelector.stringValue = "Shorts"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 20 {
+            }else if typeSelector.indexOfSelectedItem == 20 {
                 hideSleeve()
+                unHideWaist()
                 result![0].ebayCategory =  "63864"
                 ebayCategory.stringValue = "Skirt"
                 result![0].storeCategory = "33096451011"
                 storeCategorySelector.stringValue = "Skirts"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 21 {
+            }else if typeSelector.indexOfSelectedItem == 21 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "63855"
                 ebayCategory.stringValue = "Sleepwear"
                 result![0].storeCategory = "1"
                 storeCategorySelector.stringValue = "Other"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 22 {
+            }else if typeSelector.indexOfSelectedItem == 22 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "63866"
                 ebayCategory.stringValue = "Sweater"
                 result![0].storeCategory = "29010495011"
                 storeCategorySelector.stringValue = "Tops"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 23 {
+            }else if typeSelector.indexOfSelectedItem == 23 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "155226"
                 ebayCategory.stringValue = "Sweatshirt"
                 result![0].storeCategory = "1"
                 storeCategorySelector.stringValue = "Other"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 24 {
+            }else if typeSelector.indexOfSelectedItem == 24 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Tank"
                 result![0].storeCategory = "29010495011"
                 storeCategorySelector.stringValue = "Tops"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 25 {
+            }else if typeSelector.indexOfSelectedItem == 25 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Tee"
                 result![0].storeCategory = "29010495011"
                 storeCategorySelector.stringValue = "Tops"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 26 {
+            }else if typeSelector.indexOfSelectedItem == 26 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Top"
                 result![0].storeCategory = "29010495011"
                 storeCategorySelector.stringValue = "Tops"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 27 {
-                unhideSleeve()
-                result![0].ebayCategory = "53159"
-                ebayCategory.stringValue = "T-shirt"
-                result![0].storeCategory = "29010495011"
-                storeCategorySelector.stringValue = "Tops"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
-                
-                
-            }else if styleSelector.indexOfSelectedItem == 28 {
+            }else if typeSelector.indexOfSelectedItem == 27 {
                 hideSleeve()
+                unHideWaist()
                 result![0].ebayCategory = "63863"
                 ebayCategory.stringValue = "Trouser"
                 result![0].storeCategory = "31775381011"
                 storeCategorySelector.stringValue = "Pants"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
-                
-            }else if styleSelector.indexOfSelectedItem == 29 {
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
+            
+            }else if typeSelector.indexOfSelectedItem == 28 {
                 unhideSleeve()
+                hideWaist()
+                result![0].ebayCategory = "53159"
+                ebayCategory.stringValue = "T-shirt"
+                result![0].storeCategory = "29010495011"
+                storeCategorySelector.stringValue = "Tops"
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
+                
+            }else if typeSelector.indexOfSelectedItem == 29 {
+                unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "53159"
                 ebayCategory.stringValue = "Tunic"
                 result![0].storeCategory = "29010495011"
                 storeCategorySelector.stringValue = "Tops"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 30 {
+            }else if typeSelector.indexOfSelectedItem == 30 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "63862"
                 ebayCategory.stringValue = "Vest"
                 result![0].storeCategory = "1"
                 storeCategorySelector.stringValue = "Other"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
                 
-            }else if styleSelector.indexOfSelectedItem == 31 {
+            }else if typeSelector.indexOfSelectedItem == 31 {
                 unhideSleeve()
+                hideWaist()
                 result![0].ebayCategory = "63861"
                 ebayCategory.stringValue = "Wrap"
                 result![0].storeCategory = "Dresses"
                 storeCategorySelector.stringValue = "Dresses"
-                self.styleSelector.isEnabled = false
-                self.styleSelector.isEnabled = true
+                self.typeSelector.isEnabled = false
+                self.typeSelector.isEnabled = true
             }else{
                 return
             }
@@ -2162,15 +2320,7 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         }
     }
     
-    @IBAction func sleeveStyleDidSet(_ sender: NSTextField) {
-        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
-        let realm = try! Realm(configuration: config)
-        try! realm.write {
-            result![0].sleeveStyle = sleeveStyle.stringValue
-            self.sleeveStyleSelector.isEnabled = false
-            self.sleeveStyleSelector.isEnabled = true
-        }
-    }
+    
     
     @IBAction func sleeveLengthDidSet(_ sender: NSComboBox) {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
@@ -2272,6 +2422,372 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
     }
     
     
+    @IBAction func styleDidSet(_ sender: NSComboBox) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+               let realm = try! Realm(configuration: config)
+               try! realm.write {
+                   
+                if styleSelector.indexOfSelectedItem == 1 {
+                    result![0].style = "Basic"
+                }else if styleSelector.indexOfSelectedItem == 2 {
+                    result![0].style = "Camisole"
+                }else if styleSelector.indexOfSelectedItem == 3 {
+                    result![0].style = "Cropped"
+                }else if styleSelector.indexOfSelectedItem == 4 {
+                    result![0].style = "Jersey"
+                }else if styleSelector.indexOfSelectedItem == 5 {
+                    result![0].style = "Kimono"
+                }else if styleSelector.indexOfSelectedItem == 6 {
+                    result![0].style = "Ringer"
+                }else if styleSelector.indexOfSelectedItem == 7 {
+                    result![0].style = "Tunic"
+                }
+                   self.styleSelector.isEnabled = false
+                   self.styleSelector.isEnabled = true
+               }
+    }
+    
+    @IBAction func necklineDidSet(_ sender: NSComboBox) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+            
+            if necklineSelector.indexOfSelectedItem == 1 {
+                result![0].neckline = "Boat Neck"
+            }else if necklineSelector.indexOfSelectedItem == 2 {
+                result![0].neckline = "Collared"
+            }else if necklineSelector.indexOfSelectedItem == 3 {
+                result![0].neckline = "Cowl Neck"
+            }else if necklineSelector.indexOfSelectedItem == 4 {
+                result![0].neckline = "Crew Neck"
+            }else if necklineSelector.indexOfSelectedItem == 5 {
+                result![0].neckline = "Halter"
+            }else if necklineSelector.indexOfSelectedItem == 6 {
+                result![0].neckline = "Henley"
+            }else if necklineSelector.indexOfSelectedItem == 7 {
+                result![0].neckline = "High Neck"
+            }else if necklineSelector.indexOfSelectedItem == 8 {
+                result![0].neckline = "Mock Neck"
+            }else if necklineSelector.indexOfSelectedItem == 9 {
+                result![0].neckline = "Off the Shoulder"
+            }else if necklineSelector.indexOfSelectedItem == 10 {
+                result![0].neckline = "Round Neck"
+            }else if necklineSelector.indexOfSelectedItem == 11 {
+                result![0].neckline = "Scoop Neck"
+            }else if necklineSelector.indexOfSelectedItem == 12 {
+                result![0].neckline = "Square Neck"
+            }else if necklineSelector.indexOfSelectedItem == 13 {
+                result![0].neckline = "Sweetheart"
+            }else if necklineSelector.indexOfSelectedItem == 14 {
+                result![0].neckline = "Turttleneck"
+            }else if necklineSelector.indexOfSelectedItem == 15 {
+                result![0].neckline = "V-Neck"
+            }
+            self.necklineSelector.isEnabled = false
+            self.necklineSelector.isEnabled = true
+        }
+    }
+    
+    @IBAction func materialDidSet(_ sender: NSComboBox) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+            
+            if materialSelector.indexOfSelectedItem == 1 {
+                result![0].material = "Polyester"
+            }else if materialSelector.indexOfSelectedItem == 2 {
+                result![0].material = "Cotton"
+            }else if materialSelector.indexOfSelectedItem == 3 {
+                result![0].material = "Nylon"
+            }else if materialSelector.indexOfSelectedItem == 4 {
+                result![0].material = "Acetate"
+            }else if materialSelector.indexOfSelectedItem == 5 {
+                result![0].material = "Alfa"
+            }else if materialSelector.indexOfSelectedItem == 6 {
+                result![0].material = "Alginate"
+            }else if materialSelector.indexOfSelectedItem == 7 {
+                result![0].material = "Alpaca"
+            }else if materialSelector.indexOfSelectedItem == 8 {
+                result![0].material = "Angora"
+            }else if materialSelector.indexOfSelectedItem == 9 {
+                result![0].material = "Animal Hair"
+            }else if materialSelector.indexOfSelectedItem == 10 {
+                result![0].material = "Aramid"
+            }else if materialSelector.indexOfSelectedItem == 11 {
+                result![0].material = "Bamboo"
+            }else if materialSelector.indexOfSelectedItem == 12 {
+                result![0].material = "Camel"
+            }else if materialSelector.indexOfSelectedItem == 13 {
+                result![0].material = "Cashgora"
+            }else if materialSelector.indexOfSelectedItem == 14 {
+                result![0].material = "Cashmere"
+            }else if materialSelector.indexOfSelectedItem == 15 {
+                result![0].material = "Chlorofiber"
+            }else if materialSelector.indexOfSelectedItem == 16 {
+                result![0].material = "Coir"
+            }else if materialSelector.indexOfSelectedItem == 17 {
+                result![0].material = "Cupro"
+            }else if materialSelector.indexOfSelectedItem == 18 {
+                result![0].material = "Elastodiene"
+            }else if materialSelector.indexOfSelectedItem == 19 {
+                result![0].material = "Elastolefin"
+            }else if materialSelector.indexOfSelectedItem == 20 {
+                result![0].material = "Elastomultiester"
+            }else if materialSelector.indexOfSelectedItem == 21 {
+                result![0].material = "Faux Fur"
+            }else if materialSelector.indexOfSelectedItem == 22 {
+                result![0].material = "Faux Leather"
+            }else if materialSelector.indexOfSelectedItem == 23 {
+                result![0].material = "Flax"
+            }else if materialSelector.indexOfSelectedItem == 24 {
+                result![0].material = "Fluorofiber"
+            }else if materialSelector.indexOfSelectedItem == 25 {
+                result![0].material = "Fur"
+            }else if materialSelector.indexOfSelectedItem == 26 {
+                result![0].material = "Guanaco"
+            }else if materialSelector.indexOfSelectedItem == 27 {
+                result![0].material = "Hemp"
+            }else if materialSelector.indexOfSelectedItem == 28 {
+                result![0].material = "Henequen"
+            }else if materialSelector.indexOfSelectedItem == 29 {
+                result![0].material = "Jute"
+            }else if materialSelector.indexOfSelectedItem == 30 {
+                result![0].material = "Kapok"
+            }else if materialSelector.indexOfSelectedItem == 31 {
+                result![0].material = "Leather"
+            }else if materialSelector.indexOfSelectedItem == 32 {
+                result![0].material = "Linen"
+            }else if materialSelector.indexOfSelectedItem == 33 {
+                result![0].material = "Llama"
+            }else if materialSelector.indexOfSelectedItem == 34 {
+                result![0].material = "Lyocell"
+            }else if materialSelector.indexOfSelectedItem == 35 {
+                result![0].material = "Maguey"
+            }else if materialSelector.indexOfSelectedItem == 36 {
+                result![0].material = "Manila Hemp"
+            }else if materialSelector.indexOfSelectedItem == 37 {
+                result![0].material = "Modacrylic"
+            }else if materialSelector.indexOfSelectedItem == 38 {
+                result![0].material = "Modal"
+            }else if materialSelector.indexOfSelectedItem == 39 {
+                result![0].material = "Mohair"
+            }else if materialSelector.indexOfSelectedItem == 40 {
+                result![0].material = "Patent Leather"
+            }else if materialSelector.indexOfSelectedItem == 41 {
+                result![0].material = "Polyacrylate Fiber"
+            }else if materialSelector.indexOfSelectedItem == 42 {
+                result![0].material = "Polyamide"
+            }else if materialSelector.indexOfSelectedItem == 43 {
+                result![0].material = "Polycarbamide"
+            }else if materialSelector.indexOfSelectedItem == 44 {
+                result![0].material = "Polyethylene"
+            }else if materialSelector.indexOfSelectedItem == 45 {
+                result![0].material = "Polyimide"
+            }else if materialSelector.indexOfSelectedItem == 46 {
+                result![0].material = "Polylactide"
+            }else if materialSelector.indexOfSelectedItem == 47 {
+                result![0].material = "Polypropylene"
+            }else if materialSelector.indexOfSelectedItem == 48 {
+                result![0].material = "Polyurethane"
+            }else if materialSelector.indexOfSelectedItem == 49 {
+                result![0].material = "Ramie"
+            }else if materialSelector.indexOfSelectedItem == 50 {
+                result![0].material = "Silk"
+            }else if materialSelector.indexOfSelectedItem == 51 {
+                result![0].material = "Sisal"
+            }else if materialSelector.indexOfSelectedItem == 52 {
+                result![0].material = "Spandex"
+            }else if materialSelector.indexOfSelectedItem == 53 {
+                result![0].material = "Suede"
+            }else if materialSelector.indexOfSelectedItem == 54 {
+                result![0].material = "Sunn"
+            }else if materialSelector.indexOfSelectedItem == 55 {
+                result![0].material = "Tiacetate"
+            }else if materialSelector.indexOfSelectedItem == 56 {
+                result![0].material = "Trivinyl"
+            }else if materialSelector.indexOfSelectedItem == 57 {
+                result![0].material = "Vicuna"
+            }else if materialSelector.indexOfSelectedItem == 58 {
+                result![0].material = "Viscose"
+            }else if materialSelector.indexOfSelectedItem == 59 {
+                result![0].material = "Wool"
+            }else if materialSelector.indexOfSelectedItem == 60 {
+                result![0].material = "Yak"
+            }
+            self.materialSelector.isEnabled = false
+            self.materialSelector.isEnabled = true
+        }
+    }
+    
+    @IBAction func occasionDidSet(_ sender: NSComboBox) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+            
+            if occasionSelector.indexOfSelectedItem == 1 {
+                result![0].occasion = "Casual"
+            }else if occasionSelector.indexOfSelectedItem == 2 {
+                result![0].occasion = "Business"
+            }else if occasionSelector.indexOfSelectedItem == 3 {
+                result![0].occasion = "Formal"
+            }else if occasionSelector.indexOfSelectedItem == 4 {
+                result![0].occasion = "Party/Cocktail"
+            }else if occasionSelector.indexOfSelectedItem == 5 {
+                result![0].occasion = "Travel"
+            }else if occasionSelector.indexOfSelectedItem == 6 {
+                result![0].occasion = "Wedding"
+            }else if occasionSelector.indexOfSelectedItem == 7 {
+                result![0].occasion = "Workwear"
+            }
+            self.occasionSelector.isEnabled = false
+            self.occasionSelector.isEnabled = true
+        }
+    }
+    
+    @IBAction func patternDidSet(_ sender: NSComboBox) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
+        try! realm.write {
+            
+            if patternSelector.indexOfSelectedItem == 1 {
+                result![0].pattern = "Solid"
+            }else if patternSelector.indexOfSelectedItem == 2 {
+                result![0].pattern = "Floral"
+            }else if patternSelector.indexOfSelectedItem == 3 {
+                result![0].pattern = "Striped"
+            }else if patternSelector.indexOfSelectedItem == 4 {
+                result![0].pattern = "Polka Dot"
+            }else if patternSelector.indexOfSelectedItem == 5 {
+                result![0].pattern = "Geometric"
+            }else if patternSelector.indexOfSelectedItem == 6 {
+                result![0].pattern = "Argyle/Diamond"
+            }else if patternSelector.indexOfSelectedItem == 7 {
+                result![0].pattern = "Camouflage"
+            }else if patternSelector.indexOfSelectedItem == 8 {
+                result![0].pattern = "Check"
+            }else if patternSelector.indexOfSelectedItem == 9 {
+                result![0].pattern = "Colorblock"
+            }else if patternSelector.indexOfSelectedItem == 10 {
+                result![0].pattern = "Fair Isle"
+            }else if patternSelector.indexOfSelectedItem == 11 {
+                result![0].pattern = "Herringbone"
+            }else if patternSelector.indexOfSelectedItem == 12 {
+                result![0].pattern = "Paisley"
+            }else if patternSelector.indexOfSelectedItem == 13 {
+                result![0].pattern = "Plaid"
+            }
+            self.patternSelector.isEnabled = false
+            self.patternSelector.isEnabled = true
+        }
+    }
+    
+    @IBAction func waistDidSet(_ sender: NSComboBox) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+               let realm = try! Realm(configuration: config)
+               try! realm.write {
+                   
+                   if waistSelector.indexOfSelectedItem == 1 {
+                       result![0].waist = "10"
+                   }else if waistSelector.indexOfSelectedItem == 2 {
+                       result![0].waist = "11"
+                   }else if waistSelector.indexOfSelectedItem == 3 {
+                       result![0].waist = "12"
+                   }else if waistSelector.indexOfSelectedItem == 4 {
+                       result![0].waist = "13"
+                   }else if waistSelector.indexOfSelectedItem == 5 {
+                       result![0].waist = "14"
+                   }else if waistSelector.indexOfSelectedItem == 6 {
+                       result![0].waist = "15"
+                   }else if waistSelector.indexOfSelectedItem == 7 {
+                       result![0].waist = "16"
+                   }else if waistSelector.indexOfSelectedItem == 8 {
+                       result![0].waist = "17"
+                   }else if waistSelector.indexOfSelectedItem == 9 {
+                       result![0].waist = "18"
+                   }else if waistSelector.indexOfSelectedItem == 10 {
+                       result![0].waist = "19"
+                   }else if waistSelector.indexOfSelectedItem == 11 {
+                       result![0].waist = "20"
+                }
+                   self.waistSelector.isEnabled = false
+                   self.waistSelector.isEnabled = true
+               }
+    }
+    
+    @IBAction func inseamDIdSet(_ sender: NSComboBox) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+               let realm = try! Realm(configuration: config)
+               try! realm.write {
+                   
+                   if inseamSelector.indexOfSelectedItem == 1 {
+                       result![0].inseam = "26"
+                   }else if inseamSelector.indexOfSelectedItem == 2 {
+                       result![0].inseam = "27"
+                   }else if inseamSelector.indexOfSelectedItem == 3 {
+                       result![0].inseam = "28"
+                   }else if inseamSelector.indexOfSelectedItem == 4 {
+                       result![0].inseam = "29"
+                   }else if inseamSelector.indexOfSelectedItem == 5 {
+                       result![0].inseam = "30"
+                   }else if inseamSelector.indexOfSelectedItem == 6 {
+                       result![0].inseam = "31"
+                   }else if inseamSelector.indexOfSelectedItem == 7 {
+                       result![0].inseam = "32"
+                   }else if inseamSelector.indexOfSelectedItem == 8 {
+                       result![0].inseam = "33"
+                   }else if inseamSelector.indexOfSelectedItem == 9 {
+                       result![0].inseam = "34"
+                   }else if inseamSelector.indexOfSelectedItem == 10 {
+                       result![0].inseam = "35"
+                   }else if inseamSelector.indexOfSelectedItem == 11 {
+                       result![0].inseam = "36"
+                   }else if inseamSelector.indexOfSelectedItem == 12 {
+                       result![0].inseam = "37"
+                   }else if inseamSelector.indexOfSelectedItem == 13 {
+                       result![0].inseam = "38"
+                   }else if inseamSelector.indexOfSelectedItem == 14 {
+                       result![0].inseam = "39"
+                   }else if inseamSelector.indexOfSelectedItem == 15 {
+                       result![0].inseam = "40"
+                   }
+                   self.inseamSelector.isEnabled = false
+                   self.inseamSelector.isEnabled = true
+               }
+    }
+    
+    @IBAction func riseDidSet(_ sender: NSComboBox) {
+        let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
+               let realm = try! Realm(configuration: config)
+               try! realm.write {
+                   
+                   if riseSelector.indexOfSelectedItem == 1 {
+                       result![0].rise = "Ultra Low"
+                   }else if riseSelector.indexOfSelectedItem == 2 {
+                       result![0].rise = "Low"
+                   }else if riseSelector.indexOfSelectedItem == 3 {
+                       result![0].rise = "Mid"
+                   }else if riseSelector.indexOfSelectedItem == 4 {
+                       result![0].rise = "High"
+                   }
+                   self.riseSelector.isEnabled = false
+                   self.riseSelector.isEnabled = true
+               }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @IBAction func appendToDB(_ sender: NSButton) {
         let config = Realm.Configuration(fileURL: realmDBurl, readOnly: false, schemaVersion: 1)
         let realm = try! Realm(configuration: config)
@@ -2339,6 +2855,26 @@ class MultiView: NSViewController, ScaleData, ScaleStatus {
         }
     }
     
+    
+    func productScroll() {
+               for i in results! {
+                   upcArray.append(i.upc)
+               }
+        
+    }
+    
+    @IBAction func scrollProducts(_ sender: NSPopUpButton) {
+        productScroll()
+        let selectedProductNum = productSelector.indexOfSelectedItem
+        productSelector.selectItem(at: selectedProductNum)
+        let row = String(upcArray[selectedProductNum - 1])
+        UPCSearchField.stringValue = row
+        SearchBar(self)
+        productSelector.selectItem(at: selectedProductNum)
+    }
+    
+
+       
     
     //Display HD image @IBaction triggers
     

@@ -260,135 +260,135 @@ var postFixValue = 000
 
                     
                     if i.itemDescription.localizedCaseInsensitiveContains("shirt"){
-                        i.style = "Shirt"
+                        i.type = "Shirt"
                         i.ebayCategory = "53159"
                         i.storeCategory = "29010495011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("tank"){
-                        i.style = "Tank"
+                        i.type = "Tank"
                         i.ebayCategory = "53159"
                         i.storeCategory = "29010495011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("cami"){
-                        i.style = "Cami"
+                        i.type = "Cami"
                         i.ebayCategory = "53159"
                         i.storeCategory = "29010495011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("pullover"){
-                        i.style = "Pullover"
+                        i.type = "Pullover"
                         i.ebayCategory = "53159"
                         i.storeCategory = "29010495011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("top"){
-                        i.style = "Top"
+                        i.type = "Top"
                         i.ebayCategory = "53159"
                         i.storeCategory = "29010495011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("tunic"){
-                        i.style = "Tunic"
+                        i.type = "Tunic"
                         i.ebayCategory = "53159"
                         i.storeCategory = "29010495011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("tshirt"){
-                        i.style = "T-shirt"
+                        i.type = "T-shirt"
                         i.ebayCategory = "53159"
                         i.storeCategory = "29010495011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("t-shirt"){
-                        i.style = "T-shirt"
+                        i.type = "T-shirt"
                         i.ebayCategory = "53159"
                         i.storeCategory = "29010495011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("tee"){
-                        i.style = "Tee"
+                        i.type = "Tee"
                         i.ebayCategory = "53159"
                         i.storeCategory = "29010495011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("blouse"){
-                        i.style = "Blouse"
+                        i.type = "Blouse"
                         i.ebayCategory = "53159"
                         i.storeCategory = "29010495011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("sweater"){
-                        i.style = "Sweater"
+                        i.type = "Sweater"
                         i.ebayCategory = "63866"
                         i.storeCategory = "29010495011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("skirt"){
-                        i.style = "Skirt"
+                        i.type = "Skirt"
                         i.ebayCategory = "63864"
                         i.storeCategory = "33096451011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("mini"){
-                        i.style = "Mini"
+                        i.type = "Mini"
                         i.ebayCategory = "63864"
                         i.storeCategory = "33096451011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("shorts"){
-                        i.style = "Shorts"
+                        i.type = "Shorts"
                         i.ebayCategory = "11555"
                         i.storeCategory = "31775416011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("legging"){
-                        i.style = "Legging"
+                        i.type = "Legging"
                         i.ebayCategory = "63863"
                         i.storeCategory = "31775381011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("overall"){
-                        i.style = "Overall"
+                        i.type = "Overall"
                         i.ebayCategory = "63863"
                         i.storeCategory = "31775381011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("pant"){
-                        i.style = "Pants"
+                        i.type = "Pants"
                         i.ebayCategory = "63863"
                         i.storeCategory = "31775381011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("trouser"){
-                        i.style = "Trouser"
+                        i.type = "Trouser"
                         i.ebayCategory = "63863"
                         i.storeCategory = "31775381011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("jumpsuit"){
-                        i.style = "Jumpsuit"
+                        i.type = "Jumpsuit"
                         i.ebayCategory = "3009"
                         i.storeCategory = "1"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("romper"){
-                        i.style = "Romper"
+                        i.type = "Romper"
                         i.ebayCategory = "3009"
                         i.storeCategory = "1"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("jean"){
-                        i.style = "Jeans"
+                        i.type = "Jeans"
                         i.ebayCategory = "11554"
                         i.storeCategory = "31775381011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("sleepwear"){
-                        i.style = "Sleepwear"
+                        i.type = "Sleepwear"
                         i.ebayCategory = "63855"
                         i.storeCategory = "1"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("dress"){
-                        i.style = "Dress"
+                        i.type = "Dress"
                         i.ebayCategory = "63861"
                         i.storeCategory = "28973014011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("wrap"){
-                        i.style = "Wrap"
+                        i.type = "Wrap"
                         i.ebayCategory = "63861"
                         i.storeCategory = "28973014011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("gown"){
-                        i.style = "Gown"
+                        i.type = "Gown"
                         i.ebayCategory = "63861"
                         i.storeCategory = "28973014011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("maxi"){
-                        i.style = "Maxi"
+                        i.type = "Maxi"
                         i.ebayCategory = "63861"
                         i.storeCategory = "28973014011"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("coat"){
-                        i.style = "Coat"
+                        i.type = "Coat"
                         i.ebayCategory = "63862"
                         i.storeCategory = "1"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("jacket"){
-                        i.style = "Jacket"
+                        i.type = "Jacket"
                         i.ebayCategory = "63862"
                         i.storeCategory = "1"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("vest"){
-                        i.style = "Vest"
+                        i.type = "Vest"
                         i.ebayCategory = "63862"
                         i.storeCategory = "1"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("hoodie"){
-                        i.style = "Hoodie"
+                        i.type = "Hoodie"
                         i.ebayCategory = "155226"
                         i.storeCategory = "1"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("sweatshirt"){
-                        i.style = "Sweatshirt"
+                        i.type = "Sweatshirt"
                         i.ebayCategory = "155226"
                         i.storeCategory = "1"
                     }else if i.itemDescription.localizedCaseInsensitiveContains("bodysuit"){
-                        i.style = "Bodysuit"
+                        i.type = "Bodysuit"
                         i.ebayCategory = "53159"
                         i.storeCategory = "29010495011"
                     }else{
-                        i.style = "**STYLE**"
+                        i.type = "**TYPE**"
                     }
                     
                     
@@ -400,10 +400,10 @@ var postFixValue = 000
                     
                     let itemDescriptionStart = (i.brand + " Womens "  + i.itemDescription)
                     let itemDescriptionEnd = (" " + i.color + " " + i.size)
-                    if itemDescriptionStart.localizedCaseInsensitiveContains(i.style) {
+                    if itemDescriptionStart.localizedCaseInsensitiveContains(i.type) {
                         i.itemDescription = itemDescriptionStart + itemDescriptionEnd
                     }else{
-                    i.itemDescription = (i.brand + " Womens " + i.itemDescription + " " + i.style + " " + i.color + " " + i.size)
+                    i.itemDescription = (i.brand + " Womens " + i.itemDescription + " " + i.type + " " + i.color + " " + i.size)
                     }
                     
                     if i.eBayConditionID == 0 {
@@ -420,8 +420,10 @@ var postFixValue = 000
                     
                 
                 //print("number of results - reference viewcontroller  \(results!.count)")
-               // dismiss(ViewController.self)
+               // dismiss(ViewController.self)""
+                print("perform segue")
                  performSegue(withIdentifier: "MultiView", sender: self)
+                print("segue performed")
                 self.view.window?.close()
                 
             } catch {

@@ -29,12 +29,22 @@ class Product: Object, Codable {
     @objc dynamic var imageSlot4: String = ""
     @objc dynamic var price: String = ""
     @objc dynamic var shipping: Int = 0
-    @objc dynamic var style: String = ""
+    @objc dynamic var type: String = ""
     @objc dynamic var sleeveStyle: String = ""
     @objc dynamic var sleeveLength: String = ""
     @objc dynamic var ebayCategory: String = ""
     @objc dynamic var storeCategory: String = ""
     @objc dynamic var eBayConditionID: Int = 0
+    @objc dynamic var style: String = ""
+    @objc dynamic var neckline: String = ""
+    @objc dynamic var material: String = ""
+    @objc dynamic var occasion: String = ""
+    @objc dynamic var pattern: String = ""
+    @objc dynamic var waist: String = ""
+    @objc dynamic var inseam: String = ""
+    @objc dynamic var rise: String = ""
+    
+    
     
     
     override static func primaryKey() -> String? {
